@@ -7,6 +7,12 @@
 
 import UIKit
 
+@_exported import RxSwift
+@_exported import ReactorKit
+@_exported import SnapKit
+@_exported import Then
+@_exported import RxDataSources
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
