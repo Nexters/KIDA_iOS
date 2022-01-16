@@ -30,8 +30,6 @@ final class HomeViewController: BaseViewController, ServiceDependency {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        bind(reactor: reactor)
     }
 
     override func setupViews() {
