@@ -16,6 +16,5 @@ protocol Coordinatable: AnyObject {
     var navigationController: UINavigationController { get set }
 
     // MARK: - Methods
-    /// push, modal 띄우는 동작 수행 메소드
     func start()
 }

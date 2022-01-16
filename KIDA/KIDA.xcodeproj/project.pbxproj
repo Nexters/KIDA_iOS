@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8644830027930EFC0020F782 /* ServiceDependency.swift */; };
+		864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */; };
+		86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86448307279310C30020F782 /* selectedKeywordViewController.swift */; };
+		8644830A279310CB0020F782 /* SelectedKeywordReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86448309279310CB0020F782 /* SelectedKeywordReactor.swift */; };
 		86FABDEC2792AEB2001D986C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDEB2792AEB2001D986C /* AppDelegate.swift */; };
 		86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDED2792AEB2001D986C /* SceneDelegate.swift */; };
 		86FABDF02792AEB2001D986C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDEF2792AEB2001D986C /* HomeViewController.swift */; };
@@ -26,6 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8644830027930EFC0020F782 /* ServiceDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDependency.swift; sourceTree = "<group>"; };
+		864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedKeywordCoordinator.swift; sourceTree = "<group>"; };
+		86448307279310C30020F782 /* selectedKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedKeywordViewController.swift; sourceTree = "<group>"; };
+		86448309279310CB0020F782 /* SelectedKeywordReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedKeywordReactor.swift; sourceTree = "<group>"; };
 		86FABDE82792AEB2001D986C /* KIDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86FABDEB2792AEB2001D986C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86FABDED2792AEB2001D986C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +65,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		864482FF27930ED90020F782 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				86FABE092792B002001D986C /* BaseViewController.swift */,
+				86FABE052792AF5F001D986C /* Protocols */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		86448306279310B90020F782 /* SelectedKeyword */ = {
+			isa = PBXGroup;
+			children = (
+				86448307279310C30020F782 /* selectedKeywordViewController.swift */,
+				86448309279310CB0020F782 /* SelectedKeywordReactor.swift */,
+			);
+			path = SelectedKeyword;
+			sourceTree = "<group>";
+		};
 		86FABDDF2792AEB2001D986C = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +124,7 @@
 		86FABE042792AEEA001D986C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				86FABE052792AF5F001D986C /* Protocols */,
+				864482FF27930ED90020F782 /* Base */,
 				86FABE0B2792B08E001D986C /* Coordinators */,
 				86FABE062792AF61001D986C /* Scene */,
 			);
@@ -109,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				86FABE072792AFD1001D986C /* Coordinatable.swift */,
-				86FABE092792B002001D986C /* BaseViewController.swift */,
+				8644830027930EFC0020F782 /* ServiceDependency.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -117,6 +143,7 @@
 		86FABE062792AF61001D986C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				86448306279310B90020F782 /* SelectedKeyword */,
 				ED26F2E12792CA08005EE53A /* Home */,
 			);
 			path = Scene;
@@ -127,6 +154,7 @@
 			children = (
 				86FABE0C2792B097001D986C /* AppCoordinator.swift */,
 				86FABE0E2792B107001D986C /* HomeCoordinator.swift */,
+				864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -225,13 +253,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				86FABDF02792AEB2001D986C /* HomeViewController.swift in Sources */,
+				8644830A279310CB0020F782 /* SelectedKeywordReactor.swift in Sources */,
 				86FABDEC2792AEB2001D986C /* AppDelegate.swift in Sources */,
 				ED26F2E32792CA19005EE53A /* HomeViewReactor.swift in Sources */,
 				86FABE082792AFD1001D986C /* Coordinatable.swift in Sources */,
+				8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */,
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
 				86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */,
+				86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */,
 				86FABE0F2792B107001D986C /* HomeCoordinator.swift in Sources */,
 				86FABE0A2792B002001D986C /* BaseViewController.swift in Sources */,
+				864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */,
 				86FABE0D2792B097001D986C /* AppCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

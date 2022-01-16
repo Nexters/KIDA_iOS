@@ -7,14 +7,13 @@
 
 final class HomeViewReactor: Reactor {
     typealias Action = NoAction
-    
+
     struct State {
     }
     
-    var initialState: State
-    
+    let initialState: State
+
     init(){
         initialState = State()
     }
-    
 }
