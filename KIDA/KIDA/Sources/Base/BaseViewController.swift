@@ -16,24 +16,6 @@ class EmptyReactor: Reactor {
     var initialState = State()
 }
 
-protocol ServiceDependency: StoryboardView {
-    init(reactor: Reactor?)
-    
-    func bindReactor(reactor: Reactor?)
-}
-
-extension ServiceDependency where Self: UIViewController {
-    
-    func bindReactor(reactor: Reactor? = nil){
-        self.reactor = reactor
-    }
-    
-    init(reactor: Reactor? = nil) {
-        self.init()
-        self.bindReactor(reactor: reactor)
-    }
-}
-
 class BaseViewController: UIViewController {
     
     var disposeBag = DisposeBag()

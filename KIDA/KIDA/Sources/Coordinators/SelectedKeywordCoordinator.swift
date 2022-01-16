@@ -1,5 +1,5 @@
 //
-//  HomeCoordinator.swift
+//  SelectedKeywordCoordinator.swift
 //  KIDA
 //
 //  Created by Ian on 2022/01/15.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeCoordinator: Coordinatable {
+final class SelectedKeywordCoordinator: Coordinatable {
 
     // MARK: - Properties
     var childCoordinators: [Coordinatable] = []
@@ -21,8 +21,8 @@ final class HomeCoordinator: Coordinatable {
 
     // MARK: - Methods
     func start() {
-        let homeViewReactor = HomeViewReactor()
-        let homeViewController = HomeViewController(reactor: homeViewReactor)
-        navigationController.viewControllers = [homeViewController]
+        let selectedKeywordReactor = SelectedKeywordReactor()
+        let selectedkeywordViewController = SelectedKeywordViewController(reactor: selectedKeywordReactor)
+        navigationController.pushViewController(selectedkeywordViewController, animated: true)
     }
 }
