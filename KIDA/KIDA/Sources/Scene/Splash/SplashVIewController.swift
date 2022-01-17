@@ -14,7 +14,6 @@ final class SplashViewController: BaseViewController, ServiceDependency {
     private weak var splashImage: UIImageView!
     private weak var demoLabel: UILabel!
     private var reactor: SplashViewReactor
-    private let showHomeSubjet = PublishSubject<Void>()
 
     // MARK: - Initializer
     init(reactor: SplashViewReactor) {
@@ -35,7 +34,7 @@ final class SplashViewController: BaseViewController, ServiceDependency {
             .asDriver()
             .drive(onNext: { [weak self] in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [weak self] in
-                    self?.showHomeSubjet.onNext(())
+                    self?.reactor.action.onNext(.showHome)
                 })
             })
             .disposed(by: disposeBag)
@@ -65,10 +64,6 @@ final class SplashViewController: BaseViewController, ServiceDependency {
 
 private extension SplashViewController {
     func bindAction(reactor: SplashViewReactor) {
-        showHomeSubjet
-            .map { SplashViewReactor.Action.showHome }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
     }
 
     func bindState(reactor: SplashViewReactor) {
