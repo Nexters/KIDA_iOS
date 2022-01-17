@@ -21,6 +21,14 @@
 		86FABE0A2792B002001D986C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABE092792B002001D986C /* BaseViewController.swift */; };
 		86FABE0D2792B097001D986C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABE0C2792B097001D986C /* AppCoordinator.swift */; };
 		86FABE0F2792B107001D986C /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABE0E2792B107001D986C /* HomeCoordinator.swift */; };
+		ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E00E27957407004951E1 /* DiaryListViewController.swift */; };
+		ED20E01127957416004951E1 /* DiaryListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E01027957416004951E1 /* DiaryListViewReactor.swift */; };
+		ED20E015279574A8004951E1 /* DiaryListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E014279574A8004951E1 /* DiaryListCoordinator.swift */; };
+		ED20E017279575E4004951E1 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E016279575E4004951E1 /* BaseTableViewCell.swift */; };
+		ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E019279577E8004951E1 /* DiaryListCell.swift */; };
+		ED20E01C279577F0004951E1 /* DiaryListCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E01B279577F0004951E1 /* DiaryListCellReactor.swift */; };
+		ED20E01F27957946004951E1 /* ReuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E01E27957946004951E1 /* ReuseCell.swift */; };
+		ED20E02227957B52004951E1 /* DiayListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E02127957B52004951E1 /* DiayListSection.swift */; };
 		ED26F2D42792C7F1005EE53A /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = ED26F2D32792C7F1005EE53A /* ReactorKit */; };
 		ED26F2D72792C827005EE53A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ED26F2D62792C827005EE53A /* SnapKit */; };
 		ED26F2DA2792C8CD005EE53A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = ED26F2D92792C8CD005EE53A /* Then */; };
@@ -46,6 +54,14 @@
 		86FABE092792B002001D986C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		86FABE0C2792B097001D986C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		86FABE0E2792B107001D986C /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		ED20E00E27957407004951E1 /* DiaryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListViewController.swift; sourceTree = "<group>"; };
+		ED20E01027957416004951E1 /* DiaryListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListViewReactor.swift; sourceTree = "<group>"; };
+		ED20E014279574A8004951E1 /* DiaryListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListCoordinator.swift; sourceTree = "<group>"; };
+		ED20E016279575E4004951E1 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		ED20E019279577E8004951E1 /* DiaryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListCell.swift; sourceTree = "<group>"; };
+		ED20E01B279577F0004951E1 /* DiaryListCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListCellReactor.swift; sourceTree = "<group>"; };
+		ED20E01E27957946004951E1 /* ReuseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseCell.swift; sourceTree = "<group>"; };
+		ED20E02127957B52004951E1 /* DiayListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiayListSection.swift; sourceTree = "<group>"; };
 		ED26F2E22792CA19005EE53A /* HomeViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewReactor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				86FABE092792B002001D986C /* BaseViewController.swift */,
+				ED20E016279575E4004951E1 /* BaseTableViewCell.swift */,
 				86FABE052792AF5F001D986C /* Protocols */,
 			);
 			path = Base;
@@ -102,6 +119,7 @@
 		86FABDEA2792AEB2001D986C /* KIDA */ = {
 			isa = PBXGroup;
 			children = (
+				ED20E02027957B39004951E1 /* Type */,
 				86FABE022792AEB9001D986C /* App */,
 				86FABE042792AEEA001D986C /* Sources */,
 				86FABDF72792AEB3001D986C /* Assets.xcassets */,
@@ -136,6 +154,7 @@
 			children = (
 				86FABE072792AFD1001D986C /* Coordinatable.swift */,
 				8644830027930EFC0020F782 /* ServiceDependency.swift */,
+				ED20E01E27957946004951E1 /* ReuseCell.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -143,6 +162,7 @@
 		86FABE062792AF61001D986C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				ED20E00D279573ED004951E1 /* DiaryList */,
 				86448306279310B90020F782 /* SelectedKeyword */,
 				ED26F2E12792CA08005EE53A /* Home */,
 			);
@@ -155,8 +175,36 @@
 				86FABE0C2792B097001D986C /* AppCoordinator.swift */,
 				86FABE0E2792B107001D986C /* HomeCoordinator.swift */,
 				864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */,
+				ED20E014279574A8004951E1 /* DiaryListCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		ED20E00D279573ED004951E1 /* DiaryList */ = {
+			isa = PBXGroup;
+			children = (
+				ED20E018279577CE004951E1 /* Cells */,
+				ED20E00E27957407004951E1 /* DiaryListViewController.swift */,
+				ED20E01027957416004951E1 /* DiaryListViewReactor.swift */,
+			);
+			path = DiaryList;
+			sourceTree = "<group>";
+		};
+		ED20E018279577CE004951E1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				ED20E019279577E8004951E1 /* DiaryListCell.swift */,
+				ED20E01B279577F0004951E1 /* DiaryListCellReactor.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		ED20E02027957B39004951E1 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				ED20E02127957B52004951E1 /* DiayListSection.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		ED26F2E12792CA08005EE53A /* Home */ = {
@@ -252,18 +300,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED20E02227957B52004951E1 /* DiayListSection.swift in Sources */,
 				86FABDF02792AEB2001D986C /* HomeViewController.swift in Sources */,
+				ED20E01127957416004951E1 /* DiaryListViewReactor.swift in Sources */,
 				8644830A279310CB0020F782 /* SelectedKeywordReactor.swift in Sources */,
 				86FABDEC2792AEB2001D986C /* AppDelegate.swift in Sources */,
 				ED26F2E32792CA19005EE53A /* HomeViewReactor.swift in Sources */,
 				86FABE082792AFD1001D986C /* Coordinatable.swift in Sources */,
 				8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */,
+				ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */,
+				ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */,
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
 				86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */,
+				ED20E01C279577F0004951E1 /* DiaryListCellReactor.swift in Sources */,
 				86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */,
 				86FABE0F2792B107001D986C /* HomeCoordinator.swift in Sources */,
+				ED20E01F27957946004951E1 /* ReuseCell.swift in Sources */,
+				ED20E017279575E4004951E1 /* BaseTableViewCell.swift in Sources */,
 				86FABE0A2792B002001D986C /* BaseViewController.swift in Sources */,
 				864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */,
+				ED20E015279574A8004951E1 /* DiaryListCoordinator.swift in Sources */,
 				86FABE0D2792B097001D986C /* AppCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
