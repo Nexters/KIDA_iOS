@@ -13,6 +13,9 @@
 		864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */; };
 		86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86448307279310C30020F782 /* selectedKeywordViewController.swift */; };
 		8644830A279310CB0020F782 /* SelectedKeywordReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86448309279310CB0020F782 /* SelectedKeywordReactor.swift */; };
+		8667CFDA279598DF00CC484A /* WriteDiaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8667CFD9279598DF00CC484A /* WriteDiaryCoordinator.swift */; };
+		8667CFDC2795994400CC484A /* WriteDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8667CFDB2795994400CC484A /* WriteDiaryViewController.swift */; };
+		8667CFDE2795994E00CC484A /* WrtieDiaryReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8667CFDD2795994E00CC484A /* WrtieDiaryReactor.swift */; };
 		86B8B29D2795434A0028C512 /* SplashVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29C2795434A0028C512 /* SplashVIewController.swift */; };
 		86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29E279543760028C512 /* SplashVIewReactor.swift */; };
 		86B8B2A12795449A0028C512 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B2A02795449A0028C512 /* SplashCoordinator.swift */; };
@@ -49,6 +52,9 @@
 		864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedKeywordCoordinator.swift; sourceTree = "<group>"; };
 		86448307279310C30020F782 /* selectedKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedKeywordViewController.swift; sourceTree = "<group>"; };
 		86448309279310CB0020F782 /* SelectedKeywordReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedKeywordReactor.swift; sourceTree = "<group>"; };
+		8667CFD9279598DF00CC484A /* WriteDiaryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryCoordinator.swift; sourceTree = "<group>"; };
+		8667CFDB2795994400CC484A /* WriteDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryViewController.swift; sourceTree = "<group>"; };
+		8667CFDD2795994E00CC484A /* WrtieDiaryReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieDiaryReactor.swift; sourceTree = "<group>"; };
 		86B8B29C2795434A0028C512 /* SplashVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewController.swift; sourceTree = "<group>"; };
 		86B8B29E279543760028C512 /* SplashVIewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewReactor.swift; sourceTree = "<group>"; };
 		86B8B2A02795449A0028C512 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
@@ -117,6 +123,15 @@
 				86448309279310CB0020F782 /* SelectedKeywordReactor.swift */,
 			);
 			path = SelectedKeyword;
+			sourceTree = "<group>";
+		};
+		8667CFD82795989100CC484A /* WriteDiary */ = {
+			isa = PBXGroup;
+			children = (
+				8667CFDB2795994400CC484A /* WriteDiaryViewController.swift */,
+				8667CFDD2795994E00CC484A /* WrtieDiaryReactor.swift */,
+			);
+			path = WriteDiary;
 			sourceTree = "<group>";
 		};
 		86B8B29B279543430028C512 /* Splash */ = {
@@ -191,6 +206,7 @@
 		86FABE062792AF61001D986C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				8667CFD82795989100CC484A /* WriteDiary */,
 				86B8B29B279543430028C512 /* Splash */,
 				ED20E00D279573ED004951E1 /* DiaryList */,
 				86448306279310B90020F782 /* SelectedKeyword */,
@@ -205,6 +221,7 @@
 				86FABE0C2792B097001D986C /* AppCoordinator.swift */,
 				86FABE0E2792B107001D986C /* HomeCoordinator.swift */,
 				864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */,
+				8667CFD9279598DF00CC484A /* WriteDiaryCoordinator.swift */,
 				86B8B2A02795449A0028C512 /* SplashCoordinator.swift */,
 				ED20E014279574A8004951E1 /* DiaryListCoordinator.swift */,
 			);
@@ -341,18 +358,21 @@
 				ED26F2E32792CA19005EE53A /* HomeViewReactor.swift in Sources */,
 				86FABE082792AFD1001D986C /* Coordinatable.swift in Sources */,
 				8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */,
+				8667CFDE2795994E00CC484A /* WrtieDiaryReactor.swift in Sources */,
 				8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */,
 				ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */,
 				ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */,
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
 				86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */,
 				86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */,
+				8667CFDA279598DF00CC484A /* WriteDiaryCoordinator.swift in Sources */,
 				ED20E01C279577F0004951E1 /* DiaryListCellReactor.swift in Sources */,
 				86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */,
 				86FABE0F2792B107001D986C /* HomeCoordinator.swift in Sources */,
 				ED20E01F27957946004951E1 /* ReuseCell.swift in Sources */,
 				ED20E017279575E4004951E1 /* BaseTableViewCell.swift in Sources */,
 				86FABE0A2792B002001D986C /* BaseViewController.swift in Sources */,
+				8667CFDC2795994400CC484A /* WriteDiaryViewController.swift in Sources */,
 				864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */,
 				86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */,
 				ED20E015279574A8004951E1 /* DiaryListCoordinator.swift in Sources */,
