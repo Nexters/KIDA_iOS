@@ -1,13 +1,13 @@
 //
-//  HomeCoordinator.swift
+//  DiaryListCoordinator.swift
 //  KIDA
 //
-//  Created by Ian on 2022/01/15.
+//  Created by choidam on 2022/01/17.
 //
 
 import UIKit
 
-final class HomeCoordinator: Coordinatable {
+final class DiaryListCoordinator: Coordinatable {
 
     // MARK: - Properties
     var childCoordinators: [Coordinatable] = []
@@ -21,9 +21,10 @@ final class HomeCoordinator: Coordinatable {
 
     // MARK: - Methods
     func start() {
-        let homeViewReactor = HomeViewReactor()
-        let homeViewController = HomeViewController()
-        homeViewController.reactor = homeViewReactor
-        navigationController.viewControllers = [homeViewController]
+        let diaryListReactor = DiaryListViewReactor()
+        let diaryListViewController = DiaryListViewController()
+        diaryListViewController.reactor = diaryListReactor
+        navigationController.viewControllers = [diaryListViewController]
     }
 }
+
