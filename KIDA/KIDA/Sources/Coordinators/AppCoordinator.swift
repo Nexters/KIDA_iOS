@@ -26,10 +26,10 @@ final class AppCoordinator: Coordinatable {
 
     // MARK: - Methods
     func start() {
-        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
-        homeCoordinator.parentCoordinator = self
-        self.childCoordinators.append(homeCoordinator)
+        let splashCoordinator = SplashCoordinator(navigationController: navigationController)
+        splashCoordinator.parentCoordinator = self
+        self.childCoordinators.append(splashCoordinator)
 
-        homeCoordinator.start()
+        splashCoordinator.start()
     }
 }
