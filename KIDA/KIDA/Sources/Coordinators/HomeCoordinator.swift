@@ -22,7 +22,8 @@ final class HomeCoordinator: Coordinatable {
     // MARK: - Methods
     func start() {
         let homeViewReactor = HomeViewReactor()
-        let homeViewController = HomeViewController(reactor: homeViewReactor)
+        let homeViewController = HomeViewController()
+        homeViewController.reactor = homeViewReactor
         navigationController.viewControllers = [homeViewController]
     }
 }

@@ -38,5 +38,9 @@ class BaseViewController: UIViewController {
     func setupLayoutConstraints() {
         // Override Constraints.
     }
+    
+    deinit {
+        print("deinit : \(self)")
+    }
 
 }
