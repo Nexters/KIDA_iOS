@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86137908279564FF00AED9CF /* UIViewController+Rx.swift */; };
+		8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */; };
 		8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8644830027930EFC0020F782 /* ServiceDependency.swift */; };
 		864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */; };
 		86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86448307279310C30020F782 /* selectedKeywordViewController.swift */; };
 		8644830A279310CB0020F782 /* SelectedKeywordReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86448309279310CB0020F782 /* SelectedKeywordReactor.swift */; };
+		86B8B29D2795434A0028C512 /* SplashVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29C2795434A0028C512 /* SplashVIewController.swift */; };
+		86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29E279543760028C512 /* SplashVIewReactor.swift */; };
+		86B8B2A12795449A0028C512 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B2A02795449A0028C512 /* SplashCoordinator.swift */; };
 		86FABDEC2792AEB2001D986C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDEB2792AEB2001D986C /* AppDelegate.swift */; };
 		86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDED2792AEB2001D986C /* SceneDelegate.swift */; };
 		86FABDF02792AEB2001D986C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDEF2792AEB2001D986C /* HomeViewController.swift */; };
@@ -38,10 +43,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		86137908279564FF00AED9CF /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+.swift"; sourceTree = "<group>"; };
 		8644830027930EFC0020F782 /* ServiceDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDependency.swift; sourceTree = "<group>"; };
 		864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedKeywordCoordinator.swift; sourceTree = "<group>"; };
 		86448307279310C30020F782 /* selectedKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedKeywordViewController.swift; sourceTree = "<group>"; };
 		86448309279310CB0020F782 /* SelectedKeywordReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedKeywordReactor.swift; sourceTree = "<group>"; };
+		86B8B29C2795434A0028C512 /* SplashVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewController.swift; sourceTree = "<group>"; };
+		86B8B29E279543760028C512 /* SplashVIewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewReactor.swift; sourceTree = "<group>"; };
+		86B8B2A02795449A0028C512 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		86FABDE82792AEB2001D986C /* KIDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86FABDEB2792AEB2001D986C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86FABDED2792AEB2001D986C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86137907279564ED00AED9CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				86137908279564FF00AED9CF /* UIViewController+Rx.swift */,
+				8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		864482FF27930ED90020F782 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +117,15 @@
 				86448309279310CB0020F782 /* SelectedKeywordReactor.swift */,
 			);
 			path = SelectedKeyword;
+			sourceTree = "<group>";
+		};
+		86B8B29B279543430028C512 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				86B8B29C2795434A0028C512 /* SplashVIewController.swift */,
+				86B8B29E279543760028C512 /* SplashVIewReactor.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		86FABDDF2792AEB2001D986C = {
@@ -122,6 +150,7 @@
 				ED20E02027957B39004951E1 /* Type */,
 				86FABE022792AEB9001D986C /* App */,
 				86FABE042792AEEA001D986C /* Sources */,
+				86137907279564ED00AED9CF /* Extensions */,
 				86FABDF72792AEB3001D986C /* Assets.xcassets */,
 				86FABDF92792AEB3001D986C /* LaunchScreen.storyboard */,
 				86FABDFC2792AEB3001D986C /* Info.plist */,
@@ -162,6 +191,7 @@
 		86FABE062792AF61001D986C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				86B8B29B279543430028C512 /* Splash */,
 				ED20E00D279573ED004951E1 /* DiaryList */,
 				86448306279310B90020F782 /* SelectedKeyword */,
 				ED26F2E12792CA08005EE53A /* Home */,
@@ -175,6 +205,7 @@
 				86FABE0C2792B097001D986C /* AppCoordinator.swift */,
 				86FABE0E2792B107001D986C /* HomeCoordinator.swift */,
 				864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */,
+				86B8B2A02795449A0028C512 /* SplashCoordinator.swift */,
 				ED20E014279574A8004951E1 /* DiaryListCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -302,15 +333,19 @@
 			files = (
 				ED20E02227957B52004951E1 /* DiayListSection.swift in Sources */,
 				86FABDF02792AEB2001D986C /* HomeViewController.swift in Sources */,
+				86B8B2A12795449A0028C512 /* SplashCoordinator.swift in Sources */,
 				ED20E01127957416004951E1 /* DiaryListViewReactor.swift in Sources */,
 				8644830A279310CB0020F782 /* SelectedKeywordReactor.swift in Sources */,
 				86FABDEC2792AEB2001D986C /* AppDelegate.swift in Sources */,
+				86B8B29D2795434A0028C512 /* SplashVIewController.swift in Sources */,
 				ED26F2E32792CA19005EE53A /* HomeViewReactor.swift in Sources */,
 				86FABE082792AFD1001D986C /* Coordinatable.swift in Sources */,
 				8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */,
+				8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */,
 				ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */,
 				ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */,
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
+				86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */,
 				86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */,
 				ED20E01C279577F0004951E1 /* DiaryListCellReactor.swift in Sources */,
 				86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */,
@@ -319,6 +354,7 @@
 				ED20E017279575E4004951E1 /* BaseTableViewCell.swift in Sources */,
 				86FABE0A2792B002001D986C /* BaseViewController.swift in Sources */,
 				864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */,
+				86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */,
 				ED20E015279574A8004951E1 /* DiaryListCoordinator.swift in Sources */,
 				86FABE0D2792B097001D986C /* AppCoordinator.swift in Sources */,
 			);

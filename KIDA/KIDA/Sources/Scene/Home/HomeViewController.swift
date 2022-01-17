@@ -9,8 +9,6 @@ import UIKit
 
 final class HomeViewController: BaseViewController, ServiceDependency {
 
-    // MARK: UI
-
     // MARK: Property
     
     var reactor: HomeViewReactor?
@@ -31,7 +29,7 @@ final class HomeViewController: BaseViewController, ServiceDependency {
     }
 }
 
-extension HomeViewController {
+private extension HomeViewController {
 
     func bindState(reactor: HomeViewReactor){
     }
