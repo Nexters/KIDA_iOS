@@ -9,12 +9,16 @@ final class DiaryListViewReactor: Reactor {
     typealias Action = NoAction
 
     struct State {
+        var sections: [DiaryListSection] = []
     }
     
-    let initialState: State
+    var initialState: State = State()
 
     init(){
-        initialState = State()
+        
+        // test
+        initialState.sections = [.section([.item(DiaryListCellReactor(title: "sample1")), .item(DiaryListCellReactor(title: "sample2")), .item(DiaryListCellReactor(title: "sample3"))])]
+        
     }
 }
 
