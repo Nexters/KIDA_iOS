@@ -12,8 +12,7 @@ final class HomeViewController: BaseViewController, ServiceDependency {
     // MARK: UI
     
     private let testButton = UIButton()
-    
-    
+
     // MARK: Property
     
     private var reactor: HomeViewReactor
@@ -51,7 +50,7 @@ final class HomeViewController: BaseViewController, ServiceDependency {
     }
 }
 
-extension HomeViewController {
+private extension HomeViewController {
 
     func bindState(reactor: HomeViewReactor){
 
@@ -60,7 +59,6 @@ extension HomeViewController {
                 self?.view.backgroundColor = .yellow
             })
             .disposed(by: disposeBag)
-
     }
 
     func bindAction(reactor: HomeViewReactor){
