@@ -48,7 +48,7 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
     override func setupLayoutConstraints() {
         
         tableView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalTo(0)
+            $0.edges.equalTo(0)
         }
     }
 
@@ -58,7 +58,7 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
     }
 }
 
-extension DiaryListViewController {
+private extension DiaryListViewController {
 
     func bindState(reactor: DiaryListViewReactor){
         
