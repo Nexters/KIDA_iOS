@@ -132,6 +132,8 @@
 				8667CFDD2795994E00CC484A /* WrtieDiaryReactor.swift */,
 			);
 			path = WriteDiary;
+			sourceTree = "<group>";
+		};
 		86B8B29B279543430028C512 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
