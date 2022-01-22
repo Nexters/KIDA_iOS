@@ -11,8 +11,7 @@ import RxSwift
 final class SplashViewController: BaseViewController, ServiceDependency {
 
     // MARK: - Properties
-    private weak var splashImage: UIImageView!
-    private weak var demoLabel: UILabel!
+    private weak var splashImageView: UIImageView!
     private var reactor: SplashViewReactor
 
     // MARK: - Initializer
@@ -43,16 +42,16 @@ final class SplashViewController: BaseViewController, ServiceDependency {
     override func setupViews() {
         view.backgroundColor = .systemGray
 
-        self.demoLabel = UILabel().then {
-            $0.text = "Splash"
-            $0.font = .systemFont(ofSize: 20, weight: .bold)
+        self.splashImageView = UIImageView().then {
+            $0.image = UIImage(named: "splash")
+            $0.contentMode = .scaleAspectFill
             view.addSubview($0)
         }
     }
 
     override func setupLayoutConstraints() {
-        demoLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+        splashImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 
