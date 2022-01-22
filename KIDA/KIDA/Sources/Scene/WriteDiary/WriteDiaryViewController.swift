@@ -23,6 +23,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     private weak var writeButton: UIButton!
 
     private var reactor: WriteDiaryReactor
+    private let textViewPlaceholderString = "공백 포함 150자 이내로 써주세요."
 
     // MARK: - Initializer
     init(reactor: WriteDiaryReactor) {
@@ -86,7 +87,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         self.textView = UITextView().then {
             $0.textAlignment = .left
             $0.font = .systemFont(ofSize: 15, weight: .regular)
-            $0.text = "공백 포함 150자 이내로 써주세요."
+            $0.text = textViewPlaceholderString
             $0.textColor = .lightGray
 //            $0.backgroundColor = .
             $0.delegate = self
@@ -186,13 +187,15 @@ private extension WriteDiaryViewController {
 
 extension WriteDiaryViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = nil
-        textView.textColor = .black
+        if textView.text == self.textViewPlaceholderString {
+            textView.text = nil
+            textView.textColor = .black
+        }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = "공백 포함 150자 이내로 써주세요."
+            textView.text = self.textViewPlaceholderString
             textView.textColor = .lightGray
         }
     }
