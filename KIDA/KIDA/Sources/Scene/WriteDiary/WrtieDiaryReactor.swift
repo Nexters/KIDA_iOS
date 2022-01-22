@@ -15,12 +15,11 @@ protocol WriteDiaryReactorDelegate: AnyObject {
 final class WriteDiaryReactor: Reactor {
 
     enum Action {
-        case didTapOptionButton
-        case didTapChangeKeywordButton
         case didTapWriteButton
     }
 
     struct State {
+        var didTapWriteButton: Bool
     }
 
     // MARK: - Properties
@@ -29,19 +28,14 @@ final class WriteDiaryReactor: Reactor {
 
     // MARK: - Initializer
     init() {
-        self.initialState = State()
+        self.initialState = State(didTapWriteButton: false)
     }
 
     // MARK: - Methods
+
     func mutate(action: Action) -> Observable<Action> {
         switch action {
-        case .didTapOptionButton:
-            return .just(.didTapOptionButton)
-        case .didTapChangeKeywordButton:
-            delegate?.changeKeyword()
-            return .just(.didTapChangeKeywordButton)
         case .didTapWriteButton:
-            delegate?.didWriteDiary()
             return .just(.didTapWriteButton)
         }
     }
@@ -49,12 +43,10 @@ final class WriteDiaryReactor: Reactor {
     func reduce(state: State, mutation: Action) -> State {
         var newState = state
         switch mutation {
-        case .didTapOptionButton:
-            return newState
-        case .didTapChangeKeywordButton:
-            return newState
         case .didTapWriteButton:
-            return newState
+            newState.didTapWriteButton = true
         }
+
+        return newState
     }
 }
