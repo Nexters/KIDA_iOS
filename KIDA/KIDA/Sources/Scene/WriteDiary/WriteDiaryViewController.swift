@@ -38,6 +38,27 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        textView.rx.didBeginEditing
+            .asDriver()
+            .compactMap { [weak self] _ in self?.textView.text }
+            .filter { [weak self] in $0 == self?.textViewPlaceholderString ?? "" }
+            .drive(onNext: { [weak self] _ in
+                self?.textView.text = nil
+                self?.textView.textColor = .black
+            })
+            .disposed(by: disposeBag)
+
+        textView.rx.didEndEditing
+            .asDriver()
+            .compactMap { [weak self] _ in self?.textView.text }
+            .filter { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.textView.text = self.textViewPlaceholderString
+                self.textView.textColor = .lightGray
+            })
+            .disposed(by: disposeBag)
     }
 
     override func setupViews() {
@@ -89,7 +110,6 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.font = .systemFont(ofSize: 15, weight: .regular)
             $0.text = textViewPlaceholderString
             $0.textColor = .lightGray
-            $0.delegate = self
             containerView.addSubview($0)
         }
 
@@ -181,21 +201,5 @@ private extension WriteDiaryViewController {
         reactor.state
             .subscribe()
             .disposed(by: disposeBag)
-    }
-}
-
-extension WriteDiaryViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == self.textViewPlaceholderString {
-            textView.text = nil
-            textView.textColor = .black
-        }
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = self.textViewPlaceholderString
-            textView.textColor = .lightGray
-        }
     }
 }

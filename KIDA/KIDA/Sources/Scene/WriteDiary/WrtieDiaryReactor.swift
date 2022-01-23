@@ -19,7 +19,7 @@ final class WriteDiaryReactor: Reactor {
     }
 
     struct State {
-        var didTapWriteButton: Bool
+        var didTapWriteButton: Bool = false
     }
 
     // MARK: - Properties
@@ -28,7 +28,7 @@ final class WriteDiaryReactor: Reactor {
 
     // MARK: - Initializer
     init() {
-        self.initialState = State(didTapWriteButton: false)
+        self.initialState = State()
     }
 
     // MARK: - Methods
