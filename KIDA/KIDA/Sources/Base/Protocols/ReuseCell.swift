@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CellType: class {
+protocol CellType: AnyObject {
     var reuseIdentifier: String? { get }
 }
 

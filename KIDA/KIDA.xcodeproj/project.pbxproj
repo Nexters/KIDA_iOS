@@ -23,6 +23,7 @@
 		86B8B29D2795434A0028C512 /* SplashVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29C2795434A0028C512 /* SplashVIewController.swift */; };
 		86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29E279543760028C512 /* SplashVIewReactor.swift */; };
 		86B8B2A12795449A0028C512 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B2A02795449A0028C512 /* SplashCoordinator.swift */; };
+		86D0E809279C2D3B00C51031 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D0E808279C2D3B00C51031 /* UIColor+.swift */; };
 		86FABDEC2792AEB2001D986C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDEB2792AEB2001D986C /* AppDelegate.swift */; };
 		86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDED2792AEB2001D986C /* SceneDelegate.swift */; };
 		86FABDF02792AEB2001D986C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDEF2792AEB2001D986C /* HomeViewController.swift */; };
@@ -66,6 +67,7 @@
 		86B8B29C2795434A0028C512 /* SplashVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewController.swift; sourceTree = "<group>"; };
 		86B8B29E279543760028C512 /* SplashVIewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewReactor.swift; sourceTree = "<group>"; };
 		86B8B2A02795449A0028C512 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		86D0E808279C2D3B00C51031 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		86FABDE82792AEB2001D986C /* KIDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86FABDEB2792AEB2001D986C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86FABDED2792AEB2001D986C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				86137908279564FF00AED9CF /* UIViewController+Rx.swift */,
 				8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */,
+				86D0E808279C2D3B00C51031 /* UIColor+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				8620428F2796EB350055732F /* Diary.xcdatamodeld in Sources */,
 				ED20E015279574A8004951E1 /* DiaryListCoordinator.swift in Sources */,
 				86FABE0D2792B097001D986C /* AppCoordinator.swift in Sources */,
+				86D0E809279C2D3B00C51031 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,15 +12,18 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
     // MARK: - Properties
 
+    private weak var containerView: UIView!
     private weak var headerView: UIView!
-    private weak var optionButton: UIButton!
-    private weak var primaryLabel: UILabel!
-    private weak var secondaryLabel: UILabel!
-    private weak var changeKeywordButton: UIButton!
+    private weak var todayKeywordLabel: UILabel!
+    private weak var selectedKeywordLabel: UILabel!
+    private weak var emojiImageView: UIImageView!
+    private weak var titleTextField: UITextField!
+    private weak var dividerView: UIView!
     private weak var textView: UITextView!
     private weak var writeButton: UIButton!
 
     private var reactor: WriteDiaryReactor
+    private let textViewPlaceholderString = "공백 포함 150자 이내로 써주세요."
 
     // MARK: - Initializer
     init(reactor: WriteDiaryReactor) {
@@ -35,102 +38,148 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        textView.rx.didBeginEditing
+            .asDriver()
+            .compactMap { [weak self] _ in self?.textView.text }
+            .filter { [weak self] in $0 == self?.textViewPlaceholderString ?? "" }
+            .drive(onNext: { [weak self] _ in
+                self?.textView.text = nil
+                self?.textView.textColor = .black
+            })
+            .disposed(by: disposeBag)
+
+        textView.rx.didEndEditing
+            .asDriver()
+            .compactMap { [weak self] _ in self?.textView.text }
+            .filter { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.textView.text = self.textViewPlaceholderString
+                self.textView.textColor = .lightGray
+            })
+            .disposed(by: disposeBag)
     }
 
     override func setupViews() {
-        self.headerView = UIView().then {
+        view.backgroundColor = .systemGray5
+
+        self.containerView = UIView().then {
             $0.backgroundColor = .white
+            $0.layer.cornerRadius = 10
             view.addSubview($0)
         }
 
-        self.optionButton = UIButton().then {
-            $0.setTitle("'''", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
+        self.headerView = UIView().then {
+            $0.backgroundColor = .white
+            containerView.addSubview($0)
+        }
+
+        self.todayKeywordLabel = UILabel().then {
+            $0.text = "오늘의 키워드"
+            $0.font = .systemFont(ofSize: 16, weight: .semibold)
             headerView.addSubview($0)
         }
 
-        self.primaryLabel = UILabel().then {
-            $0.text = "키워드"
-            $0.font = .systemFont(ofSize: 30, weight: .medium)
+        self.selectedKeywordLabel = UILabel().then {
+            $0.text = "쿠쿠루삥뽕"
+            $0.font = .systemFont(ofSize: 40, weight: .bold)
+            $0.textColor = .kida_orange()
             headerView.addSubview($0)
         }
 
-        self.secondaryLabel = UILabel().then {
-            $0.text = "어쩌구 저쩌구"
-            $0.font = .systemFont(ofSize: 15, weight: .regular)
+        self.emojiImageView = UIImageView().then {
+            $0.contentMode = .scaleAspectFit
+            $0.backgroundColor = .white
             headerView.addSubview($0)
         }
 
-        self.changeKeywordButton = UIButton().then {
-            $0.setTitle("키워드 다시뽑기", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
-            $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .regular)
-            $0.layer.borderColor = UIColor.black.cgColor
-            $0.layer.borderWidth = 1
-            $0.layer.cornerRadius = 13
-            $0.titleEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            headerView.addSubview($0)
+        self.titleTextField = UITextField().then {
+            $0.placeholder = "제목"
+            $0.font = .systemFont(ofSize: 20, weight: .semibold)
+            containerView.addSubview($0)
+        }
+
+        self.dividerView = UIView().then {
+            $0.backgroundColor = .systemGray2
+            containerView.addSubview($0)
         }
 
         self.textView = UITextView().then {
             $0.textAlignment = .left
-            $0.font = .systemFont(ofSize: 20, weight: .regular)
-            $0.backgroundColor = .systemGray5
-            view.addSubview($0)
+            $0.font = .systemFont(ofSize: 15, weight: .regular)
+            $0.text = textViewPlaceholderString
+            $0.textColor = .lightGray
+            containerView.addSubview($0)
         }
 
         self.writeButton = UIButton().then {
-            $0.setTitle("일기 남기기", for: .normal)
+            $0.setTitle("작성하기", for: .normal)
             $0.backgroundColor = .black
             $0.setTitleColor(.white, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
-            view.addSubview($0)
+            $0.backgroundColor = .black
+            $0.layer.cornerRadius = 10
+            containerView.addSubview($0)
         }
     }
 
     override func setupLayoutConstraints() {
-        let headerSideMargin: CGFloat = 20
-        let textViewSideMargin: CGFloat = 27
+        let sideMargin: CGFloat = 20
         let writeButtonHeight: CGFloat = 60
 
+        writeButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(55)
+            $0.trailing.equalToSuperview().offset(-55)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.height.equalTo(writeButtonHeight)
+        }
+
+        containerView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(sideMargin)
+            $0.trailing.equalToSuperview().offset(-sideMargin)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(sideMargin)
+            $0.bottom.equalTo(writeButton.snp.top).offset(-24)
+        }
+
         headerView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(headerSideMargin)
-            $0.top.equalToSuperview().offset(80)
-            $0.trailing.equalToSuperview().offset(-headerSideMargin)
+            $0.top.equalToSuperview().offset(sideMargin)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(90)
         }
 
-        optionButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview()
+        todayKeywordLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(36)
+            $0.leading.equalToSuperview().offset(sideMargin)
         }
 
-        primaryLabel.snp.makeConstraints {
-            // TODO: 키워드가 길어질 경우 어떻게 할 지 의논 후 제약 변경
-            $0.top.equalToSuperview().offset(3)
-            $0.leading.equalToSuperview()
+        selectedKeywordLabel.snp.makeConstraints {
+            $0.top.equalTo(todayKeywordLabel.snp.bottom).offset(12)
+            $0.leading.equalTo(todayKeywordLabel)
         }
 
-        secondaryLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.top.equalTo(primaryLabel.snp.bottom).offset(15)
+        emojiImageView.snp.makeConstraints {
+            $0.top.equalTo(todayKeywordLabel)
+            $0.trailing.equalToSuperview().offset(-sideMargin)
         }
 
-        changeKeywordButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview()
-            $0.centerY.equalTo(secondaryLabel)
-            $0.width.equalTo(115)
+        titleTextField.snp.makeConstraints {
+            $0.top.equalTo(headerView.snp.bottom).offset(60)
+            $0.leading.equalTo(todayKeywordLabel)
+        }
+
+        dividerView.snp.makeConstraints {
+            $0.top.equalTo(titleTextField.snp.bottom).offset(18)
+            $0.leading.equalTo(titleTextField)
+            $0.trailing.equalToSuperview().offset(-sideMargin)
+            $0.height.equalTo(1)
         }
 
         textView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(textViewSideMargin)
-            $0.trailing.equalToSuperview().offset(-textViewSideMargin)
-            $0.top.equalTo(headerView.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().offset(sideMargin)
+            $0.trailing.equalToSuperview().offset(-sideMargin)
+            $0.top.equalTo(dividerView.snp.bottom).offset(20)
             $0.bottom.equalToSuperview().offset(-(writeButtonHeight + 20))
-        }
-
-        writeButton.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(writeButtonHeight)
         }
     }
 
@@ -142,16 +191,6 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
 private extension WriteDiaryViewController {
     func bindAction(reactor: WriteDiaryReactor) {
-        optionButton.rx.tap
-            .map { WriteDiaryReactor.Action.didTapOptionButton }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-
-        changeKeywordButton.rx.tap
-            .map { WriteDiaryReactor.Action.didTapChangeKeywordButton }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-
         writeButton.rx.tap
             .map { WriteDiaryReactor.Action.didTapWriteButton }
             .bind(to: reactor.action)
