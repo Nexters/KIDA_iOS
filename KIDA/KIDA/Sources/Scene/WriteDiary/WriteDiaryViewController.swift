@@ -89,7 +89,6 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.font = .systemFont(ofSize: 15, weight: .regular)
             $0.text = textViewPlaceholderString
             $0.textColor = .lightGray
-//            $0.backgroundColor = .
             $0.delegate = self
             containerView.addSubview($0)
         }
