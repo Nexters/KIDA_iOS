@@ -9,12 +9,13 @@ final class KeywordSelectViewReactor: Reactor {
     typealias Action = NoAction
 
     struct State {
+        var sections: [KeywordSelectSection] = []
     }
     
-    var initialState: State
+    var initialState: State = State()
 
     init(){
-        initialState = State()
+        initialState.sections = [.section([.item(KeywordSelectCellReactor()), .item(KeywordSelectCellReactor())])]
     }
 }
 

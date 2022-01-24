@@ -50,6 +50,10 @@
 		ED74BD62279D5686006AA255 /* KeywordSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD61279D5686006AA255 /* KeywordSelectViewController.swift */; };
 		ED74BD64279D5690006AA255 /* KeywordSelectViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD63279D5690006AA255 /* KeywordSelectViewReactor.swift */; };
 		ED74BD66279D57A9006AA255 /* KeywordSelectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD65279D57A9006AA255 /* KeywordSelectCoordinator.swift */; };
+		ED74BD73279EDC9D006AA255 /* KeywordSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD72279EDC9D006AA255 /* KeywordSelectCell.swift */; };
+		ED74BD75279EDCA8006AA255 /* KeywordSelectCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD74279EDCA8006AA255 /* KeywordSelectCellReactor.swift */; };
+		ED74BD77279EDCE5006AA255 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD76279EDCE5006AA255 /* BaseCollectionViewCell.swift */; };
+		ED74BD79279EDDEF006AA255 /* KeywordSelectSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +97,10 @@
 		ED74BD61279D5686006AA255 /* KeywordSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectViewController.swift; sourceTree = "<group>"; };
 		ED74BD63279D5690006AA255 /* KeywordSelectViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectViewReactor.swift; sourceTree = "<group>"; };
 		ED74BD65279D57A9006AA255 /* KeywordSelectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectCoordinator.swift; sourceTree = "<group>"; };
+		ED74BD72279EDC9D006AA255 /* KeywordSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectCell.swift; sourceTree = "<group>"; };
+		ED74BD74279EDCA8006AA255 /* KeywordSelectCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectCellReactor.swift; sourceTree = "<group>"; };
+		ED74BD76279EDCE5006AA255 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,7 @@
 				86FABE092792B002001D986C /* BaseViewController.swift */,
 				ED20E016279575E4004951E1 /* BaseTableViewCell.swift */,
 				86FABE052792AF5F001D986C /* Protocols */,
+				ED74BD76279EDCE5006AA255 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -287,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				ED20E02127957B52004951E1 /* DiayListSection.swift */,
+				ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -303,10 +313,20 @@
 		ED74BD60279D566E006AA255 /* KeywordSelect */ = {
 			isa = PBXGroup;
 			children = (
+				ED74BD71279EDC8E006AA255 /* Cells */,
 				ED74BD61279D5686006AA255 /* KeywordSelectViewController.swift */,
 				ED74BD63279D5690006AA255 /* KeywordSelectViewReactor.swift */,
 			);
 			path = KeywordSelect;
+			sourceTree = "<group>";
+		};
+		ED74BD71279EDC8E006AA255 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				ED74BD72279EDC9D006AA255 /* KeywordSelectCell.swift */,
+				ED74BD74279EDCA8006AA255 /* KeywordSelectCellReactor.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,14 +424,17 @@
 				ED26F2E32792CA19005EE53A /* HomeViewReactor.swift in Sources */,
 				86FABE082792AFD1001D986C /* Coordinatable.swift in Sources */,
 				8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */,
+				ED74BD77279EDCE5006AA255 /* BaseCollectionViewCell.swift in Sources */,
 				8667CFDE2795994E00CC484A /* WrtieDiaryReactor.swift in Sources */,
 				8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */,
 				ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */,
+				ED74BD73279EDC9D006AA255 /* KeywordSelectCell.swift in Sources */,
 				ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */,
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
 				8673D8B12796ED4900085BF7 /* PersistentStorage.swift in Sources */,
 				86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */,
 				8673D8AD2796ECE400085BF7 /* Diary+CoreDataClass.swift in Sources */,
+				ED74BD75279EDCA8006AA255 /* KeywordSelectCellReactor.swift in Sources */,
 				86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */,
 				8667CFDA279598DF00CC484A /* WriteDiaryCoordinator.swift in Sources */,
 				ED74BD62279D5686006AA255 /* KeywordSelectViewController.swift in Sources */,
@@ -423,6 +446,7 @@
 				ED20E017279575E4004951E1 /* BaseTableViewCell.swift in Sources */,
 				86FABE0A2792B002001D986C /* BaseViewController.swift in Sources */,
 				ED74BD64279D5690006AA255 /* KeywordSelectViewReactor.swift in Sources */,
+				ED74BD79279EDDEF006AA255 /* KeywordSelectSection.swift in Sources */,
 				8667CFDC2795994400CC484A /* WriteDiaryViewController.swift in Sources */,
 				864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */,
 				86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */,
