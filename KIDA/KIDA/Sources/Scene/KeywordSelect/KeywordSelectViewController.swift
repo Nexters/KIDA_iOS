@@ -76,9 +76,6 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.width.equalTo(UIScreen.main.bounds.width)
             $0.top.equalTo(titleLabel.snp.bottom).offset(30)
         }
-        
-        collectionView.rx.setDelegate(self).disposed(by: disposeBag)
-        collectionView.delegate = self
     }
     
     private func initCollectionView(){
@@ -95,6 +92,9 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.isPagingEnabled = true
             $0.register(Reuse.keywordCell)
         }
+        
+        collectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        collectionView.delegate = self
     }
     
 }
@@ -102,12 +102,15 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 extension KeywordSelectViewController {
     private func bindState(reactor: KeywordSelectViewReactor){
         
-        // 오류 ,, 왜죠
-//        reactor.state
-//            .compactMap { $0.sections }
-//            .filter { !$0.isEmpty }
-//            .bind(to: collectionView.rx.items(dataSource: dataSource))
-//            .disposed(by: disposeBag)
+        guard let collectionView = collectionView else {
+            return
+        }
+        
+        reactor.state
+            .map { $0.sections }
+            .filter { !$0.isEmpty }
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
         
     }
     
