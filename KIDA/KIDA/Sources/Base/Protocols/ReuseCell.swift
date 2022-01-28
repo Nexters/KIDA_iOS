@@ -39,6 +39,10 @@ extension UITableViewCell: CellType {
     
 }
 
+extension UICollectionViewCell: CellType {
+    
+}
+
 extension UITableView {
     func register<Cell>(_ cell: ReuseCell<Cell>) {
         if let nib = cell.nib {
@@ -56,3 +60,18 @@ extension UITableView {
         return self.dequeueReusableCell(withIdentifier: cell.identifier, for: indexPath) as! Cell
      }
 }
+
+extension UICollectionView {
+    func register<Cell>(_ cell: ReuseCell<Cell>) {
+        if let nib = cell.nib {
+            self.register(nib, forCellWithReuseIdentifier: cell.identifier)
+        } else {
+            self.register(Cell.self, forCellWithReuseIdentifier: cell.identifier)
+        }
+    }
+    
+    func dequeue<Cell>(_ cell: ReuseCell<Cell>, for indexPath: IndexPath) -> Cell {
+      return self.dequeueReusableCell(withReuseIdentifier: cell.identifier, for: indexPath) as! Cell
+    }
+}
+
