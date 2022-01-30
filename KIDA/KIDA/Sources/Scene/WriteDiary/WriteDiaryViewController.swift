@@ -76,6 +76,13 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
                 self?.view.endEditing(true)
             })
             .disposed(by: disposeBag)
+
+        textView.rx.text
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.checkContentCondition($0)
+            })
+            .disposed(by: disposeBag)
     }
 
     override func setupViews() {
@@ -256,5 +263,16 @@ private extension WriteDiaryViewController {
                           createdAt: Date(),
                           keyword: diaryKeyword,
                           title: titleTextField.text ?? "")
+    }
+
+    func checkContentCondition(_ content: String?) {
+        guard let content = content else {
+            return
+        }
+        writeButton.isEnabled = content.contains(PersistentStorage.shared.todayKeyword) && titleTextField.text != ""
+        writeButton.backgroundColor = writeButton.isEnabled ? .black : .lightGray
+        if content.count >= 150 {
+            textView.text = String(content.prefix(149))
+        }
     }
 }
