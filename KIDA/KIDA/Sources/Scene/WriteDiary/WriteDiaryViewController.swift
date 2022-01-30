@@ -21,6 +21,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     private weak var dividerView: UIView!
     private weak var textView: UITextView!
     private weak var writeButton: UIButton!
+    private var tapGestureRecognizer: UITapGestureRecognizer!
 
     private var reactor: WriteDiaryReactor
     private let textViewPlaceholderString = "공백 포함 150자 이내로 써주세요."
@@ -41,8 +42,11 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         textView.rx.didBeginEditing
             .asDriver()
+            .do(onNext: { [weak self] _ in
+                self?.textVieweditingAnimation(.didBegin)
+            })
             .compactMap { [weak self] _ in self?.textView.text }
-            .filter { [weak self] in $0 == self?.textViewPlaceholderString ?? "" }
+            .filter(isPlaceHolderString(_:))
             .drive(onNext: { [weak self] _ in
                 self?.textView.text = nil
                 self?.textView.textColor = .black
@@ -51,18 +55,30 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         textView.rx.didEndEditing
             .asDriver()
+            .do(onNext: { [weak self] _ in
+                self?.textVieweditingAnimation(.didEnd)
+            })
             .compactMap { [weak self] _ in self?.textView.text }
-            .filter { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            .filter(isEmptyTextView(_:))
             .drive(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                self.textView.text = self.textViewPlaceholderString
-                self.textView.textColor = .lightGray
+                self?.textView.text = self?.textViewPlaceholderString
+                self?.textView.textColor = .lightGray
+            })
+            .disposed(by: disposeBag)
+
+        tapGestureRecognizer.rx.event
+            .asDriver()
+            .map { $0.state == .recognized }
+            .drive(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
             })
             .disposed(by: disposeBag)
     }
 
     override func setupViews() {
+        self.tapGestureRecognizer = UITapGestureRecognizer()
         view.backgroundColor = .systemGray5
+        view.addGestureRecognizer(tapGestureRecognizer)
 
         self.containerView = UIView().then {
             $0.backgroundColor = .white
@@ -190,6 +206,11 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 }
 
 private extension WriteDiaryViewController {
+    enum TextViewEditingStatus {
+        case didBegin
+        case didEnd
+    }
+
     func bindAction(reactor: WriteDiaryReactor) {
         writeButton.rx.tap
             .map { WriteDiaryReactor.Action.didTapWriteButton }
@@ -201,5 +222,27 @@ private extension WriteDiaryViewController {
         reactor.state
             .subscribe()
             .disposed(by: disposeBag)
+    }
+
+    func isPlaceHolderString(_ string: String) -> Bool {
+        return string == textViewPlaceholderString
+    }
+
+    func isEmptyTextView(_ string: String) -> Bool {
+        return string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    func textVieweditingAnimation(_ status: TextViewEditingStatus) {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            let yPosition: CGFloat
+            switch status {
+            case .didBegin:
+                yPosition = -100
+            case .didEnd:
+                yPosition = 0
+            }
+
+            self?.view.frame.origin.y = yPosition
+        })
     }
 }
