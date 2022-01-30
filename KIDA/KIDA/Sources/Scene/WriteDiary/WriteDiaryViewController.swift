@@ -5,7 +5,6 @@
 //  Created by Ian on 2022/01/17.
 //
 
-import Foundation
 import UIKit
 
 final class WriteDiaryViewController: BaseViewController, ServiceDependency {
@@ -15,7 +14,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     private weak var containerView: UIView!
     private weak var headerView: UIView!
     private weak var todayKeywordLabel: UILabel!
-    private weak var selectedKeywordLabel: UILabel!
+    private weak var diaryKeywordLabel: UILabel!
     private weak var emojiImageView: UIImageView!
     private weak var titleTextField: UITextField!
     private weak var dividerView: UIView!
@@ -25,10 +24,12 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
     private var reactor: WriteDiaryReactor
     private let textViewPlaceholderString = "공백 포함 150자 이내로 써주세요."
+    private let diaryKeyword: String
 
     // MARK: - Initializer
     init(reactor: WriteDiaryReactor) {
         self.reactor = reactor
+        self.diaryKeyword = PersistentStorage.shared.todayKeyword
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -39,6 +40,8 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        bind(reactor: reactor)
 
         textView.rx.didBeginEditing
             .asDriver()
@@ -97,8 +100,8 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             headerView.addSubview($0)
         }
 
-        self.selectedKeywordLabel = UILabel().then {
-            $0.text = "쿠쿠루삥뽕"
+        self.diaryKeywordLabel = UILabel().then {
+            $0.text = diaryKeyword
             $0.font = .systemFont(ofSize: 40, weight: .bold)
             $0.textColor = .kida_orange()
             headerView.addSubview($0)
@@ -136,7 +139,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
             $0.backgroundColor = .black
             $0.layer.cornerRadius = 10
-            containerView.addSubview($0)
+            view.addSubview($0)
         }
     }
 
@@ -169,7 +172,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.leading.equalToSuperview().offset(sideMargin)
         }
 
-        selectedKeywordLabel.snp.makeConstraints {
+        diaryKeywordLabel.snp.makeConstraints {
             $0.top.equalTo(todayKeywordLabel.snp.bottom).offset(12)
             $0.leading.equalTo(todayKeywordLabel)
         }
@@ -213,13 +216,15 @@ private extension WriteDiaryViewController {
 
     func bindAction(reactor: WriteDiaryReactor) {
         writeButton.rx.tap
-            .map { WriteDiaryReactor.Action.didTapWriteButton }
+            .map(makeDiary)
+            .map { WriteDiaryReactor.Action.didTapWriteButton($0, didSuccess: false) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
     }
 
     func bindState(reactor: WriteDiaryReactor) {
         reactor.state
+            .map { $0.didSuccessCreateDiary }
             .subscribe()
             .disposed(by: disposeBag)
     }
@@ -244,5 +249,12 @@ private extension WriteDiaryViewController {
 
             self?.view.frame.origin.y = yPosition
         })
+    }
+
+    func makeDiary() -> DiaryModel {
+        return DiaryModel(content: textView.text,
+                          createdAt: Date(),
+                          keyword: diaryKeyword,
+                          title: titleTextField.text ?? "")
     }
 }

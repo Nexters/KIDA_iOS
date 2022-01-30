@@ -2,7 +2,7 @@
 //  Diary+CoreDataProperties.swift
 //  KIDA
 //
-//  Created by Ian on 2022/01/18.
+//  Created by Ian on 2022/01/30.
 //
 //
 
@@ -16,10 +16,10 @@ extension Diary {
         return NSFetchRequest<Diary>(entityName: "Diary")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var keyword: String?
     @NSManaged public var content: String?
     @NSManaged public var createdAt: Date?
+    @NSManaged public var keyword: String?
+    @NSManaged public var title: String?
 
 }
 
