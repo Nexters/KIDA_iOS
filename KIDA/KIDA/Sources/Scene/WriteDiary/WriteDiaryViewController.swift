@@ -23,7 +23,6 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     private weak var writeButton: UIButton!
 
     private var reactor: WriteDiaryReactor
-    private let textViewPlaceholderString = "공백 포함 150자 이내로 써주세요."
 
     // MARK: - Initializer
     init(reactor: WriteDiaryReactor) {
@@ -42,7 +41,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         textView.rx.didBeginEditing
             .asDriver()
             .compactMap { [weak self] _ in self?.textView.text }
-            .filter { [weak self] in $0 == self?.textViewPlaceholderString ?? "" }
+            .filter { $0 == KIDA_String.WriteDiary.textViewPlaceholder }
             .drive(onNext: { [weak self] _ in
                 self?.textView.text = nil
                 self?.textView.textColor = .black
@@ -55,7 +54,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             .filter { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.textView.text = self.textViewPlaceholderString
+                self.textView.text = KIDA_String.WriteDiary.textViewPlaceholder
                 self.textView.textColor = .lightGray
             })
             .disposed(by: disposeBag)
@@ -76,15 +75,14 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         }
 
         self.todayKeywordLabel = UILabel().then {
-            $0.text = "오늘의 키워드"
+            $0.text = KIDA_String.WriteDiary.todayKeyword
             $0.font = .systemFont(ofSize: 16, weight: .semibold)
             headerView.addSubview($0)
         }
 
         self.selectedKeywordLabel = UILabel().then {
-            $0.text = "쿠쿠루삥뽕"
             $0.font = .systemFont(ofSize: 40, weight: .bold)
-            $0.textColor = .kida_orange()
+            $0.textColor = .KIDA_orange()
             headerView.addSubview($0)
         }
 
@@ -95,7 +93,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         }
 
         self.titleTextField = UITextField().then {
-            $0.placeholder = "제목"
+            $0.placeholder = KIDA_String.WriteDiary.titleTextFieldPlaceholder
             $0.font = .systemFont(ofSize: 20, weight: .semibold)
             containerView.addSubview($0)
         }
@@ -108,13 +106,13 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         self.textView = UITextView().then {
             $0.textAlignment = .left
             $0.font = .systemFont(ofSize: 15, weight: .regular)
-            $0.text = textViewPlaceholderString
+            $0.text = KIDA_String.WriteDiary.textViewPlaceholder
             $0.textColor = .lightGray
             containerView.addSubview($0)
         }
 
         self.writeButton = UIButton().then {
-            $0.setTitle("작성하기", for: .normal)
+            $0.setTitle(KIDA_String.WriteDiary.writeButtonTitle, for: .normal)
             $0.backgroundColor = .black
             $0.setTitleColor(.white, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
