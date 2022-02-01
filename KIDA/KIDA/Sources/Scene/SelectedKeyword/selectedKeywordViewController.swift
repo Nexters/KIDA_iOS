@@ -10,11 +10,11 @@ import UIKit
 final class SelectedKeywordViewController: BaseViewController, ServiceDependency {
 
     // MARK: - UI
-    private var containerView: UIView!
-    private var closeButton: UIButton!
-    private var todayKeywordLabel: UILabel!
-    private var selectedKeyword: UILabel!
-    private var confirmButton: UIButton!
+    private weak var todayKeywordLabel: UILabel!
+    private weak var selectedKeywordLabel: UILabel!
+    private weak var characterImageView: UIImageView!
+    private weak var confirmButton: UIButton!
+    private weak var rePickButton: UIButton!
 
     // MARK: - Property
     private var reactor: SelectedKeywordReactor
@@ -31,33 +31,27 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        bind(reactor: reactor)
     }
 
     override func setupViews() {
-        view.backgroundColor = UIColor(white: 1, alpha: 0.4)
-
-        self.containerView = UIView().then {
-            $0.backgroundColor = .white
-            $0.layer.cornerRadius = 17
-            view.addSubview($0)
-        }
-
-        self.closeButton = UIButton().then {
-            $0.setTitle("x", for: .normal)
-            $0.setTitleColor(.systemGray, for: .normal)
-            containerView.addSubview($0)
-        }
-
         self.todayKeywordLabel = UILabel().then {
             $0.text = "오늘의 키워드"
             $0.font = .systemFont(ofSize: 20)
-            containerView.addSubview($0)
+            view.addSubview($0)
         }
 
-        self.selectedKeyword = UILabel().then {
+        self.selectedKeywordLabel = UILabel().then {
             $0.font = .systemFont(ofSize: 30, weight: .bold)
             $0.text = "여행"
-            containerView.addSubview($0)
+            view.addSubview($0)
+        }
+
+        self.characterImageView = UIImageView().then {
+            $0.contentMode = .scaleAspectFit
+            $0.backgroundColor = .white
+            view.addSubview($0)
         }
 
         self.confirmButton = UIButton().then {
@@ -65,41 +59,54 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
             $0.setTitle("확인", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-            $0.layer.cornerRadius = 20
-            containerView.addSubview($0)
+            $0.layer.cornerRadius = 12
+            view.addSubview($0)
+        }
+
+        self.rePickButton = UIButton().then {
+            // TODO: 추후 KIDA_String 으로 관리
+            let attributedString = NSMutableAttributedString(string: "다시 뽑을래",
+                                                             attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue,
+                                                                          .font: UIFont.systemFont(ofSize: 15),
+                                                                          .foregroundColor: UIColor.systemGray])
+            $0.backgroundColor = .clear
+            $0.setAttributedTitle(attributedString, for: .normal)
+            view.addSubview($0)
         }
     }
 
     override func setupLayoutConstraints() {
-        let sideMargine: CGFloat = 20.0
-
-        containerView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(sideMargine)
-            $0.trailing.equalToSuperview().offset(-sideMargine)
-            $0.height.equalTo(330)
-            $0.centerY.equalToSuperview()
-        }
-
-        closeButton.snp.makeConstraints {
-            $0.top.equalTo(containerView).offset(sideMargine)
-            $0.trailing.equalTo(containerView).offset(-sideMargine)
-            $0.size.equalTo(CGSize(width: 30, height: 30))
-        }
+        let sideMargin: CGFloat = 55
 
         todayKeywordLabel.snp.makeConstraints {
-            $0.centerX.equalTo(containerView)
-            $0.top.equalTo(containerView).offset(75)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
         }
 
-        selectedKeyword.snp.makeConstraints {
-            $0.centerX.equalTo(containerView)
-            $0.top.equalTo(todayKeywordLabel.snp.bottom).offset(26)
+        selectedKeywordLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(todayKeywordLabel.snp.bottom).offset(12)
+        }
+
+        characterImageView.snp.makeConstraints {
+//            $0.centerX.equalToSuperview()
+            // TODO: 임시로 height 지정, 에셋 받은 이후 변경 예정
+            $0.top.equalTo(selectedKeywordLabel.snp.bottom).offset(35)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(280)
         }
 
         confirmButton.snp.makeConstraints {
-            $0.size.equalTo(CGSize(width: 183, height: 53))
-            $0.centerX.equalTo(containerView)
-            $0.bottom.equalTo(containerView).offset(-24)
+            $0.top.equalTo(characterImageView.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().offset(sideMargin)
+            $0.trailing.equalToSuperview().offset(-sideMargin)
+            $0.height.equalTo(56)
+        }
+
+        rePickButton.snp.makeConstraints {
+            $0.top.equalTo(confirmButton.snp.bottom).offset(10)
+            $0.leading.trailing.equalTo(confirmButton)
+            $0.height.equalTo(56)
         }
     }
 
@@ -110,11 +117,23 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
 }
 
 private extension SelectedKeywordViewController {
-    func bindState(reactor: SelectedKeywordReactor) {
-
-    }
-
     func bindAction(reactor: SelectedKeywordReactor) {
+        confirmButton.rx.tap
+            .map { SelectedKeywordReactor.Action.didTapConfirmButton }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
 
+        rePickButton.rx.tap
+            .map { SelectedKeywordReactor.Action.didTapRePickButton }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
     }
+
+    func bindState(reactor: SelectedKeywordReactor) {
+        reactor.state
+            .asDriverSkipError()
+            .drive()
+            .disposed(by: disposeBag)
+    }
+
 }
