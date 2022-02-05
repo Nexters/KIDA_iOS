@@ -37,6 +37,8 @@ enum KIDA_String {
 
     /// DiaryListViewController 에서 사용하는 문자열을 관리합니다.
     enum DiaryList {
+        static let navigationTitle = "내 일기"
+        static let headerTitle = "내가 쓴 일기"
     }
 
     /// SelectedKeywordViewController 에서 사용하는 문자열을 관리합니다.

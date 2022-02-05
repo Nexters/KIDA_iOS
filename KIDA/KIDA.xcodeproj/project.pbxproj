@@ -57,6 +57,7 @@
 		ED74BD75279EDCA8006AA255 /* KeywordSelectCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD74279EDCA8006AA255 /* KeywordSelectCellReactor.swift */; };
 		ED74BD77279EDCE5006AA255 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD76279EDCE5006AA255 /* BaseCollectionViewCell.swift */; };
 		ED74BD79279EDDEF006AA255 /* KeywordSelectSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */; };
+		ED85CEF027AE50C500C26CA3 /* DiaryListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +108,7 @@
 		ED74BD74279EDCA8006AA255 /* KeywordSelectCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectCellReactor.swift; sourceTree = "<group>"; };
 		ED74BD76279EDCE5006AA255 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectSection.swift; sourceTree = "<group>"; };
+		ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 		ED20E00D279573ED004951E1 /* DiaryList */ = {
 			isa = PBXGroup;
 			children = (
+				ED85CEEE27AE50B300C26CA3 /* Views */,
 				ED20E018279577CE004951E1 /* Cells */,
 				ED20E00E27957407004951E1 /* DiaryListViewController.swift */,
 				ED20E01027957416004951E1 /* DiaryListViewReactor.swift */,
@@ -336,6 +339,14 @@
 				ED74BD74279EDCA8006AA255 /* KeywordSelectCellReactor.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		ED85CEEE27AE50B300C26CA3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,6 +446,7 @@
 				86FABE082792AFD1001D986C /* Coordinatable.swift in Sources */,
 				8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */,
 				ED74BD77279EDCE5006AA255 /* BaseCollectionViewCell.swift in Sources */,
+				ED85CEF027AE50C500C26CA3 /* DiaryListHeaderView.swift in Sources */,
 				86B7759B27A6B3690012FAB6 /* Diary+CoreDataProperties.swift in Sources */,
 				8667CFDE2795994E00CC484A /* WrtieDiaryReactor.swift in Sources */,
 				86B7759727A696AE0012FAB6 /* DiaryModel.swift in Sources */,
