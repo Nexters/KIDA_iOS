@@ -23,7 +23,6 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     private var tapGestureRecognizer: UITapGestureRecognizer!
 
     private var reactor: WriteDiaryReactor
-    private let textViewPlaceholderString = "공백 포함 150자 이내로 써주세요."
     private let diaryKeyword: String
 
     // MARK: - Initializer
@@ -65,7 +64,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             .compactMap { [weak self] _ in self?.textView.text }
             .filter(isEmptyTextView(_:))
             .drive(onNext: { [weak self] _ in
-                self?.textView.text = self?.textViewPlaceholderString
+                self?.textView.text = KIDA_String.WriteDiary.textViewPlaceholder
                 self?.textView.textColor = .lightGray
             })
             .disposed(by: disposeBag)
@@ -113,8 +112,6 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         self.diaryKeywordLabel = UILabel().then {
             $0.text = diaryKeyword
-
-        self.selectedKeywordLabel = UILabel().then {
             $0.font = .systemFont(ofSize: 40, weight: .bold)
             $0.textColor = .KIDA_orange()
             headerView.addSubview($0)
@@ -243,7 +240,7 @@ private extension WriteDiaryViewController {
     }
 
     func isPlaceHolderString(_ string: String) -> Bool {
-        return string == textViewPlaceholderString
+        return string == KIDA_String.WriteDiary.textViewPlaceholder
     }
 
     func isEmptyTextView(_ string: String) -> Bool {

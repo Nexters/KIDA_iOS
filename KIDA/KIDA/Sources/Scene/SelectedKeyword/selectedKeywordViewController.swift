@@ -64,8 +64,7 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
         }
 
         self.rePickButton = UIButton().then {
-            // TODO: 추후 KIDA_String 으로 관리
-            let attributedString = NSMutableAttributedString(string: "다시 뽑을래",
+            let attributedString = NSMutableAttributedString(string: KIDA_String.SelectedKeyword.cancelButtonTitle,
                                                              attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue,
                                                                           .font: UIFont.systemFont(ofSize: 15),
                                                                           .foregroundColor: UIColor.systemGray])
