@@ -47,8 +47,6 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.title = "title"
     }
     
     override func setupViews() {
@@ -57,7 +55,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         view.addSubview(collectionView)
         
         self.titleLabel = UILabel().then {
-            $0.text = "오늘의 키워드 어쩌구"
+            $0.text = KIDA_String.KeywordSelect.title
             $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             $0.textColor = .black
             view.addSubview($0)
@@ -67,7 +65,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     override func setupLayoutConstraints() {
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(60)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(60)
         }
         
         collectionView.snp.makeConstraints {

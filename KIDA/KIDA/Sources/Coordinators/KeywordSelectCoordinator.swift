@@ -23,6 +23,7 @@ final class KeywordSelectCoordinator: Coordinatable {
         let keywordSelectReactor = KeywordSelectViewReactor()
         let keywordSelectViewController = KeywordSelectViewController()
         keywordSelectViewController.reactor = keywordSelectReactor
+        keywordSelectViewController.navigationItem.title = .navBarDateTitle
         navigationController.viewControllers = [keywordSelectViewController]
     }
 }

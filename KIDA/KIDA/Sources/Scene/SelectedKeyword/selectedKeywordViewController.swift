@@ -49,7 +49,7 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
         }
 
         self.todayKeywordLabel = UILabel().then {
-            $0.text = "오늘의 키워드"
+            $0.text = KIDA_String.SelectedKeyword.todayKeyword
             $0.font = .systemFont(ofSize: 20)
             containerView.addSubview($0)
         }

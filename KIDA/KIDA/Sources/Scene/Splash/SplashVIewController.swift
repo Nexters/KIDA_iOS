@@ -43,7 +43,7 @@ final class SplashViewController: BaseViewController, ServiceDependency {
         view.backgroundColor = .systemGray
 
         self.splashImageView = UIImageView().then {
-            $0.image = UIImage(named: "splash")
+            $0.image = UIImage(named: KIDA_String.Splash.splashImage)
             $0.contentMode = .scaleAspectFill
             view.addSubview($0)
         }
