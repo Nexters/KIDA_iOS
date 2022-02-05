@@ -17,7 +17,7 @@ final class DiaryListViewReactor: Reactor {
     init(){
         
         // test
-        initialState.sections = [.section([.item(DiaryListCellReactor(title: "sample1")), .item(DiaryListCellReactor(title: "sample2")), .item(DiaryListCellReactor(title: "sample3"))])]
+        initialState.sections = [.section([.item(DiaryListCellReactor(title: "sample1")), .item(DiaryListCellReactor(title: "sample2")), .item(DiaryListCellReactor(title: "sample3")), .item(DiaryListCellReactor(title: "sample2"))])]
         
     }
 }

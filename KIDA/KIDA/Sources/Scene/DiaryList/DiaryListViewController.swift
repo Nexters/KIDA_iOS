@@ -49,6 +49,7 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
         tableView.register(Reuse.diaryListCell)
         tableView.tableHeaderView = tableHeaderView
         tableView.tableHeaderView?.frame.size = CGSize(width: tableView.frame.width , height: headerHeight)
+        tableView.separatorStyle = .none
         
         view.addSubview(tableView)
     }
