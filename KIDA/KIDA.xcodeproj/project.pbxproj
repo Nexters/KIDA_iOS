@@ -24,6 +24,8 @@
 		86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29E279543760028C512 /* SplashVIewReactor.swift */; };
 		86B8B2A12795449A0028C512 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B2A02795449A0028C512 /* SplashCoordinator.swift */; };
 		86D0E809279C2D3B00C51031 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D0E808279C2D3B00C51031 /* UIColor+.swift */; };
+		86D513AB27A9389900A3391A /* KIDA_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D513AA27A9389900A3391A /* KIDA_String.swift */; };
+		86D513AD27A941BE00A3391A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D513AC27A941BE00A3391A /* String+.swift */; };
 		86FABDEC2792AEB2001D986C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDEB2792AEB2001D986C /* AppDelegate.swift */; };
 		86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDED2792AEB2001D986C /* SceneDelegate.swift */; };
 		86FABDF02792AEB2001D986C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FABDEF2792AEB2001D986C /* HomeViewController.swift */; };
@@ -75,6 +77,8 @@
 		86B8B29E279543760028C512 /* SplashVIewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewReactor.swift; sourceTree = "<group>"; };
 		86B8B2A02795449A0028C512 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		86D0E808279C2D3B00C51031 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		86D513AA27A9389900A3391A /* KIDA_String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIDA_String.swift; sourceTree = "<group>"; };
+		86D513AC27A941BE00A3391A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		86FABDE82792AEB2001D986C /* KIDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KIDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86FABDEB2792AEB2001D986C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86FABDED2792AEB2001D986C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				86137908279564FF00AED9CF /* UIViewController+Rx.swift */,
 				8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */,
 				86D0E808279C2D3B00C51031 /* UIColor+.swift */,
+				86D513AC27A941BE00A3391A /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -145,9 +150,9 @@
 		864482FF27930ED90020F782 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				86FABE052792AF5F001D986C /* Protocols */,
 				86FABE092792B002001D986C /* BaseViewController.swift */,
 				ED20E016279575E4004951E1 /* BaseTableViewCell.swift */,
-				86FABE052792AF5F001D986C /* Protocols */,
 				ED74BD76279EDCE5006AA255 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
@@ -175,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				8673D8B02796ED4900085BF7 /* PersistentStorage.swift */,
+				86D513AA27A9389900A3391A /* KIDA_String.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -417,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED20E02227957B52004951E1 /* DiayListSection.swift in Sources */,
+				86D513AD27A941BE00A3391A /* String+.swift in Sources */,
 				86FABDF02792AEB2001D986C /* HomeViewController.swift in Sources */,
 				86B8B2A12795449A0028C512 /* SplashCoordinator.swift in Sources */,
 				ED20E01127957416004951E1 /* DiaryListViewReactor.swift in Sources */,
@@ -452,6 +459,7 @@
 				ED74BD79279EDDEF006AA255 /* KeywordSelectSection.swift in Sources */,
 				86B7759A27A6B3690012FAB6 /* Diary+CoreDataClass.swift in Sources */,
 				8667CFDC2795994400CC484A /* WriteDiaryViewController.swift in Sources */,
+				86D513AB27A9389900A3391A /* KIDA_String.swift in Sources */,
 				864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */,
 				86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */,
 				ED20E015279574A8004951E1 /* DiaryListCoordinator.swift in Sources */,

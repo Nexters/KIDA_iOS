@@ -15,7 +15,7 @@ final class PersistentStorage {
 
     static let shared = PersistentStorage()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private let entityName = "Diary"
+    private let entityName = KIDA_String.PersistentStorage.entityName
 
     /// 유저가 뽑은 키워드를 저장합니다.
     /// 해당 프로퍼티는 `pickKeyword()` 함수 호출을 통해 초기화 됩니다.
