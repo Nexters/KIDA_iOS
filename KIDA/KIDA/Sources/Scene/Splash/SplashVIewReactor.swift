@@ -8,13 +8,13 @@
 import RxSwift
 
 protocol SplashViewReactorDelegate: AnyObject {
-    func showHome()
+    func showKeywordSelect()
 }
 
 final class SplashViewReactor: Reactor {
 
     enum Action {
-        case showHome
+        case showKeywordSelect
     }
 
     struct State {
@@ -30,17 +30,17 @@ final class SplashViewReactor: Reactor {
 
     func mutate(action: Action) -> Observable<Action> {
         switch action {
-        case .showHome:
-            return Observable<Action>.just(.showHome)
+        case .showKeywordSelect:
+            return Observable<Action>.just(.showKeywordSelect)
                 .do(onNext: { [weak self] _ in
-                    self?.delegate?.showHome()
+                    self?.delegate?.showKeywordSelect()
                 })
         }
     }
 
     func reduce(state: State, mutation: Action) -> State {
         switch mutation {
-        case .showHome:
+        case .showKeywordSelect:
             return state
         }
     }

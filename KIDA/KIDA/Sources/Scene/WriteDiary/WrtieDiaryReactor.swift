@@ -8,18 +8,17 @@
 import Foundation
 
 protocol WriteDiaryReactorDelegate: AnyObject {
-    func changeKeyword()
     func didWriteDiary()
 }
 
 final class WriteDiaryReactor: Reactor {
 
     enum Action {
-        case didTapWriteButton
+        case didTapWriteButton(_ diary: DiaryModel, didSuccess: Bool)
     }
 
     struct State {
-        var didTapWriteButton: Bool = false
+        var didSuccessCreateDiary: Bool = false
     }
 
     // MARK: - Properties
@@ -34,17 +33,26 @@ final class WriteDiaryReactor: Reactor {
     // MARK: - Methods
 
     func mutate(action: Action) -> Observable<Action> {
+        var didSuccessCreate: Bool = false
+
         switch action {
-        case .didTapWriteButton:
-            return .just(.didTapWriteButton)
+        case .didTapWriteButton(let diary, _):
+            PersistentStorage.shared.createDiary(diary, onSuccess: { success in
+                didSuccessCreate = success
+            })
+            return Observable.just(.didTapWriteButton(diary, didSuccess: didSuccessCreate))
         }
     }
 
     func reduce(state: State, mutation: Action) -> State {
         var newState = state
         switch mutation {
-        case .didTapWriteButton:
-            newState.didTapWriteButton = true
+        case .didTapWriteButton(_, let didSuccess):
+            newState.didSuccessCreateDiary = didSuccess
+            if didSuccess {
+                // 리스트뷰로 화면 전환 예정
+                self.delegate?.didWriteDiary()
+            }
         }
 
         return newState

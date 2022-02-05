@@ -30,11 +30,11 @@ final class SplashCoordinator: Coordinatable {
 }
 
 extension SplashCoordinator: SplashViewReactorDelegate {
-    func showHome() {
-        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
-        homeCoordinator.parentCoordinator = self
-        self.childCoordinators.append(homeCoordinator)
+    func showKeywordSelect() {
+        let keywordSelectCoordinator = KeywordSelectCoordinator(navigationController: navigationController)
+        keywordSelectCoordinator.parentCoordinator = self
+        self.childCoordinators.append(keywordSelectCoordinator)
 
-        homeCoordinator.start()
+        keywordSelectCoordinator.start()
     }
 }

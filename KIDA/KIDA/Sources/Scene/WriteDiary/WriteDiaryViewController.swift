@@ -5,7 +5,6 @@
 //  Created by Ian on 2022/01/17.
 //
 
-import Foundation
 import UIKit
 
 final class WriteDiaryViewController: BaseViewController, ServiceDependency {
@@ -15,18 +14,22 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     private weak var containerView: UIView!
     private weak var headerView: UIView!
     private weak var todayKeywordLabel: UILabel!
-    private weak var selectedKeywordLabel: UILabel!
+    private weak var diaryKeywordLabel: UILabel!
     private weak var emojiImageView: UIImageView!
     private weak var titleTextField: UITextField!
     private weak var dividerView: UIView!
     private weak var textView: UITextView!
     private weak var writeButton: UIButton!
+    private var tapGestureRecognizer: UITapGestureRecognizer!
 
     private var reactor: WriteDiaryReactor
+    private let textViewPlaceholderString = "공백 포함 150자 이내로 써주세요."
+    private let diaryKeyword: String
 
     // MARK: - Initializer
     init(reactor: WriteDiaryReactor) {
         self.reactor = reactor
+        self.diaryKeyword = PersistentStorage.shared.todayKeyword
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,9 +41,15 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bind(reactor: reactor)
+
         textView.rx.didBeginEditing
             .asDriver()
+            .do(onNext: { [weak self] _ in
+                self?.textVieweditingAnimation(.didBegin)
+            })
             .compactMap { [weak self] _ in self?.textView.text }
+            .filter(isPlaceHolderString(_:))
             .filter { $0 == KIDA_String.WriteDiary.textViewPlaceholder }
             .drive(onNext: { [weak self] _ in
                 self?.textView.text = nil
@@ -50,9 +59,29 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         textView.rx.didEndEditing
             .asDriver()
+            .do(onNext: { [weak self] _ in
+                self?.textVieweditingAnimation(.didEnd)
+            })
             .compactMap { [weak self] _ in self?.textView.text }
-            .filter { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            .filter(isEmptyTextView(_:))
             .drive(onNext: { [weak self] _ in
+                self?.textView.text = self?.textViewPlaceholderString
+                self?.textView.textColor = .lightGray
+            })
+            .disposed(by: disposeBag)
+
+        tapGestureRecognizer.rx.event
+            .asDriver()
+            .map { $0.state == .recognized }
+            .drive(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+
+        textView.rx.text
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.checkContentCondition($0)
                 guard let self = self else { return }
                 self.textView.text = KIDA_String.WriteDiary.textViewPlaceholder
                 self.textView.textColor = .lightGray
@@ -61,7 +90,9 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     }
 
     override func setupViews() {
+        self.tapGestureRecognizer = UITapGestureRecognizer()
         view.backgroundColor = .systemGray5
+        view.addGestureRecognizer(tapGestureRecognizer)
 
         self.containerView = UIView().then {
             $0.backgroundColor = .white
@@ -79,6 +110,9 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.font = .systemFont(ofSize: 16, weight: .semibold)
             headerView.addSubview($0)
         }
+
+        self.diaryKeywordLabel = UILabel().then {
+            $0.text = diaryKeyword
 
         self.selectedKeywordLabel = UILabel().then {
             $0.font = .systemFont(ofSize: 40, weight: .bold)
@@ -118,7 +152,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
             $0.backgroundColor = .black
             $0.layer.cornerRadius = 10
-            containerView.addSubview($0)
+            view.addSubview($0)
         }
     }
 
@@ -151,7 +185,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.leading.equalToSuperview().offset(sideMargin)
         }
 
-        selectedKeywordLabel.snp.makeConstraints {
+        diaryKeywordLabel.snp.makeConstraints {
             $0.top.equalTo(todayKeywordLabel.snp.bottom).offset(12)
             $0.leading.equalTo(todayKeywordLabel)
         }
@@ -188,16 +222,63 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 }
 
 private extension WriteDiaryViewController {
+    enum TextViewEditingStatus {
+        case didBegin
+        case didEnd
+    }
+
     func bindAction(reactor: WriteDiaryReactor) {
         writeButton.rx.tap
-            .map { WriteDiaryReactor.Action.didTapWriteButton }
+            .map(makeDiary)
+            .map { WriteDiaryReactor.Action.didTapWriteButton($0, didSuccess: false) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
     }
 
     func bindState(reactor: WriteDiaryReactor) {
         reactor.state
+            .map { $0.didSuccessCreateDiary }
             .subscribe()
             .disposed(by: disposeBag)
+    }
+
+    func isPlaceHolderString(_ string: String) -> Bool {
+        return string == textViewPlaceholderString
+    }
+
+    func isEmptyTextView(_ string: String) -> Bool {
+        return string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    func textVieweditingAnimation(_ status: TextViewEditingStatus) {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            let yPosition: CGFloat
+            switch status {
+            case .didBegin:
+                yPosition = -100
+            case .didEnd:
+                yPosition = 0
+            }
+
+            self?.view.frame.origin.y = yPosition
+        })
+    }
+
+    func makeDiary() -> DiaryModel {
+        return DiaryModel(content: textView.text,
+                          createdAt: Date(),
+                          keyword: diaryKeyword,
+                          title: titleTextField.text ?? "")
+    }
+
+    func checkContentCondition(_ content: String?) {
+        guard let content = content else {
+            return
+        }
+        writeButton.isEnabled = content.contains(PersistentStorage.shared.todayKeyword) && titleTextField.text != ""
+        writeButton.backgroundColor = writeButton.isEnabled ? .black : .lightGray
+        if content.count >= 150 {
+            textView.text = String(content.prefix(149))
+        }
     }
 }

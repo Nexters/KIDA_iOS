@@ -33,7 +33,7 @@ final class SplashViewController: BaseViewController, ServiceDependency {
             .asDriver()
             .drive(onNext: { [weak self] in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [weak self] in
-                    self?.reactor.action.onNext(.showHome)
+                    self?.reactor.action.onNext(.showKeywordSelect)
                 })
             })
             .disposed(by: disposeBag)

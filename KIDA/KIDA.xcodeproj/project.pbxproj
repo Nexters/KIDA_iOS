@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86137908279564FF00AED9CF /* UIViewController+Rx.swift */; };
 		8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */; };
-		8620428F2796EB350055732F /* Diary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8620428D2796EB350055732F /* Diary.xcdatamodeld */; };
 		8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8644830027930EFC0020F782 /* ServiceDependency.swift */; };
 		864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */; };
 		86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86448307279310C30020F782 /* selectedKeywordViewController.swift */; };
@@ -17,9 +16,10 @@
 		8667CFDA279598DF00CC484A /* WriteDiaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8667CFD9279598DF00CC484A /* WriteDiaryCoordinator.swift */; };
 		8667CFDC2795994400CC484A /* WriteDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8667CFDB2795994400CC484A /* WriteDiaryViewController.swift */; };
 		8667CFDE2795994E00CC484A /* WrtieDiaryReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8667CFDD2795994E00CC484A /* WrtieDiaryReactor.swift */; };
-		8673D8AD2796ECE400085BF7 /* Diary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8673D8AB2796ECE400085BF7 /* Diary+CoreDataClass.swift */; };
-		8673D8AE2796ECE400085BF7 /* Diary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8673D8AC2796ECE400085BF7 /* Diary+CoreDataProperties.swift */; };
 		8673D8B12796ED4900085BF7 /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8673D8B02796ED4900085BF7 /* PersistentStorage.swift */; };
+		86B7759727A696AE0012FAB6 /* DiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7759627A696AE0012FAB6 /* DiaryModel.swift */; };
+		86B7759A27A6B3690012FAB6 /* Diary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7759827A6B3690012FAB6 /* Diary+CoreDataClass.swift */; };
+		86B7759B27A6B3690012FAB6 /* Diary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7759927A6B3690012FAB6 /* Diary+CoreDataProperties.swift */; };
 		86B8B29D2795434A0028C512 /* SplashVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29C2795434A0028C512 /* SplashVIewController.swift */; };
 		86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29E279543760028C512 /* SplashVIewReactor.swift */; };
 		86B8B2A12795449A0028C512 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B2A02795449A0028C512 /* SplashCoordinator.swift */; };
@@ -62,7 +62,6 @@
 /* Begin PBXFileReference section */
 		86137908279564FF00AED9CF /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+.swift"; sourceTree = "<group>"; };
-		8620428E2796EB350055732F /* Diary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Diary.xcdatamodel; sourceTree = "<group>"; };
 		8644830027930EFC0020F782 /* ServiceDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDependency.swift; sourceTree = "<group>"; };
 		864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedKeywordCoordinator.swift; sourceTree = "<group>"; };
 		86448307279310C30020F782 /* selectedKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedKeywordViewController.swift; sourceTree = "<group>"; };
@@ -70,9 +69,10 @@
 		8667CFD9279598DF00CC484A /* WriteDiaryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryCoordinator.swift; sourceTree = "<group>"; };
 		8667CFDB2795994400CC484A /* WriteDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryViewController.swift; sourceTree = "<group>"; };
 		8667CFDD2795994E00CC484A /* WrtieDiaryReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieDiaryReactor.swift; sourceTree = "<group>"; };
-		8673D8AB2796ECE400085BF7 /* Diary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diary+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8673D8AC2796ECE400085BF7 /* Diary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8673D8B02796ED4900085BF7 /* PersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorage.swift; sourceTree = "<group>"; };
+		86B7759627A696AE0012FAB6 /* DiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryModel.swift; sourceTree = "<group>"; };
+		86B7759827A6B3690012FAB6 /* Diary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diary+CoreDataClass.swift"; sourceTree = "<group>"; };
+		86B7759927A6B3690012FAB6 /* Diary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		86B8B29C2795434A0028C512 /* SplashVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewController.swift; sourceTree = "<group>"; };
 		86B8B29E279543760028C512 /* SplashVIewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewReactor.swift; sourceTree = "<group>"; };
 		86B8B2A02795449A0028C512 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
@@ -139,9 +139,10 @@
 		8620428A2796EB070055732F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8620428D2796EB350055732F /* Diary.xcdatamodeld */,
-				8673D8AB2796ECE400085BF7 /* Diary+CoreDataClass.swift */,
-				8673D8AC2796ECE400085BF7 /* Diary+CoreDataProperties.swift */,
+				86B7759627A696AE0012FAB6 /* DiaryModel.swift */,
+				86FABDF42792AEB2001D986C /* KIDA.xcdatamodeld */,
+				86B7759827A6B3690012FAB6 /* Diary+CoreDataClass.swift */,
+				86B7759927A6B3690012FAB6 /* Diary+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -219,7 +220,6 @@
 				86FABDF72792AEB3001D986C /* Assets.xcassets */,
 				86FABDF92792AEB3001D986C /* LaunchScreen.storyboard */,
 				86FABDFC2792AEB3001D986C /* Info.plist */,
-				86FABDF42792AEB2001D986C /* KIDA.xcdatamodeld */,
 			);
 			path = KIDA;
 			sourceTree = "<group>";
@@ -435,7 +435,9 @@
 				86FABE082792AFD1001D986C /* Coordinatable.swift in Sources */,
 				8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */,
 				ED74BD77279EDCE5006AA255 /* BaseCollectionViewCell.swift in Sources */,
+				86B7759B27A6B3690012FAB6 /* Diary+CoreDataProperties.swift in Sources */,
 				8667CFDE2795994E00CC484A /* WrtieDiaryReactor.swift in Sources */,
+				86B7759727A696AE0012FAB6 /* DiaryModel.swift in Sources */,
 				8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */,
 				ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */,
 				ED74BD73279EDC9D006AA255 /* KeywordSelectCell.swift in Sources */,
@@ -443,7 +445,6 @@
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
 				8673D8B12796ED4900085BF7 /* PersistentStorage.swift in Sources */,
 				86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */,
-				8673D8AD2796ECE400085BF7 /* Diary+CoreDataClass.swift in Sources */,
 				ED74BD75279EDCA8006AA255 /* KeywordSelectCellReactor.swift in Sources */,
 				86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */,
 				8667CFDA279598DF00CC484A /* WriteDiaryCoordinator.swift in Sources */,
@@ -452,16 +453,15 @@
 				86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */,
 				86FABE0F2792B107001D986C /* HomeCoordinator.swift in Sources */,
 				ED20E01F27957946004951E1 /* ReuseCell.swift in Sources */,
-				8673D8AE2796ECE400085BF7 /* Diary+CoreDataProperties.swift in Sources */,
 				ED20E017279575E4004951E1 /* BaseTableViewCell.swift in Sources */,
 				86FABE0A2792B002001D986C /* BaseViewController.swift in Sources */,
 				ED74BD64279D5690006AA255 /* KeywordSelectViewReactor.swift in Sources */,
 				ED74BD79279EDDEF006AA255 /* KeywordSelectSection.swift in Sources */,
+				86B7759A27A6B3690012FAB6 /* Diary+CoreDataClass.swift in Sources */,
 				8667CFDC2795994400CC484A /* WriteDiaryViewController.swift in Sources */,
 				86D513AB27A9389900A3391A /* KIDA_String.swift in Sources */,
 				864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */,
 				86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */,
-				8620428F2796EB350055732F /* Diary.xcdatamodeld in Sources */,
 				ED20E015279574A8004951E1 /* DiaryListCoordinator.swift in Sources */,
 				86FABE0D2792B097001D986C /* AppCoordinator.swift in Sources */,
 				86D0E809279C2D3B00C51031 /* UIColor+.swift in Sources */,
@@ -747,16 +747,6 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		8620428D2796EB350055732F /* Diary.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8620428E2796EB350055732F /* Diary.xcdatamodel */,
-			);
-			currentVersion = 8620428E2796EB350055732F /* Diary.xcdatamodel */;
-			path = Diary.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		86FABDF42792AEB2001D986C /* KIDA.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
