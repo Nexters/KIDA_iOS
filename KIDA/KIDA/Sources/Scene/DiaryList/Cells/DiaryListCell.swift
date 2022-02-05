@@ -13,7 +13,7 @@ final class DiaryListCell: BaseTableViewCell<DiaryListCellReactor> {
     
     private weak var wholeView: UIView!
     private weak var titleLabel: UILabel!
-    private weak var tagLabel: UILabel!
+    private weak var keywordLabel: UILabel!
     private weak var dateLabel: UILabel!
     private weak var contentLabel: UILabel!
     
@@ -30,6 +30,26 @@ final class DiaryListCell: BaseTableViewCell<DiaryListCellReactor> {
     
     override func bind(reactor: DiaryListCellReactor) {
         
+        reactor.state
+            .map { $0.title }
+            .bind(to: titleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.keyword }
+            .bind(to: keywordLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.createdAt }
+            .map { $0.toStringTypeOne }
+            .bind(to: dateLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.content }
+            .bind(to: contentLabel.rx.text)
+            .disposed(by: disposeBag)
     }
     
 }
@@ -48,30 +68,24 @@ extension DiaryListCell {
         }
         
         titleLabel = UILabel().then {
-            $0.text = "가을은 내 최애 날씨야~" // test
             $0.font = .systemFont(ofSize: 14, weight: .bold)
             $0.textColor = .black
             wholeView.addSubview($0)
         }
         
-        tagLabel = UILabel().then {
-            $0.text = "#가을" // test
+        keywordLabel = UILabel().then {
             $0.font = .systemFont(ofSize: 12)
             $0.textColor = .KIDA_orange()
             wholeView.addSubview($0)
         }
         
         dateLabel = UILabel().then {
-            $0.text = "2022.02.04" // test
             $0.font = .systemFont(ofSize: 12)
             $0.textColor = .gray
             wholeView.addSubview($0)
         }
         
         contentLabel = UILabel().then {
-            $0.text = """
-            가을하면 떠오르는게 뭐냐고 묻는다면 나는 최애 날씨라 하겄어. 왜냐하면 좋기때문이지. 당신들은 그렇지 않아? 나는 가을이 제일 좋아. 왜냐면 옷을 맘대로 입어도 간지가 나잖냐 안그래? 난 그리고 지금 다이어트 중이라 너무 배고파 죽을거같애 어떡하지? 살려줘엉엉엉엉어엉엉
-            """ // test
             $0.font = .systemFont(ofSize: 12)
             $0.textColor = .black
             $0.numberOfLines = 0
@@ -93,14 +107,14 @@ extension DiaryListCell {
             $0.trailing.equalTo(wholeView.snp.trailing).offset(-20)
         }
         
-        tagLabel.snp.makeConstraints {
+        keywordLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(5)
             $0.leading.equalTo(wholeView.snp.leading).offset(20)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.centerY.equalTo(tagLabel.snp.centerY)
-            $0.leading.equalTo(tagLabel.snp.trailing).offset(8)
+            $0.centerY.equalTo(keywordLabel.snp.centerY)
+            $0.leading.equalTo(keywordLabel.snp.trailing).offset(8)
         }
         
         contentLabel.snp.makeConstraints {
