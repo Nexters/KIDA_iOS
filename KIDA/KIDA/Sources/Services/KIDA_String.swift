@@ -30,10 +30,12 @@ enum KIDA_String {
 
     /// WriteDiaryViewController 에서 사용하는 문자열을 관리합니다.
     enum WriteDiary {
-        static let textViewPlaceholder = "공백 포함 150자 이내로 써주세요."
-        static let todayKeyword = "오늘의 키워드"
-        static let titleTextFieldPlaceholder = "제목"
-        static let writeButtonTitle = "작성하기"
+        static let pickedKeyword = "뽑은 키워드"
+        static let titleLabel = "제목"
+        static let titlePlaceholder = "공백 포함 20자"
+        static let contentLabel = "내용"
+        static let contentTextViewPlaceholder = "공백 포함 150자"
+        static let writeButtonTitle = "작성 완료"
     }
 
     /// DiaryListViewController 에서 사용하는 문자열을 관리합니다.
