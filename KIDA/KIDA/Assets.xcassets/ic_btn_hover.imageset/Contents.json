@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_btn_hover.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

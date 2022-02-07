@@ -7,19 +7,18 @@
 
 import UIKit
 import RxDataSources
-import RxSwift
 
 final class KeywordSelectViewController: BaseViewController, ServiceDependency {
-    
+
     fileprivate struct Reuse {
         static let keywordCell = ReuseCell<KeywordSelectCell>()
     }
     
     // MARK: UI
     
-    // TODO: '느낌충만하게' 키워드에 하이라이트를 어떻게 해야할지 고민중,,
-    private var titleLabel: UILabel!
-    
+    private weak var titleLabelOne: UILabel!
+    private weak var titleLabelTwo: UILabel!
+    private weak var selectButton: UIButton!
     private var collectionView: UICollectionView!
     
     private lazy var dataSource = KeywordSelectViewController.dataSourceFactory()
@@ -35,44 +34,70 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
                 }
                 
                 return cell
-        })
+            })
     }
     
     var reactor: KeywordSelectViewReactor?
-    
-    func bind(reactor: KeywordSelectViewReactor) {
-        bindState(reactor: reactor)
-        bindAction(reactor: reactor)
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bind(reactor: reactor!) // TODO: 추후에 수정
+    }
+    
+    override func setupNavigationBar() {
+        setupNavigationBarTitle(title: Date().toStringTypeTwo)
+        setupNavigationRightButton(buttonType: .info)
     }
     
     override func setupViews() {
+        view.backgroundColor = .KIDA_background()
         initCollectionView()
-        
         view.addSubview(collectionView)
         
-        self.titleLabel = UILabel().then {
-            $0.text = KIDA_String.KeywordSelect.title
-            $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-            $0.textColor = .black
+        titleLabelOne = UILabel().then {
+            $0.text = KIDA_String.KeywordSelect.titleOne
+            $0.font = .systemFont(ofSize: 28, weight: .bold)
+            $0.textColor = .white
+            view.addSubview($0)
+        }
+        
+        titleLabelTwo = UILabel().then {
+            $0.text = KIDA_String.KeywordSelect.titleTwo
+            $0.font = .systemFont(ofSize: 28, weight: .bold)
+            $0.textColor = .white
+            view.addSubview($0)
+        }
+        
+        selectButton = UIButton().then {
+            $0.setImage(UIImage(named: "ic_btn_default"), for: .normal)
             view.addSubview($0)
         }
     }
-    
+
     override func setupLayoutConstraints() {
-        titleLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(60)
+        titleLabelOne.snp.makeConstraints {
+            $0.top.equalTo(100) // TODO: 추후에 수정
+            $0.leading.equalTo(40)
         }
         
+        titleLabelTwo.snp.makeConstraints {
+            $0.top.equalTo(titleLabelOne.snp.bottom).offset(8)
+            $0.leading.equalTo(40)
+        }
+        
+        selectButton.snp.makeConstraints {
+            $0.width.height.equalTo(32)
+            $0.trailing.equalTo(-40)
+            $0.top.equalTo(titleLabelTwo.snp.bottom)
+        }
+        
+        // TODO: UI 수정
         collectionView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            $0.leading.equalTo(0)
+            $0.trailing.equalTo(0)
             $0.height.equalTo(300)
-            $0.width.equalTo(UIScreen.main.bounds.width)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
+            $0.top.equalTo(titleLabelTwo.snp.bottom).offset(100)
         }
     }
     
@@ -84,7 +109,6 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         }
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout).then {
-            $0.backgroundColor = .blue // test
             $0.showsVerticalScrollIndicator = false
             $0.showsHorizontalScrollIndicator = false
             $0.isPagingEnabled = true
@@ -94,26 +118,27 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
         collectionView.delegate = self
     }
-    
+
+    func bind(reactor: KeywordSelectViewReactor) {
+        bindState(reactor: reactor)
+        bindAction(reactor: reactor)
+    }
 }
 
 extension KeywordSelectViewController {
-    private func bindState(reactor: KeywordSelectViewReactor){
-        
+    func bindState(reactor: KeywordSelectViewReactor){
         guard let collectionView = collectionView else {
             return
         }
-        
+
         reactor.state
             .map { $0.sections }
             .filter { !$0.isEmpty }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
     }
-    
-    private func bindAction(reactor: KeywordSelectViewReactor){
-        
+
+    func bindAction(reactor: KeywordSelectViewReactor){
     }
 }
 
