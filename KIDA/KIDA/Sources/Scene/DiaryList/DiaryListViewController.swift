@@ -10,13 +10,15 @@ import RxDataSources
 
 final class DiaryListViewController: BaseViewController, ServiceDependency {
 
-    // MARK: UI
-    
     fileprivate struct Reuse {
         static let diaryListCell = ReuseCell<DiaryListCell>()
     }
     
+    // MARK: UI
+    
     private lazy var tableView = UITableView()
+    
+    private var tableHeaderView = DiaryListHeaderView()
     
     // MARK: Property
     
@@ -40,15 +42,21 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
     }
 
     override func setupViews() {
-        tableView.register(Reuse.diaryListCell)
-        view.addSubview(tableView)
+        self.navigationItem.title = KIDA_String.DiaryList.navigationTitle
         
+        let headerHeight: CGFloat = 62
+        
+        tableView.register(Reuse.diaryListCell)
+        tableView.tableHeaderView = tableHeaderView
+        tableView.tableHeaderView?.frame.size = CGSize(width: tableView.frame.width , height: headerHeight)
+        tableView.separatorStyle = .none
+        
+        view.addSubview(tableView)
     }
 
     override func setupLayoutConstraints() {
-        
         tableView.snp.makeConstraints {
-            $0.edges.equalTo(0)
+            $0.edges.equalToSuperview()
         }
     }
 
