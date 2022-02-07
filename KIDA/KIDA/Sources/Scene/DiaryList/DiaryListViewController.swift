@@ -56,7 +56,7 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
 
     override func setupLayoutConstraints() {
         tableView.snp.makeConstraints {
-            $0.edges.equalTo(0)
+            $0.edges.equalToSuperview()
         }
     }
 

@@ -29,7 +29,6 @@ final class DiaryListCell: BaseTableViewCell<DiaryListCellReactor> {
     }
     
     override func bind(reactor: DiaryListCellReactor) {
-        
         reactor.state
             .map { $0.title }
             .bind(to: titleLabel.rx.text)
@@ -37,6 +36,7 @@ final class DiaryListCell: BaseTableViewCell<DiaryListCellReactor> {
         
         reactor.state
             .map { $0.keyword }
+            .map { "#\($0)" }
             .bind(to: keywordLabel.rx.text)
             .disposed(by: disposeBag)
         
@@ -51,7 +51,6 @@ final class DiaryListCell: BaseTableViewCell<DiaryListCellReactor> {
             .bind(to: contentLabel.rx.text)
             .disposed(by: disposeBag)
     }
-    
 }
 
 extension DiaryListCell {
@@ -97,7 +96,7 @@ extension DiaryListCell {
         wholeView.snp.makeConstraints {
             $0.leading.equalTo(20)
             $0.trailing.equalTo(-20)
-            $0.top.equalTo(0)
+            $0.top.equalToSuperview()
             $0.bottom.equalTo(-12)
         }
         
