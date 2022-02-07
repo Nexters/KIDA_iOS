@@ -23,8 +23,9 @@ enum KIDA_String {
 
     /// KeywordSelectViewController 에서 사용하는 문자열을 관리합니다.
     enum KeywordSelect {
-        static let title = "오늘의 짝꿍을 느낌충만하게 뽑아봐!"
-        static let confirmButtonTitle = "이 친구로 뽑을래?"
+        static let titleOne = "오늘의 키워드를"
+        static let titleTwo = "선택해봐!"
+        static let confirmButtonTitle = "뽑아볼까?"
     }
 
     /// WriteDiaryViewController 에서 사용하는 문자열을 관리합니다.

@@ -25,8 +25,14 @@ class BaseViewController: UIViewController {
         
         self.view.backgroundColor = .white
 
+        setupNavigationBar()
         setupViews()
         setupLayoutConstraints()
+    }
+    
+    /// 네비게이션바를 정의합니다.
+    func setupNavigationBar(){
+        
     }
 
     /// UI를 정의합니다.
