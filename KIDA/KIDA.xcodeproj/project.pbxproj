@@ -59,6 +59,7 @@
 		ED74BD79279EDDEF006AA255 /* KeywordSelectSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */; };
 		ED85CEF027AE50C500C26CA3 /* DiaryListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */; };
 		ED85CEF227AE7FB200C26CA3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF127AE7FB200C26CA3 /* Date+.swift */; };
+		ED85CEF427B16B1200C26CA3 /* RightButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +112,7 @@
 		ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectSection.swift; sourceTree = "<group>"; };
 		ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListHeaderView.swift; sourceTree = "<group>"; };
 		ED85CEF127AE7FB200C26CA3 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightButtonType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +314,7 @@
 			children = (
 				ED20E02127957B52004951E1 /* DiayListSection.swift */,
 				ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */,
+				ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */,
 				ED74BD75279EDCA8006AA255 /* KeywordSelectCellReactor.swift in Sources */,
 				86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */,
+				ED85CEF427B16B1200C26CA3 /* RightButtonType.swift in Sources */,
 				8667CFDA279598DF00CC484A /* WriteDiaryCoordinator.swift in Sources */,
 				ED85CEF227AE7FB200C26CA3 /* Date+.swift in Sources */,
 				ED74BD62279D5686006AA255 /* KeywordSelectViewController.swift in Sources */,

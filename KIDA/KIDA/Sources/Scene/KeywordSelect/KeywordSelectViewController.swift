@@ -44,19 +44,10 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         
         bind(reactor: reactor!) // TODO: 추후에 수정
     }
-
+    
     override func setupNavigationBar() {
-        self.navigationController?.navigationBar.tintColor = .KIDA_orange()
-        
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        self.navigationItem.title = Date().toStringTypeTwo
-        
-        let logoButton = UIBarButtonItem(image: UIImage(named: "ic_logo"), style: .plain, target: self, action: nil)
-        let infoButton = UIBarButtonItem(image: UIImage(named: "ic_info"), style: .plain, target: self, action: nil)
-        
-        self.navigationItem.leftBarButtonItem = logoButton
-        self.navigationItem.rightBarButtonItem = infoButton
+        setupNavigationBarTitle(title: Date().toStringTypeTwo)
+        setupNavigationRightButton(buttonType: .info)
     }
     
     override func setupViews() {
@@ -135,7 +126,6 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 }
 
 extension KeywordSelectViewController {
-
     func bindState(reactor: KeywordSelectViewReactor){
         guard let collectionView = collectionView else {
             return
