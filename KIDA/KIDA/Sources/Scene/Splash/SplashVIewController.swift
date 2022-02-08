@@ -11,7 +11,7 @@ import RxSwift
 final class SplashViewController: BaseViewController, ServiceDependency {
 
     // MARK: - Properties
-    private weak var splashImageView: UIImageView!
+    private var splashImageView: UIImageView!
     private var reactor: SplashViewReactor
 
     // MARK: - Initializer
@@ -40,7 +40,6 @@ final class SplashViewController: BaseViewController, ServiceDependency {
     }
 
     override func setupViews() {
-        view.backgroundColor = .systemGray
 
         self.splashImageView = UIImageView().then {
             $0.image = UIImage(named: KIDA_String.Splash.splashImage)
@@ -51,7 +50,8 @@ final class SplashViewController: BaseViewController, ServiceDependency {
 
     override func setupLayoutConstraints() {
         splashImageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(160)
         }
     }
 
