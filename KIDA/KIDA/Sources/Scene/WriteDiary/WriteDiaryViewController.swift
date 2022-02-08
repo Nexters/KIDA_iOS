@@ -10,20 +10,25 @@ import UIKit
 final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
     // MARK: - Properties
-
     private weak var containerView: UIView!
-    private weak var headerView: UIView!
-    private weak var todayKeywordLabel: UILabel!
-    private weak var diaryKeywordLabel: UILabel!
-    private weak var emojiImageView: UIImageView!
+    private weak var pickedKeywordGuideLabel: UILabel!
+    private weak var pickedKeywordLabel: UILabel!
+    private weak var leftImageView: UIImageView!
+    private weak var rightImageView: UIImageView!
+    private weak var titleView: UIView!
+    private weak var titleLabel: UILabel!
     private weak var titleTextField: UITextField!
-    private weak var dividerView: UIView!
-    private weak var textView: UITextView!
+    private weak var contentView: UIView!
+    private weak var contentLabel: UILabel!
+    private weak var contentTextView: UITextView!
     private weak var writeButton: UIButton!
     private var tapGestureRecognizer: UITapGestureRecognizer!
 
     private var reactor: WriteDiaryReactor
     private let diaryKeyword: String
+
+    private let subViewBackgroundColor = UIColor.init(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+    private let subViewTitleColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
 
     // MARK: - Initializer
     init(reactor: WriteDiaryReactor) {
@@ -42,30 +47,29 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         bind(reactor: reactor)
 
-        textView.rx.didBeginEditing
+        contentTextView.rx.didBeginEditing
             .asDriver()
             .do(onNext: { [weak self] _ in
                 self?.textVieweditingAnimation(.didBegin)
             })
-            .compactMap { [weak self] _ in self?.textView.text }
+            .compactMap { [weak self] _ in self?.contentTextView.text }
             .filter(isPlaceHolderString(_:))
-            .filter { $0 == KIDA_String.WriteDiary.textViewPlaceholder }
             .drive(onNext: { [weak self] _ in
-                self?.textView.text = nil
-                self?.textView.textColor = .black
+                self?.contentTextView.text = nil
+                self?.contentTextView.textColor = .white
             })
             .disposed(by: disposeBag)
 
-        textView.rx.didEndEditing
+        contentTextView.rx.didEndEditing
             .asDriver()
             .do(onNext: { [weak self] _ in
                 self?.textVieweditingAnimation(.didEnd)
             })
-            .compactMap { [weak self] _ in self?.textView.text }
+            .compactMap { [weak self] _ in self?.contentTextView.text }
             .filter(isEmptyTextView(_:))
             .drive(onNext: { [weak self] _ in
-                self?.textView.text = KIDA_String.WriteDiary.textViewPlaceholder
-                self?.textView.textColor = .lightGray
+                self?.contentTextView.text = KIDA_String.WriteDiary.contentTextViewPlaceholder
+                self?.contentTextView.textColor = .lightGray
             })
             .disposed(by: disposeBag)
 
@@ -77,139 +81,176 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             })
             .disposed(by: disposeBag)
 
-        textView.rx.text
+        contentTextView.rx.text
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.checkContentCondition($0)
-                guard let self = self else { return }
-                self.textView.text = KIDA_String.WriteDiary.textViewPlaceholder
-                self.textView.textColor = .lightGray
             })
             .disposed(by: disposeBag)
     }
 
     override func setupViews() {
-        self.tapGestureRecognizer = UITapGestureRecognizer()
-        view.backgroundColor = .systemGray5
-        view.addGestureRecognizer(tapGestureRecognizer)
-
         self.containerView = UIView().then {
-            $0.backgroundColor = .white
+            $0.backgroundColor = UIColor.init(red: 0.23, green: 0.23, blue: 0.23, alpha: 1)
             $0.layer.cornerRadius = 10
             view.addSubview($0)
         }
 
-        self.headerView = UIView().then {
-            $0.backgroundColor = .white
+        self.tapGestureRecognizer = UITapGestureRecognizer()
+        view.addGestureRecognizer(tapGestureRecognizer)
+
+        self.pickedKeywordGuideLabel = UILabel().then {
+            $0.text = KIDA_String.WriteDiary.pickedKeyword
+            $0.font = .systemFont(ofSize: 15, weight: .semibold)
+            $0.textColor = .KIDA_orange()
             containerView.addSubview($0)
         }
 
-        self.todayKeywordLabel = UILabel().then {
-            $0.text = KIDA_String.WriteDiary.todayKeyword
-            $0.font = .systemFont(ofSize: 16, weight: .semibold)
-            headerView.addSubview($0)
-        }
-
-        self.diaryKeywordLabel = UILabel().then {
+        self.pickedKeywordLabel = UILabel().then {
             $0.text = diaryKeyword
-            $0.font = .systemFont(ofSize: 40, weight: .bold)
-            $0.textColor = .KIDA_orange()
-            headerView.addSubview($0)
+            $0.textColor = .white
+            $0.font = .systemFont(ofSize: 24, weight: .bold)
+            containerView.addSubview($0)
         }
 
-        self.emojiImageView = UIImageView().then {
+        self.leftImageView = UIImageView().then {
             $0.contentMode = .scaleAspectFit
-            $0.backgroundColor = .white
-            headerView.addSubview($0)
+            containerView.addSubview($0)
+        }
+
+        self.rightImageView = UIImageView().then {
+            $0.contentMode = .scaleAspectFit
+            containerView.addSubview($0)
+        }
+
+        self.titleView = UIView().then {
+            $0.backgroundColor = subViewBackgroundColor
+            $0.layer.cornerRadius = 10
+            containerView.addSubview($0)
+        }
+
+        self.titleLabel = UILabel().then {
+            $0.text = KIDA_String.WriteDiary.titleLabel
+            $0.textColor = subViewTitleColor
+            $0.font = .systemFont(ofSize: 15)
+            titleView.addSubview($0)
         }
 
         self.titleTextField = UITextField().then {
-            $0.placeholder = KIDA_String.WriteDiary.titleTextFieldPlaceholder
-            $0.font = .systemFont(ofSize: 20, weight: .semibold)
+            $0.attributedPlaceholder = NSAttributedString(string: KIDA_String.WriteDiary.titlePlaceholder,
+                                                          attributes: [.foregroundColor: UIColor.lightGray])
+            $0.font = .systemFont(ofSize: 17, weight: .regular)
+            $0.textColor = .white
+            titleView.addSubview($0)
+        }
+
+        self.contentView = UIView().then {
+            $0.backgroundColor = subViewBackgroundColor
+            $0.layer.cornerRadius = 10
             containerView.addSubview($0)
         }
 
-        self.dividerView = UIView().then {
-            $0.backgroundColor = .systemGray2
-            containerView.addSubview($0)
+        self.contentLabel = UILabel().then {
+            $0.text = KIDA_String.WriteDiary.contentLabel
+            $0.textColor = subViewTitleColor
+            $0.font = .systemFont(ofSize: 15)
+            contentView.addSubview($0)
         }
 
-        self.textView = UITextView().then {
+        self.contentTextView = UITextView().then {
             $0.textAlignment = .left
-            $0.font = .systemFont(ofSize: 15, weight: .regular)
-            $0.text = KIDA_String.WriteDiary.textViewPlaceholder
+            $0.font = .systemFont(ofSize: 17, weight: .regular)
+            $0.text = KIDA_String.WriteDiary.contentTextViewPlaceholder
             $0.textColor = .lightGray
-            containerView.addSubview($0)
+            $0.backgroundColor = .clear
+            contentView.addSubview($0)
         }
 
         self.writeButton = UIButton().then {
             $0.setTitle(KIDA_String.WriteDiary.writeButtonTitle, for: .normal)
-            $0.backgroundColor = .black
-            $0.setTitleColor(.white, for: .normal)
+            $0.backgroundColor = .init(red: 0.43, green: 0.43, blue: 0.43, alpha: 1)
+            $0.setTitleColor(subViewTitleColor, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
-            $0.backgroundColor = .black
             $0.layer.cornerRadius = 10
             view.addSubview($0)
         }
     }
 
     override func setupLayoutConstraints() {
-        let sideMargin: CGFloat = 20
-        let writeButtonHeight: CGFloat = 60
+        let containerViewSideMargin: CGFloat = 20
+        let subViewSideMargin: CGFloat = 14
+        let writeButtonHeight: CGFloat = 50
 
         writeButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(55)
-            $0.trailing.equalToSuperview().offset(-55)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
             $0.height.equalTo(writeButtonHeight)
         }
 
         containerView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(sideMargin)
-            $0.trailing.equalToSuperview().offset(-sideMargin)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(sideMargin)
+            $0.leading.equalToSuperview().offset(containerViewSideMargin)
+            $0.trailing.equalToSuperview().offset(-containerViewSideMargin)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.bottom.equalTo(writeButton.snp.top).offset(-24)
         }
 
-        headerView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(sideMargin)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(90)
+        pickedKeywordGuideLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(18)
+            $0.centerX.equalToSuperview()
         }
 
-        todayKeywordLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(36)
-            $0.leading.equalToSuperview().offset(sideMargin)
+        pickedKeywordLabel.snp.makeConstraints {
+            $0.top.equalTo(pickedKeywordGuideLabel).offset(20)
+            $0.centerX.equalToSuperview()
         }
 
-        diaryKeywordLabel.snp.makeConstraints {
-            $0.top.equalTo(todayKeywordLabel.snp.bottom).offset(12)
-            $0.leading.equalTo(todayKeywordLabel)
+        leftImageView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(13)
+            $0.top.equalToSuperview().offset(31)
         }
 
-        emojiImageView.snp.makeConstraints {
-            $0.top.equalTo(todayKeywordLabel)
-            $0.trailing.equalToSuperview().offset(-sideMargin)
+        rightImageView.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-13)
+            $0.top.equalToSuperview().offset(31)
+        }
+
+        titleView.snp.makeConstraints {
+            $0.top.equalTo(pickedKeywordLabel.snp.bottom).offset(24)
+            $0.leading.equalToSuperview().offset(14)
+            $0.trailing.equalToSuperview().offset(-14)
+            $0.height.equalTo(80)
+        }
+
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(20)
         }
 
         titleTextField.snp.makeConstraints {
-            $0.top.equalTo(headerView.snp.bottom).offset(60)
-            $0.leading.equalTo(todayKeywordLabel)
+            $0.top.equalTo(titleLabel).offset(20)
+            $0.leading.equalTo(titleLabel)
         }
 
-        dividerView.snp.makeConstraints {
-            $0.top.equalTo(titleTextField.snp.bottom).offset(18)
-            $0.leading.equalTo(titleTextField)
-            $0.trailing.equalToSuperview().offset(-sideMargin)
-            $0.height.equalTo(1)
+        contentView.snp.makeConstraints {
+            $0.top.equalTo(titleView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(subViewSideMargin)
+            $0.trailing.equalToSuperview().offset(-subViewSideMargin)
+            $0.bottom.equalToSuperview().offset(-subViewSideMargin)
         }
 
-        textView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(sideMargin)
-            $0.trailing.equalToSuperview().offset(-sideMargin)
-            $0.top.equalTo(dividerView.snp.bottom).offset(20)
-            $0.bottom.equalToSuperview().offset(-(writeButtonHeight + 20))
+        contentLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(20)
         }
+
+        contentTextView.snp.makeConstraints {
+            $0.top.equalTo(contentLabel).offset(18)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview()
+        }
+
     }
 
     func bind(reactor: WriteDiaryReactor) {
@@ -240,7 +281,7 @@ private extension WriteDiaryViewController {
     }
 
     func isPlaceHolderString(_ string: String) -> Bool {
-        return string == KIDA_String.WriteDiary.textViewPlaceholder
+        return string == KIDA_String.WriteDiary.contentTextViewPlaceholder
     }
 
     func isEmptyTextView(_ string: String) -> Bool {
@@ -252,7 +293,7 @@ private extension WriteDiaryViewController {
             let yPosition: CGFloat
             switch status {
             case .didBegin:
-                yPosition = -100
+                yPosition = -50
             case .didEnd:
                 yPosition = 0
             }
@@ -262,7 +303,7 @@ private extension WriteDiaryViewController {
     }
 
     func makeDiary() -> DiaryModel {
-        return DiaryModel(content: textView.text,
+        return DiaryModel(content: contentTextView.text,
                           createdAt: Date(),
                           keyword: diaryKeyword,
                           title: titleTextField.text ?? "")
@@ -272,10 +313,11 @@ private extension WriteDiaryViewController {
         guard let content = content else {
             return
         }
-        writeButton.isEnabled = content.contains(PersistentStorage.shared.todayKeyword) && titleTextField.text != ""
-        writeButton.backgroundColor = writeButton.isEnabled ? .black : .lightGray
+        writeButton.isEnabled = content.contains(diaryKeyword) && (!(titleTextField.text?.isEmpty ?? true))
+        writeButton.backgroundColor = writeButton.isEnabled ? .KIDA_orange() : subViewBackgroundColor
+        writeButton.setTitleColor(writeButton.isEnabled ? .white : subViewTitleColor, for: .normal)
         if content.count >= 150 {
-            textView.text = String(content.prefix(149))
+            contentTextView.text = String(content.prefix(149))
         }
     }
 }
