@@ -51,7 +51,6 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     }
     
     override func setupViews() {
-        view.backgroundColor = .KIDA_background()
         initCollectionView()
         view.addSubview(collectionView)
         

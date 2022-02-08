@@ -60,6 +60,8 @@
 		ED85CEF027AE50C500C26CA3 /* DiaryListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */; };
 		ED85CEF227AE7FB200C26CA3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF127AE7FB200C26CA3 /* Date+.swift */; };
 		ED85CEF427B16B1200C26CA3 /* RightButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */; };
+		ED85CEF627B2707800C26CA3 /* DiaryListTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF527B2707800C26CA3 /* DiaryListTopView.swift */; };
+		ED85CEF827B2762300C26CA3 /* DiaryListBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF727B2762300C26CA3 /* DiaryListBottomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +115,8 @@
 		ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListHeaderView.swift; sourceTree = "<group>"; };
 		ED85CEF127AE7FB200C26CA3 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightButtonType.swift; sourceTree = "<group>"; };
+		ED85CEF527B2707800C26CA3 /* DiaryListTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListTopView.swift; sourceTree = "<group>"; };
+		ED85CEF727B2762300C26CA3 /* DiaryListBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListBottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +355,8 @@
 			isa = PBXGroup;
 			children = (
 				ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */,
+				ED85CEF527B2707800C26CA3 /* DiaryListTopView.swift */,
+				ED85CEF727B2762300C26CA3 /* DiaryListBottomView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				86FABE082792AFD1001D986C /* Coordinatable.swift in Sources */,
 				8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */,
 				ED74BD77279EDCE5006AA255 /* BaseCollectionViewCell.swift in Sources */,
+				ED85CEF627B2707800C26CA3 /* DiaryListTopView.swift in Sources */,
 				ED85CEF027AE50C500C26CA3 /* DiaryListHeaderView.swift in Sources */,
 				86B7759B27A6B3690012FAB6 /* Diary+CoreDataProperties.swift in Sources */,
 				8667CFDE2795994E00CC484A /* WrtieDiaryReactor.swift in Sources */,
@@ -463,6 +470,7 @@
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
 				8673D8B12796ED4900085BF7 /* PersistentStorage.swift in Sources */,
 				86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */,
+				ED85CEF827B2762300C26CA3 /* DiaryListBottomView.swift in Sources */,
 				ED74BD75279EDCA8006AA255 /* KeywordSelectCellReactor.swift in Sources */,
 				86FABDEE2792AEB2001D986C /* SceneDelegate.swift in Sources */,
 				ED85CEF427B16B1200C26CA3 /* RightButtonType.swift in Sources */,

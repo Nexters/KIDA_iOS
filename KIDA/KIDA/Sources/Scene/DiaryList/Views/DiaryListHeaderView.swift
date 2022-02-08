@@ -25,8 +25,6 @@ final class DiaryListHeaderView: UIView {
     }
     
     private func setupViews(){
-        self.backgroundColor = .systemGray6
-        
         self.titleLabel = UILabel().then {
             $0.text = KIDA_String.DiaryList.headerTitle
             $0.font = UIFont.systemFont(ofSize: 20)
