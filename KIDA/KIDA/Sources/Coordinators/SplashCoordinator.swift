@@ -24,13 +24,14 @@ final class SplashCoordinator: Coordinatable {
         let splashViewReactor = SplashViewReactor()
         splashViewReactor.delegate = self
         let splashViewController = SplashViewController(reactor: splashViewReactor)
-
+        navigationController.navigationBar.isHidden = true
         navigationController.pushViewController(splashViewController, animated: false)
     }
 }
 
 extension SplashCoordinator: SplashViewReactorDelegate {
     func showKeywordSelect() {
+        navigationController.navigationBar.isHidden = false
         let keywordSelectCoordinator = KeywordSelectCoordinator(navigationController: navigationController)
         keywordSelectCoordinator.parentCoordinator = self
         self.childCoordinators.append(keywordSelectCoordinator)
