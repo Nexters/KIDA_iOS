@@ -11,21 +11,12 @@ final class DiaryListCellReactor: Reactor {
 
     struct State {
         var diary: DiaryModel
-        
-        var title: String
-        var keyword: String
-        var createdAt: Date
-        var content: String
     }
     
     var initialState: State
 
     init(diary: DiaryModel){
-        initialState = State(diary: diary,
-                             title: diary.title,
-                             keyword: diary.keyword,
-                             createdAt: diary.createdAt,
-                             content: diary.content)
+        initialState = State(diary: diary)
     }
 }
 

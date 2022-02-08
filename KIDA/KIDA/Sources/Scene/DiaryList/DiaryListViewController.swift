@@ -18,8 +18,6 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
     
     private lazy var tableView = UITableView()
     
-    private var tableHeaderView = DiaryListHeaderView()
-    
     // MARK: Property
     
     private static func dataSourceFactory() -> RxTableViewSectionedReloadDataSource<DiaryListSection>{
@@ -40,16 +38,15 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func setupNavigationBar() {
+        self.setupNavigationBarTitle(title: KIDA_String.DiaryList.navigationTitle)
+    }
 
     override func setupViews() {
-        self.navigationItem.title = KIDA_String.DiaryList.navigationTitle
-        
-        let headerHeight: CGFloat = 62
-        
         tableView.register(Reuse.diaryListCell)
-        tableView.tableHeaderView = tableHeaderView
-        tableView.tableHeaderView?.frame.size = CGSize(width: tableView.frame.width , height: headerHeight)
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .KIDA_background()
         
         view.addSubview(tableView)
     }
