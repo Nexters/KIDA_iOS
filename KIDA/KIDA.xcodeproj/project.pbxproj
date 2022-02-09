@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86137908279564FF00AED9CF /* UIViewController+Rx.swift */; };
 		8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */; };
+		863C6E3F27B3FBBE00BB8978 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 863C6E3627B3FBBD00BB8978 /* Pretendard-ExtraLight.otf */; };
+		863C6E4327B3FBBE00BB8978 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 863C6E3A27B3FBBD00BB8978 /* Pretendard-SemiBold.otf */; };
+		863C6E4527B3FBBE00BB8978 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 863C6E3C27B3FBBE00BB8978 /* Pretendard-Bold.otf */; };
+		863C6E4627B3FBBE00BB8978 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 863C6E3D27B3FBBE00BB8978 /* Pretendard-Light.otf */; };
+		863C6E4727B3FBBE00BB8978 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 863C6E3E27B3FBBE00BB8978 /* Pretendard-Regular.otf */; };
+		863C6E4927B3FCA200BB8978 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863C6E4827B3FCA200BB8978 /* UIFont+.swift */; };
 		8644830127930EFC0020F782 /* ServiceDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8644830027930EFC0020F782 /* ServiceDependency.swift */; };
 		864483052793106C0020F782 /* SelectedKeywordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */; };
 		86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86448307279310C30020F782 /* selectedKeywordViewController.swift */; };
@@ -73,6 +79,12 @@
 /* Begin PBXFileReference section */
 		86137908279564FF00AED9CF /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+.swift"; sourceTree = "<group>"; };
+		863C6E3627B3FBBD00BB8978 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		863C6E3A27B3FBBD00BB8978 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		863C6E3C27B3FBBE00BB8978 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		863C6E3D27B3FBBE00BB8978 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		863C6E3E27B3FBBE00BB8978 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		863C6E4827B3FCA200BB8978 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		8644830027930EFC0020F782 /* ServiceDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDependency.swift; sourceTree = "<group>"; };
 		864483042793106C0020F782 /* SelectedKeywordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedKeywordCoordinator.swift; sourceTree = "<group>"; };
 		86448307279310C30020F782 /* selectedKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedKeywordViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +167,7 @@
 				86D0E808279C2D3B00C51031 /* UIColor+.swift */,
 				86D513AC27A941BE00A3391A /* String+.swift */,
 				ED85CEF127AE7FB200C26CA3 /* Date+.swift */,
+				863C6E4827B3FCA200BB8978 /* UIFont+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -168,6 +181,26 @@
 				86B7759927A6B3690012FAB6 /* Diary+CoreDataProperties.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		863C6E3427B3FB5300BB8978 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				863C6E3527B3FB5D00BB8978 /* Font */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		863C6E3527B3FB5D00BB8978 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				863C6E3C27B3FBBE00BB8978 /* Pretendard-Bold.otf */,
+				863C6E3627B3FBBD00BB8978 /* Pretendard-ExtraLight.otf */,
+				863C6E3D27B3FBBE00BB8978 /* Pretendard-Light.otf */,
+				863C6E3E27B3FBBE00BB8978 /* Pretendard-Regular.otf */,
+				863C6E3A27B3FBBD00BB8978 /* Pretendard-SemiBold.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		864482FF27930ED90020F782 /* Base */ = {
@@ -240,6 +273,7 @@
 				86FABE022792AEB9001D986C /* App */,
 				86FABE042792AEEA001D986C /* Sources */,
 				86137907279564ED00AED9CF /* Extensions */,
+				863C6E3427B3FB5300BB8978 /* Utilities */,
 				86FABDF72792AEB3001D986C /* Assets.xcassets */,
 				86FABDF92792AEB3001D986C /* LaunchScreen.storyboard */,
 				86FABDFC2792AEB3001D986C /* Info.plist */,
@@ -483,8 +517,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				863C6E3F27B3FBBE00BB8978 /* Pretendard-ExtraLight.otf in Resources */,
 				86FABDFB2792AEB3001D986C /* LaunchScreen.storyboard in Resources */,
+				863C6E4327B3FBBE00BB8978 /* Pretendard-SemiBold.otf in Resources */,
+				863C6E4627B3FBBE00BB8978 /* Pretendard-Light.otf in Resources */,
 				86FABDF82792AEB3001D986C /* Assets.xcassets in Resources */,
+				863C6E4727B3FBBE00BB8978 /* Pretendard-Regular.otf in Resources */,
+				863C6E4527B3FBBE00BB8978 /* Pretendard-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +556,7 @@
 				8667CFDE2795994E00CC484A /* WrtieDiaryReactor.swift in Sources */,
 				86B7759727A696AE0012FAB6 /* DiaryModel.swift in Sources */,
 				8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */,
+				863C6E4927B3FCA200BB8978 /* UIFont+.swift in Sources */,
 				ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */,
 				ED74BD73279EDC9D006AA255 /* KeywordSelectCell.swift in Sources */,
 				ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */,
@@ -689,6 +729,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 857J3M5L6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KIDA/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -716,6 +757,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 857J3M5L6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KIDA/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
