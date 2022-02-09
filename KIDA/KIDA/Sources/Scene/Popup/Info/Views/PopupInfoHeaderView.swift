@@ -29,11 +29,9 @@ final class PopupInfoHeaderView: UIView {
 
 private extension PopupInfoHeaderView {
     func setupViews() {
-        self.backgroundColor = .white
-
         self.imageView = UIImageView().then {
             $0.contentMode = .scaleAspectFit
-            $0.image = UIImage(named: "splash")
+            $0.image = UIImage(named: "img_popup_info")
             addSubview($0)
         }
 
@@ -46,13 +44,9 @@ private extension PopupInfoHeaderView {
     }
 
     func setupLayoutConstraints() {
-        snp.makeConstraints {
-            $0.size.equalTo(CGSize(width: superview?.frame.width ?? 0.0,
-                                   height: 153))
-        }
         imageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(24)
+            $0.top.equalToSuperview().offset(15)
         }
 
         titleLabel.snp.makeConstraints {

@@ -27,7 +27,6 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     private var reactor: WriteDiaryReactor
     private let diaryKeyword: String
 
-    private let subViewBackgroundColor = UIColor.init(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
     private let subViewTitleColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
 
     // MARK: - Initializer
@@ -124,7 +123,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         }
 
         self.titleView = UIView().then {
-            $0.backgroundColor = subViewBackgroundColor
+            $0.backgroundColor = .KIDA_background2()
             $0.layer.cornerRadius = 10
             containerView.addSubview($0)
         }
@@ -145,7 +144,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         }
 
         self.contentView = UIView().then {
-            $0.backgroundColor = subViewBackgroundColor
+            $0.backgroundColor = .KIDA_background2()
             $0.layer.cornerRadius = 10
             containerView.addSubview($0)
         }
@@ -184,7 +183,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         writeButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
             $0.height.equalTo(writeButtonHeight)
         }
 
@@ -314,7 +313,7 @@ private extension WriteDiaryViewController {
             return
         }
         writeButton.isEnabled = content.contains(diaryKeyword) && (!(titleTextField.text?.isEmpty ?? true))
-        writeButton.backgroundColor = writeButton.isEnabled ? .KIDA_orange() : subViewBackgroundColor
+        writeButton.backgroundColor = writeButton.isEnabled ? .KIDA_orange() : .KIDA_background2()
         writeButton.setTitleColor(writeButton.isEnabled ? .white : subViewTitleColor, for: .normal)
         if content.count >= 150 {
             contentTextView.text = String(content.prefix(149))

@@ -7,20 +7,21 @@
 
 import UIKit
 
+/// PopupType
+enum PopupType {
+    case info
+    case error
+}
+
 final class PopupCoordinator: Coordinatable {
 
-    /// PopupType
-    enum PopupType {
-        case info
-        case error
-    }
 
     // MARK: - Properties
     var childCoordinators: [Coordinatable] = []
     var parentCoordinator: Coordinatable?
     var navigationController: UINavigationController
 
-    let popupType: PopupType
+    private let popupType: PopupType
 
     // MARK: - Initializer
     init(navigationController: UINavigationController, popupType: PopupType) {
@@ -46,7 +47,7 @@ final class PopupCoordinator: Coordinatable {
             return
         }
 
-        topViewController.modalPresentationStyle = .fullScreen
+        topViewController.modalPresentationStyle = .overFullScreen
         topViewController.present(popupViewController,
                                   animated: true,
                                   completion: nil)

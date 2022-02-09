@@ -33,7 +33,7 @@ final class PopupInfoViewController: BaseViewController, ServiceDependency {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+        view.backgroundColor = .KIDA_dimmed()
         bind(reactor: reactor)
     }
 
@@ -45,8 +45,8 @@ final class PopupInfoViewController: BaseViewController, ServiceDependency {
         }
 
         self.closeButton = UIButton().then {
-            $0.backgroundColor = .clear
             $0.setImage(UIImage(named: "ic_close"), for: .normal)
+            $0.contentEdgeInsets = .init(top: 0, left: 10, bottom: 10, right: 10)
             containerView.addSubview($0)
         }
 
@@ -87,7 +87,7 @@ final class PopupInfoViewController: BaseViewController, ServiceDependency {
             $0.top.equalToSuperview().offset(90)
             $0.leading.equalToSuperview().offset(34)
             $0.trailing.equalToSuperview().offset(-34)
-            $0.height.equalTo(460)
+            $0.height.equalToSuperview().multipliedBy(0.65)
         }
 
         closeButton.snp.makeConstraints {
@@ -96,13 +96,14 @@ final class PopupInfoViewController: BaseViewController, ServiceDependency {
         }
 
         headerView.snp.makeConstraints {
-            $0.top.equalTo(closeButton).offset(15)
+            $0.top.equalTo(closeButton).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(200)
         }
 
         primaryDescription.snp.makeConstraints {
-            $0.top.equalTo(headerView.snp.bottom).offset(36)
+            $0.top.equalTo(headerView.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
         }
 
