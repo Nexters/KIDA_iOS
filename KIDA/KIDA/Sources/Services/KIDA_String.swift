@@ -53,7 +53,6 @@ enum KIDA_String {
 
     enum Popup {
         enum Info {
-            static let title = "키다"
             static let primaryDescription = "우리는\n키워드 다이어리"
             static let secondaryDescription = "오늘의 카드를 뽑아 나온 키워드로\n너만의 일기를 만들어봐!\n키다에 온 걸 진심으로 환영해 :)"
             static let buttonTitle = "뽑으러 가자!"

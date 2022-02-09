@@ -75,7 +75,7 @@ class BaseViewController: UIViewController {
                           }
                     // TODO: 카드를 이미 뽑았는지의 여부에 따라 popupType 인자 변경
                     self.startPopup(presenter: navigationController,
-                                    popupType: .info)
+                                    popupType: .error)
                 })
                 .disposed(by: disposeBag)
         }
@@ -113,7 +113,7 @@ private extension BaseViewController {
     func startPopup(presenter: UINavigationController,
                     popupType: PopupType) {
         let popupCoordinator = PopupCoordinator(navigationController: presenter,
-                                                popupType: .info)
+                                                popupType: popupType)
         self.popupCoordinator = popupCoordinator
         self.popupCoordinator?.start()
     }

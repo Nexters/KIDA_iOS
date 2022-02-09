@@ -100,7 +100,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         self.pickedKeywordGuideLabel = UILabel().then {
             $0.text = KIDA_String.WriteDiary.pickedKeyword
-            $0.font = .systemFont(ofSize: 15, weight: .semibold)
+            $0.font = .pretendard(size: 15)
             $0.textColor = .KIDA_orange()
             containerView.addSubview($0)
         }
@@ -114,16 +114,18 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         self.leftImageView = UIImageView().then {
             $0.contentMode = .scaleAspectFit
+            $0.image = UIImage(named: "img_left_particle")
             containerView.addSubview($0)
         }
 
         self.rightImageView = UIImageView().then {
             $0.contentMode = .scaleAspectFit
+            $0.image = UIImage(named: "img_right_particle")
             containerView.addSubview($0)
         }
 
         self.titleView = UIView().then {
-            $0.backgroundColor = .KIDA_background2()
+            $0.backgroundColor = .KIDA_background3()
             $0.layer.cornerRadius = 10
             containerView.addSubview($0)
         }
@@ -131,20 +133,20 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         self.titleLabel = UILabel().then {
             $0.text = KIDA_String.WriteDiary.titleLabel
             $0.textColor = subViewTitleColor
-            $0.font = .systemFont(ofSize: 15)
+            $0.font = .pretendard(size: 15)
             titleView.addSubview($0)
         }
 
         self.titleTextField = UITextField().then {
             $0.attributedPlaceholder = NSAttributedString(string: KIDA_String.WriteDiary.titlePlaceholder,
                                                           attributes: [.foregroundColor: UIColor.lightGray])
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
+            $0.font = .pretendard(size: 17)
             $0.textColor = .white
             titleView.addSubview($0)
         }
 
         self.contentView = UIView().then {
-            $0.backgroundColor = .KIDA_background2()
+            $0.backgroundColor = .KIDA_background3()
             $0.layer.cornerRadius = 10
             containerView.addSubview($0)
         }
@@ -152,14 +154,14 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         self.contentLabel = UILabel().then {
             $0.text = KIDA_String.WriteDiary.contentLabel
             $0.textColor = subViewTitleColor
-            $0.font = .systemFont(ofSize: 15)
+            $0.font = .pretendard(size: 15)
             contentView.addSubview($0)
         }
 
         self.contentTextView = UITextView().then {
             $0.textAlignment = .left
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
             $0.text = KIDA_String.WriteDiary.contentTextViewPlaceholder
+            $0.font = .pretendard(size: 15)
             $0.textColor = .lightGray
             $0.backgroundColor = .clear
             contentView.addSubview($0)
@@ -169,7 +171,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.setTitle(KIDA_String.WriteDiary.writeButtonTitle, for: .normal)
             $0.backgroundColor = .init(red: 0.43, green: 0.43, blue: 0.43, alpha: 1)
             $0.setTitleColor(subViewTitleColor, for: .normal)
-            $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
+            $0.titleLabel?.font = .pretendard(size: 18)
             $0.layer.cornerRadius = 10
             view.addSubview($0)
         }
@@ -245,7 +247,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         contentTextView.snp.makeConstraints {
             $0.top.equalTo(contentLabel).offset(18)
-            $0.leading.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalToSuperview()
         }
