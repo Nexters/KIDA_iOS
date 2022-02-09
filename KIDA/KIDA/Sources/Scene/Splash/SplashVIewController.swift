@@ -51,7 +51,7 @@ final class SplashViewController: BaseViewController, ServiceDependency {
     override func setupLayoutConstraints() {
         splashImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(160)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(200)
         }
     }
 

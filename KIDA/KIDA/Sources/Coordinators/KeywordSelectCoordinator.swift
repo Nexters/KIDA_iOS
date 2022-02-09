@@ -20,6 +20,10 @@ final class KeywordSelectCoordinator: Coordinatable {
 
     // MARK: - Methods
     func start() {
+        if navigationController.topViewController is KeywordSelectViewController {
+            return
+        }
+
         let keywordSelectReactor = KeywordSelectViewReactor()
         let keywordSelectViewController = KeywordSelectViewController()
         keywordSelectViewController.reactor = keywordSelectReactor
@@ -27,4 +31,3 @@ final class KeywordSelectCoordinator: Coordinatable {
         navigationController.viewControllers = [keywordSelectViewController]
     }
 }
-
