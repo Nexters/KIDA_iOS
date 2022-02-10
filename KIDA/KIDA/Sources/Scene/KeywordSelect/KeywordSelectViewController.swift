@@ -56,14 +56,14 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         
         titleLabelOne = UILabel().then {
             $0.text = KIDA_String.KeywordSelect.titleOne
-            $0.font = .systemFont(ofSize: 28, weight: .bold)
+            $0.font = .pretendard(.SemiBold, size: 28)
             $0.textColor = .white
             view.addSubview($0)
         }
         
         titleLabelTwo = UILabel().then {
             $0.text = KIDA_String.KeywordSelect.titleTwo
-            $0.font = .systemFont(ofSize: 28, weight: .bold)
+            $0.font = .pretendard(.SemiBold, size: 28)
             $0.textColor = .white
             view.addSubview($0)
         }

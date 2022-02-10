@@ -55,26 +55,27 @@ final class PopupInfoViewController: BaseViewController, ServiceDependency {
         }
 
         self.primaryDescription = UILabel().then {
-            let attrString = NSMutableAttributedString(string: KIDA_String.Popup.Info.primaryDescription,
-                                                       attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .semibold)])
+            let attrString = NSMutableAttributedString(string: KIDA_String.Popup.Info.primaryDescription)
             $0.attributedText = attrString
             $0.numberOfLines = 2
             $0.textAlignment = .center
+            $0.font = .pretendard(.SemiBold, size: 28)
             containerView.addSubview($0)
         }
 
         self.secondaryDescription = UILabel().then {
             let attrString = NSMutableAttributedString(string: KIDA_String.Popup.Info.secondaryDescription,
-                                                       attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular),
-                                                                    .foregroundColor: UIColor.systemGray])
+                                                       attributes: [.foregroundColor: UIColor.systemGray])
             $0.attributedText = attrString
             $0.textAlignment = . center
             $0.numberOfLines = 3
+            $0.font = .pretendard(size: 14)
             containerView.addSubview($0)
         }
 
         self.gotoSelectButton = UIButton().then {
             $0.setTitle(KIDA_String.Popup.Info.buttonTitle, for: .normal)
+            $0.titleLabel?.font = .pretendard(size: 16)
             $0.backgroundColor = .KIDA_orange()
             $0.layer.cornerRadius = 8
             containerView.addSubview($0)

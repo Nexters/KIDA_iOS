@@ -40,6 +40,7 @@ final class PopupCoordinator: Coordinatable {
 
         case .error:
             let popupErrorReactor = PopupErrorReactor()
+            popupErrorReactor.delegate = self
             popupViewController = PopupErrorViewController(reactor: popupErrorReactor)
         }
 
@@ -67,5 +68,12 @@ extension PopupCoordinator: PopupInfoReactorDelegate {
 
         navigationController.dismiss(animated: true,
                                      completion: keywordSelectCoordinator.start)
+    }
+}
+
+extension PopupCoordinator: PopupErrorReactorDelegate {
+    func didTapClosePopupError() {
+        navigationController.dismiss(animated: true,
+                                     completion: nil)
     }
 }

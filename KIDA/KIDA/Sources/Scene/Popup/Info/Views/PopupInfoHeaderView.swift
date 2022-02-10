@@ -10,8 +10,8 @@ import UIKit
 final class PopupInfoHeaderView: UIView {
 
     // MARK: - Properties
-    private weak var imageView: UIImageView!
-    private weak var titleLabel: UILabel!
+    private weak var characterImageView: UIImageView!
+    private weak var kidaImageView: UIImageView!
 
 
     override init(frame: CGRect) {
@@ -29,28 +29,27 @@ final class PopupInfoHeaderView: UIView {
 
 private extension PopupInfoHeaderView {
     func setupViews() {
-        self.imageView = UIImageView().then {
+        self.characterImageView = UIImageView().then {
             $0.contentMode = .scaleAspectFit
             $0.image = UIImage(named: "img_popup_info")
             addSubview($0)
         }
 
-        self.titleLabel = UILabel().then {
-            $0.text = KIDA_String.Popup.Info.title
-            $0.font = .systemFont(ofSize: 30, weight: .bold)
-            $0.textColor = .KIDA_orange()
+        self.kidaImageView = UIImageView().then {
+            $0.contentMode = .scaleAspectFit
+            $0.image = UIImage(named: "img_logo_korean")
             addSubview($0)
         }
     }
 
     func setupLayoutConstraints() {
-        imageView.snp.makeConstraints {
+        characterImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(15)
         }
 
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(-30)
+        kidaImageView.snp.makeConstraints {
+            $0.top.equalTo(characterImageView.snp.bottom).offset(-30)
             $0.centerX.equalToSuperview()
         }
     }

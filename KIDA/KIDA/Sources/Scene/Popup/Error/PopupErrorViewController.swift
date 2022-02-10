@@ -32,6 +32,8 @@ final class PopupErrorViewController: BaseViewController, ServiceDependency {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        bind(reactor: reactor)
     }
 
     override func setupViews() {
@@ -56,7 +58,7 @@ final class PopupErrorViewController: BaseViewController, ServiceDependency {
 
         self.mainLabel = UILabel().then {
             $0.text = KIDA_String.Popup.Error.mainDescription
-            $0.font = .systemFont(ofSize: 15)
+            $0.font = .pretendard(size: 12)
             $0.textColor = .KIDA_orange()
             containerView.addSubview($0)
         }
@@ -64,7 +66,7 @@ final class PopupErrorViewController: BaseViewController, ServiceDependency {
         self.primaryDescriptionLabel = UILabel().then {
             $0.text = KIDA_String.Popup.Error.primaryDescription
             $0.textAlignment = .center
-            $0.font = .systemFont(ofSize: 28, weight: .semibold)
+            $0.font = .pretendard(.SemiBold, size: 28)
             containerView.addSubview($0)
         }
 
@@ -72,7 +74,7 @@ final class PopupErrorViewController: BaseViewController, ServiceDependency {
             $0.text = KIDA_String.Popup.Error.secondaryDescription
             $0.numberOfLines = 3
             $0.textAlignment = .center
-            $0.font = .systemFont(ofSize: 14)
+            $0.font = .pretendard(size: 14)
             $0.textColor = .systemGray
             containerView.addSubview($0)
         }
@@ -84,7 +86,7 @@ final class PopupErrorViewController: BaseViewController, ServiceDependency {
             $0.top.equalToSuperview().offset(170)
             $0.leading.equalToSuperview().offset(34)
             $0.trailing.equalToSuperview().offset(-34)
-            $0.height.equalToSuperview().multipliedBy(0.5)
+            $0.height.equalToSuperview().multipliedBy(0.45)
         }
 
         imageView.snp.makeConstraints {
@@ -121,8 +123,9 @@ final class PopupErrorViewController: BaseViewController, ServiceDependency {
 
 private extension PopupErrorViewController {
     func bindAction(_ reactor: PopupErrorReactor) {
-        reactor.action
-            .subscribe()
+        closeButton.rx.tap
+            .map { PopupErrorReactor.Action.didTapClose }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
     }
 
