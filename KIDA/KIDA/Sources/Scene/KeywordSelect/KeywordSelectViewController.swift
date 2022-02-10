@@ -16,11 +16,11 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     
     // MARK: UI
     
+    private weak var headerView: UIView!
     private weak var titleLabelOne: UILabel!
     private weak var titleLabelTwo: UILabel!
     private weak var selectButton: UIButton!
     private weak var keywordTooltip: KeywordToolTipView!
-    
     private var collectionView: UICollectionView!
     
     private lazy var dataSource = KeywordSelectViewController.dataSourceFactory()
@@ -56,23 +56,27 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         initCollectionView()
         view.addSubview(collectionView)
         
+        headerView = UIView().then {
+            view.addSubview($0)
+        }
+        
         titleLabelOne = UILabel().then {
             $0.text = KIDA_String.KeywordSelect.titleOne
             $0.font = .pretendard(.SemiBold, size: 28)
             $0.textColor = .white
-            view.addSubview($0)
+            headerView.addSubview($0)
         }
         
         titleLabelTwo = UILabel().then {
             $0.text = KIDA_String.KeywordSelect.titleTwo
             $0.font = .pretendard(.SemiBold, size: 28)
             $0.textColor = .white
-            view.addSubview($0)
+            headerView.addSubview($0)
         }
         
         selectButton = UIButton().then {
             $0.setImage(UIImage(named: "ic_btn_default"), for: .normal)
-            view.addSubview($0)
+            headerView.addSubview($0)
         }
         
         keywordTooltip = KeywordToolTipView().then {
@@ -81,34 +85,41 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     }
 
     override func setupLayoutConstraints() {
-        titleLabelOne.snp.makeConstraints {
+        
+        headerView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
             $0.leading.equalTo(40)
+            $0.trailing.equalTo(-40)
+            $0.height.equalTo(96)
+        }
+        
+        titleLabelOne.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
+            $0.leading.equalTo(headerView.snp.leading)
         }
         
         titleLabelTwo.snp.makeConstraints {
             $0.top.equalTo(titleLabelOne.snp.bottom).offset(8)
-            $0.leading.equalTo(40)
+            $0.leading.equalTo(headerView.snp.leading)
         }
         
         selectButton.snp.makeConstraints {
             $0.width.height.equalTo(32)
-            $0.trailing.equalTo(-40)
-            $0.top.equalTo(titleLabelTwo.snp.bottom)
+            $0.trailing.equalTo(headerView.snp.trailing)
+            $0.bottom.equalTo(headerView.snp.bottom)
         }
         
         keywordTooltip.snp.makeConstraints {
-            $0.bottom.equalTo(selectButton.snp.top).offset(-10)
-            $0.trailing.equalTo(-40)
+            $0.top.equalTo(headerView.snp.top).offset(22)
+            $0.trailing.equalTo(headerView.snp.trailing)
             $0.width.equalTo(68)
             $0.height.equalTo(32)
         }
         
-        // TODO: UI 수정
         collectionView.snp.makeConstraints {
             $0.leading.equalTo(0)
             $0.trailing.equalTo(0)
-            $0.top.equalTo(titleLabelTwo.snp.bottom).offset(61)
+            $0.top.equalTo(headerView.snp.bottom).offset(29)
             $0.bottom.equalTo(-23)
         }
     }
