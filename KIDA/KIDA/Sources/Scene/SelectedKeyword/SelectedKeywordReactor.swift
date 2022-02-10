@@ -5,10 +5,15 @@
 //  Created by Ian on 2022/01/15.
 //
 
+protocol SelectedKeywordReactorDelegate: AnyObject {
+    func didTapGotoWrite()
+    func didTapRePick()
+}
+
 final class SelectedKeywordReactor: Reactor {
 
     enum Action {
-        case didTapConfirmButton
+        case didTapGotoWriteButton
         case didTapRePickButton
     }
 
@@ -16,6 +21,7 @@ final class SelectedKeywordReactor: Reactor {
     }
 
     var initialState: State
+    weak var delegate: SelectedKeywordReactorDelegate?
 
     init() {
         self.initialState = State()
@@ -23,8 +29,8 @@ final class SelectedKeywordReactor: Reactor {
 
     func mutate(action: Action) -> Observable<Action> {
         switch action {
-        case .didTapConfirmButton:
-            return .just(.didTapConfirmButton)
+        case .didTapGotoWriteButton:
+            return .just(.didTapGotoWriteButton)
         case .didTapRePickButton:
             // keywordSelect로 이동
             return .just(.didTapRePickButton)
@@ -33,9 +39,11 @@ final class SelectedKeywordReactor: Reactor {
 
     func reduce(state: State, mutation: Action) -> State {
         switch mutation {
-        case .didTapConfirmButton:
+        case .didTapGotoWriteButton:
+            delegate?.didTapGotoWrite()
             return state
         case .didTapRePickButton:
+            delegate?.didTapRePick()
             return state
         }
     }

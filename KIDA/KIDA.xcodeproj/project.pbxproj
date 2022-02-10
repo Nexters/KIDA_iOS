@@ -29,6 +29,7 @@
 		86B8B29D2795434A0028C512 /* SplashVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29C2795434A0028C512 /* SplashVIewController.swift */; };
 		86B8B29F279543760028C512 /* SplashVIewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B29E279543760028C512 /* SplashVIewReactor.swift */; };
 		86B8B2A12795449A0028C512 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8B2A02795449A0028C512 /* SplashCoordinator.swift */; };
+		86CFE12F27B54DA700DB8F99 /* UIVIew+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CFE12E27B54DA700DB8F99 /* UIVIew+.swift */; };
 		86D0E809279C2D3B00C51031 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D0E808279C2D3B00C51031 /* UIColor+.swift */; };
 		86D513AB27A9389900A3391A /* KIDA_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D513AA27A9389900A3391A /* KIDA_String.swift */; };
 		86D513AD27A941BE00A3391A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D513AC27A941BE00A3391A /* String+.swift */; };
@@ -99,6 +100,7 @@
 		86B8B29C2795434A0028C512 /* SplashVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewController.swift; sourceTree = "<group>"; };
 		86B8B29E279543760028C512 /* SplashVIewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVIewReactor.swift; sourceTree = "<group>"; };
 		86B8B2A02795449A0028C512 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		86CFE12E27B54DA700DB8F99 /* UIVIew+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+.swift"; sourceTree = "<group>"; };
 		86D0E808279C2D3B00C51031 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		86D513AA27A9389900A3391A /* KIDA_String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIDA_String.swift; sourceTree = "<group>"; };
 		86D513AC27A941BE00A3391A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				86D513AC27A941BE00A3391A /* String+.swift */,
 				ED85CEF127AE7FB200C26CA3 /* Date+.swift */,
 				863C6E4827B3FCA200BB8978 /* UIFont+.swift */,
+				86CFE12E27B54DA700DB8F99 /* UIVIew+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				8667CFDA279598DF00CC484A /* WriteDiaryCoordinator.swift in Sources */,
 				ED85CEF227AE7FB200C26CA3 /* Date+.swift in Sources */,
 				ED74BD62279D5686006AA255 /* KeywordSelectViewController.swift in Sources */,
+				86CFE12F27B54DA700DB8F99 /* UIVIew+.swift in Sources */,
 				ED20E01C279577F0004951E1 /* DiaryListCellReactor.swift in Sources */,
 				86FE8F3227B355D400786A12 /* PopupInfoHeaderView.swift in Sources */,
 				86448308279310C30020F782 /* selectedKeywordViewController.swift in Sources */,

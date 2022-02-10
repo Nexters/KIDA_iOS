@@ -75,7 +75,7 @@ class BaseViewController: UIViewController {
                           }
                     // TODO: 카드를 이미 뽑았는지의 여부에 따라 popupType 인자 변경
                     self.startPopup(presenter: navigationController,
-                                    popupType: .error)
+                                    popupType: .info)
                 })
                 .disposed(by: disposeBag)
         }
