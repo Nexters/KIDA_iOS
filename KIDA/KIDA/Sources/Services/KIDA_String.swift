@@ -50,4 +50,19 @@ enum KIDA_String {
         static let confirmButtonTitle = "글쓰러 가자"
         static let cancelButtonTitle = "다시 뽑을래"
     }
+
+    enum Popup {
+        enum Info {
+            static let title = "키다"
+            static let primaryDescription = "우리는\n키워드 다이어리"
+            static let secondaryDescription = "오늘의 카드를 뽑아 나온 키워드로\n너만의 일기를 만들어봐!\n키다에 온 걸 진심으로 환영해 :)"
+            static let buttonTitle = "뽑으러 가자!"
+        }
+
+        enum Error {
+            static let mainDescription = "삐빅 에러"
+            static let primaryDescription = "하루에 한번만!"
+            static let secondaryDescription = "igo..아쉽지만,\n키다는 하루에 한번만 쓸 수 있어!\n내일 다시 보자 :)"
+        }
+    }
 }

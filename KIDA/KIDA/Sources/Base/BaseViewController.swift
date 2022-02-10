@@ -17,8 +17,11 @@ class EmptyReactor: Reactor {
 }
 
 class BaseViewController: UIViewController {
-    
+
+    // MARK: - Properties
     var disposeBag = DisposeBag()
+    private var popupCoordinator: PopupCoordinator?
+    private var keywordSelectCoordinator: KeywordSelectCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +33,25 @@ class BaseViewController: UIViewController {
         setupViews()
         setupLayoutConstraints()
     }
-    
+
+    // MARK: - Methods for override.
     /// 기본 네비게이션바 설정 내용입니다.
     func setDefaultNavigation(){
-        self.navigationController?.navigationBar.tintColor = .KIDA_orange()
-        
-        let logoButton = UIBarButtonItem(image: UIImage(named: "ic_logo"), style: .plain, target: self, action: nil)
-        self.navigationItem.leftBarButtonItem = logoButton
+        let leftButton = UIButton().then {
+            $0.setImage(UIImage(named: "ic_logo"), for: .normal)
+        }
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+
+        leftButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self,
+                      let navigationController = self.navigationController else {
+                          return
+                      }
+                self.startKeywordSelect(presenter: navigationController)
+            })
+            .disposed(by: disposeBag)
     }
     
     /// 네비게이션바를 정의합니다.
@@ -45,8 +60,25 @@ class BaseViewController: UIViewController {
     
     /// 네비게이션바 오른쪽 버튼을 정의합니다.
     func setupNavigationRightButton(buttonType: RightButtonType?){
-        let button = UIBarButtonItem(image: buttonType?.image, style: .plain, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = button
+        let rightButon = UIButton().then {
+            $0.setImage(UIImage(named: "ic_info"), for: .normal)
+        }
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButon)
+
+        if buttonType == .info {
+            rightButon.rx.tap
+                .asDriver()
+                .drive(onNext: { [weak self] _ in
+                    guard let self = self,
+                          let navigationController = self.navigationController else {
+                              return
+                          }
+                    // TODO: 카드를 이미 뽑았는지의 여부에 따라 popupType 인자 변경
+                    self.startPopup(presenter: navigationController,
+                                    popupType: .info)
+                })
+                .disposed(by: disposeBag)
+        }
     }
     
     /// 네비게이션바 타이틀을 정의합니다.
@@ -69,4 +101,20 @@ class BaseViewController: UIViewController {
         print("deinit : \(self)")
     }
 
+}
+
+private extension BaseViewController {
+    func startKeywordSelect(presenter: UINavigationController) {
+        let keywordSelectCoordinator = KeywordSelectCoordinator(navigationController: presenter)
+        self.keywordSelectCoordinator = keywordSelectCoordinator
+        self.keywordSelectCoordinator?.start()
+    }
+
+    func startPopup(presenter: UINavigationController,
+                    popupType: PopupType) {
+        let popupCoordinator = PopupCoordinator(navigationController: presenter,
+                                                popupType: .info)
+        self.popupCoordinator = popupCoordinator
+        self.popupCoordinator?.start()
+    }
 }
