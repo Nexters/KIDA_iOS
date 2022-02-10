@@ -15,7 +15,7 @@ final class KeywordSelectViewReactor: Reactor {
     var initialState: State = State()
 
     init(){
-        initialState.sections = [.section([.item(KeywordSelectCellReactor()), .item(KeywordSelectCellReactor())])]
+        initialState.sections = [.section([.item(KeywordSelectCellReactor()), .item(KeywordSelectCellReactor()), .item(KeywordSelectCellReactor()), .item(KeywordSelectCellReactor())])]
     }
 }
 

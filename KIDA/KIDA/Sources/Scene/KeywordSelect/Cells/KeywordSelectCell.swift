@@ -10,10 +10,13 @@ class KeywordSelectCell: BaseCollectionViewCell<KeywordSelectCellReactor> {
     
     // MARK: UI
     
+    private weak var cardImage: UIImageView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .yellow // test
+        setupViews()
+        setupLayoutConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -24,4 +27,20 @@ class KeywordSelectCell: BaseCollectionViewCell<KeywordSelectCellReactor> {
         
     }
     
+}
+
+extension KeywordSelectCell {
+    private func setupViews(){
+        cardImage = UIImageView().then {
+            $0.image = UIImage(named: "card_01")
+            $0.contentMode = .scaleToFill
+            addSubview($0)
+        }
+    }
+    
+    private func setupLayoutConstraints(){
+        cardImage.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
 }

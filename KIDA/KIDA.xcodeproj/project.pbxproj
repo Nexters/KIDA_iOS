@@ -74,6 +74,8 @@
 		ED85CEF427B16B1200C26CA3 /* RightButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */; };
 		ED85CEF627B2707800C26CA3 /* DiaryListTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF527B2707800C26CA3 /* DiaryListTopView.swift */; };
 		ED85CEF827B2762300C26CA3 /* DiaryListBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF727B2762300C26CA3 /* DiaryListBottomView.swift */; };
+		ED85CEFA27B5424D00C26CA3 /* KeywordSelectButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF927B5424D00C26CA3 /* KeywordSelectButtonType.swift */; };
+		ED85CEFD27B5445000C26CA3 /* KeywordToolTipViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEFC27B5445000C26CA3 /* KeywordToolTipViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +143,8 @@
 		ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightButtonType.swift; sourceTree = "<group>"; };
 		ED85CEF527B2707800C26CA3 /* DiaryListTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListTopView.swift; sourceTree = "<group>"; };
 		ED85CEF727B2762300C26CA3 /* DiaryListBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListBottomView.swift; sourceTree = "<group>"; };
+		ED85CEF927B5424D00C26CA3 /* KeywordSelectButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectButtonType.swift; sourceTree = "<group>"; };
+		ED85CEFC27B5445000C26CA3 /* KeywordToolTipViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordToolTipViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -403,6 +407,7 @@
 				ED20E02127957B52004951E1 /* DiayListSection.swift */,
 				ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */,
 				ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */,
+				ED85CEF927B5424D00C26CA3 /* KeywordSelectButtonType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 		ED74BD60279D566E006AA255 /* KeywordSelect */ = {
 			isa = PBXGroup;
 			children = (
+				ED85CEFB27B5444400C26CA3 /* Views */,
 				ED74BD71279EDC8E006AA255 /* Cells */,
 				ED74BD61279D5686006AA255 /* KeywordSelectViewController.swift */,
 				ED74BD63279D5690006AA255 /* KeywordSelectViewReactor.swift */,
@@ -441,6 +447,14 @@
 				ED85CEEF27AE50C500C26CA3 /* DiaryListHeaderView.swift */,
 				ED85CEF527B2707800C26CA3 /* DiaryListTopView.swift */,
 				ED85CEF727B2762300C26CA3 /* DiaryListBottomView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ED85CEFB27B5444400C26CA3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED85CEFC27B5445000C26CA3 /* KeywordToolTipViews.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -558,9 +572,11 @@
 				8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */,
 				863C6E4927B3FCA200BB8978 /* UIFont+.swift in Sources */,
 				ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */,
+				ED85CEFD27B5445000C26CA3 /* KeywordToolTipViews.swift in Sources */,
 				ED74BD73279EDC9D006AA255 /* KeywordSelectCell.swift in Sources */,
 				ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */,
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
+				ED85CEFA27B5424D00C26CA3 /* KeywordSelectButtonType.swift in Sources */,
 				8673D8B12796ED4900085BF7 /* PersistentStorage.swift in Sources */,
 				86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */,
 				ED85CEF827B2762300C26CA3 /* DiaryListBottomView.swift in Sources */,

@@ -19,6 +19,8 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     private weak var titleLabelOne: UILabel!
     private weak var titleLabelTwo: UILabel!
     private weak var selectButton: UIButton!
+    private weak var keywordTooltip: KeywordToolTipView!
+    
     private var collectionView: UICollectionView!
     
     private lazy var dataSource = KeywordSelectViewController.dataSourceFactory()
@@ -72,11 +74,15 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.setImage(UIImage(named: "ic_btn_default"), for: .normal)
             view.addSubview($0)
         }
+        
+        keywordTooltip = KeywordToolTipView().then {
+            view.addSubview($0)
+        }
     }
 
     override func setupLayoutConstraints() {
         titleLabelOne.snp.makeConstraints {
-            $0.top.equalTo(100) // TODO: 추후에 수정
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
             $0.leading.equalTo(40)
         }
         
@@ -91,12 +97,19 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.top.equalTo(titleLabelTwo.snp.bottom)
         }
         
+        keywordTooltip.snp.makeConstraints {
+            $0.bottom.equalTo(selectButton.snp.top).offset(-10)
+            $0.trailing.equalTo(-40)
+            $0.width.equalTo(68)
+            $0.height.equalTo(32)
+        }
+        
         // TODO: UI 수정
         collectionView.snp.makeConstraints {
             $0.leading.equalTo(0)
             $0.trailing.equalTo(0)
-            $0.height.equalTo(300)
-            $0.top.equalTo(titleLabelTwo.snp.bottom).offset(100)
+            $0.top.equalTo(titleLabelTwo.snp.bottom).offset(61)
+            $0.bottom.equalTo(-23)
         }
     }
     
@@ -112,6 +125,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.showsHorizontalScrollIndicator = false
             $0.isPagingEnabled = true
             $0.register(Reuse.keywordCell)
+            $0.backgroundColor = .KIDA_background()
         }
         
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -143,9 +157,13 @@ extension KeywordSelectViewController {
 
 extension KeywordSelectViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = UIScreen.main.bounds.width
-        let height: CGFloat = 300
-        
+        let width: CGFloat = UIScreen.main.bounds.width-80
+        let height: CGFloat = UIScreen.main.bounds.height-224 // TODO: 추후에 수정
+
         return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
     }
 }
