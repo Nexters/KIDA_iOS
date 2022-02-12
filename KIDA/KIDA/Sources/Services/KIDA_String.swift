@@ -46,9 +46,9 @@ enum KIDA_String {
 
     /// SelectedKeywordViewController 에서 사용하는 문자열을 관리합니다.
     enum SelectedKeyword {
-        static let todayKeyword = "오늘의 키워드"
-        static let confirmButtonTitle = "글쓰러 가자"
-        static let cancelButtonTitle = "다시 뽑을래"
+        static let selectedKeywordGuide = "뽑은 키워드"
+        static let goToWriteDiaryTitle = "일기 쓰러가기"
+        static let rePickTitle = "다시 뽑기"
     }
 
     enum Popup {
