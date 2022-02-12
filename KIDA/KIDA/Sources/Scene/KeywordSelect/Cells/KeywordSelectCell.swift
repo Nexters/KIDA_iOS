@@ -12,16 +12,20 @@ class KeywordSelectCell: BaseCollectionViewCell<KeywordSelectCellReactor> {
     
     private weak var cardImage: UIImageView!
     
+    // MARK: Property
+    
     override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.frame.origin.y -= 10
-                })
-            } else {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.frame.origin.y += 10
-                })
+        willSet {
+            if newValue != isSelected { // 값이 변경된 경우에만 호출
+                if isSelected {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.frame.origin.y += 10
+                    })
+                } else {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.frame.origin.y -= 10
+                    })
+                }
             }
         }
     }

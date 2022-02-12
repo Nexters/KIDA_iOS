@@ -85,7 +85,6 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     }
 
     override func setupLayoutConstraints() {
-        
         headerView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
             $0.leading.equalTo(40)
@@ -206,25 +205,21 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
         
         targetContentOffset.pointee = CGPoint(x: xPoint,
                                               y: 0)
-        print(index)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let cell = collectionView.cellForItem(at: indexPath) as? KeywordSelectCell else {
+        let cells = collectionView.visibleCells
+
+        for cell in cells {
+            cell.isSelected = false
+        }
+
+        guard let selectCell = collectionView.cellForItem(at: indexPath) as? KeywordSelectCell else {
             fatalError()
         }
-        
-        if cell.isSelected == false {
-            cell.isSelected = true
-        }
-        
-        
-//        if cell.isSelected == true {
-//            cell.isSelected = false
-//        } else {
-//            cell.isSelected = true
-//        }
+
+        selectCell.isSelected = !selectCell.isSelected
     }
     
 }
