@@ -12,6 +12,20 @@ class KeywordSelectCell: BaseCollectionViewCell<KeywordSelectCellReactor> {
     
     private weak var cardImage: UIImageView!
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.frame.origin.y -= 10
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.frame.origin.y += 10
+                })
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

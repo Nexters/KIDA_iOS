@@ -135,7 +135,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
                                           collectionViewLayout: flowLayout)
         collectionView.register(Reuse.keywordCell)
         collectionView.decelerationRate = .fast
-        collectionView.contentInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        collectionView.contentInset = .init(top: 0, left: 40, bottom: 0, right: 40)
         collectionView.isPagingEnabled = false
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -151,9 +151,9 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 
 extension KeywordSelectViewController {
     func bindState(reactor: KeywordSelectViewReactor){
-        guard let collectionView = collectionView else {
-            return
-        }
+//        guard let collectionView = collectionView else {
+//            return
+//        }
 
 //        reactor.state
 //            .map { $0.sections }
@@ -202,14 +202,31 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
         }
 
         var xPoint = CGFloat(index) * cellWidthIncludingSpacing
-
-        if index == 0 || index == 5 {
-            xPoint = xPoint - 40
-        } else {
-            xPoint = xPoint - 80
-        }
+        xPoint -= 40
+        
         targetContentOffset.pointee = CGPoint(x: xPoint,
                                               y: 0)
         print(index)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? KeywordSelectCell else {
+            fatalError()
+        }
+        
+        if cell.isSelected == false {
+            cell.isSelected = true
+        }
+        
+        
+//        if cell.isSelected == true {
+//            cell.isSelected = false
+//        } else {
+//            cell.isSelected = true
+//        }
+    }
+    
 }
+
+// didse
