@@ -45,6 +45,20 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         super.viewDidLoad()
         
         bind(reactor: reactor!) // TODO: 추후에 수정
+        
+        collectionView.rx.didEndDragging
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                
+                guard let currentIndex = self.collectionView.indexPathsForVisibleItems.first else {
+                    return
+                }
+//                self.collectionView.scrollToItem(at: currentIndex,
+//                                                 at: .right,
+//                                                 animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     override func setupNavigationBar() {
@@ -127,7 +141,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     private func initCollectionView(){
         let flowLayout = UICollectionViewFlowLayout().then {
             $0.scrollDirection = .horizontal
-            $0.minimumLineSpacing = 0
+            $0.minimumLineSpacing = 20
             $0.minimumInteritemSpacing = 0
         }
         
@@ -136,7 +150,8 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.showsHorizontalScrollIndicator = false
             $0.isPagingEnabled = true
             $0.register(Reuse.keywordCell)
-            $0.backgroundColor = .KIDA_background()
+//            $0.backgroundColor = .KIDA_background()
+            $0.backgroundColor = .white
         }
         
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -176,5 +191,9 @@ extension KeywordSelectViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("🌈🌈🌈🌈")
     }
 }
