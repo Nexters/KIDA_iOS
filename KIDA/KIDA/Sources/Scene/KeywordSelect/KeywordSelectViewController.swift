@@ -45,20 +45,6 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         super.viewDidLoad()
         
         bind(reactor: reactor!) // TODO: 추후에 수정
-        
-        collectionView.rx.didEndDragging
-            .asDriver()
-            .drive(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                
-                guard let currentIndex = self.collectionView.indexPathsForVisibleItems.first else {
-                    return
-                }
-//                self.collectionView.scrollToItem(at: currentIndex,
-//                                                 at: .right,
-//                                                 animated: true)
-            })
-            .disposed(by: disposeBag)
     }
     
     override func setupNavigationBar() {
@@ -131,30 +117,29 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         }
         
         collectionView.snp.makeConstraints {
-            $0.leading.equalTo(0)
-            $0.trailing.equalTo(0)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
             $0.top.equalTo(headerView.snp.bottom).offset(29)
             $0.bottom.equalTo(-23)
         }
     }
     
     private func initCollectionView(){
-        let flowLayout = UICollectionViewFlowLayout().then {
-            $0.scrollDirection = .horizontal
-            $0.minimumLineSpacing = 20
-            $0.minimumInteritemSpacing = 0
-        }
-        
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout).then {
-            $0.showsVerticalScrollIndicator = false
-            $0.showsHorizontalScrollIndicator = false
-            $0.isPagingEnabled = true
-            $0.register(Reuse.keywordCell)
-//            $0.backgroundColor = .KIDA_background()
-            $0.backgroundColor = .white
-        }
-        
-        collectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 20
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.itemSize = CGSize(width: self.view.frame.width - 80,
+                                     height: UIScreen.main.bounds.height - 300)
+
+        collectionView = UICollectionView(frame: .zero,
+                                          collectionViewLayout: flowLayout)
+        collectionView.register(Reuse.keywordCell)
+        collectionView.decelerationRate = .fast
+        collectionView.contentInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        collectionView.isPagingEnabled = false
+        collectionView.dataSource = self
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
         collectionView.delegate = self
     }
 
@@ -170,30 +155,61 @@ extension KeywordSelectViewController {
             return
         }
 
-        reactor.state
-            .map { $0.sections }
-            .filter { !$0.isEmpty }
-            .bind(to: collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+//        reactor.state
+//            .map { $0.sections }
+//            .filter { !$0.isEmpty }
+//            .bind(to: collectionView.rx.items(dataSource: dataSource))
+//            .disposed(by: disposeBag)
     }
 
     func bindAction(reactor: KeywordSelectViewReactor){
     }
 }
 
-extension KeywordSelectViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = UIScreen.main.bounds.width-80
-        let height: CGFloat = UIScreen.main.bounds.height-224 // TODO: 추후에 수정
+extension KeywordSelectViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
 
-        return CGSize(width: width, height: height)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: KeywordSelectCell = collectionView.dequeueReusableCell(withReuseIdentifier: Reuse.keywordCell.identifier,
+                                                                               for: indexPath) as? KeywordSelectCell else {
+            return UICollectionViewCell()
+        }
+
+        cell.configure(indexPath: indexPath)
+        return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("🌈🌈🌈🌈")
+}
+
+extension KeywordSelectViewController: UICollectionViewDelegate {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        guard let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+
+        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+
+        let estimatedIndex = scrollView.contentOffset.x / cellWidthIncludingSpacing
+
+        let index: Int
+        if velocity.x > 0 {
+            index = Int(ceil(estimatedIndex))
+        } else if velocity.x < 0 {
+            index = Int(floor(estimatedIndex))
+        } else {
+            index = Int(round(estimatedIndex))
+        }
+
+        var xPoint = CGFloat(index) * cellWidthIncludingSpacing
+
+        if index == 0 || index == 5 {
+            xPoint = xPoint - 40
+        } else {
+            xPoint = xPoint - 80
+        }
+        targetContentOffset.pointee = CGPoint(x: xPoint,
+                                              y: 0)
+        print(index)
     }
 }

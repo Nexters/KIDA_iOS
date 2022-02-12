@@ -26,15 +26,23 @@ class KeywordSelectCell: BaseCollectionViewCell<KeywordSelectCellReactor> {
     override func bind(reactor: KeywordSelectCellReactor) {
         
     }
-    
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        cardImage.image = nil
+    }
+
+    func configure(indexPath: IndexPath) {
+        cardImage.image = UIImage(named: "card_0\(indexPath.item + 1)")
+    }
 }
 
 extension KeywordSelectCell {
     private func setupViews(){
         cardImage = UIImageView().then {
-            $0.image = UIImage(named: "card_01")
-            $0.contentMode = .scaleToFill
-            addSubview($0)
+            $0.contentMode = .scaleAspectFit
+            contentView.addSubview($0)
         }
     }
     
