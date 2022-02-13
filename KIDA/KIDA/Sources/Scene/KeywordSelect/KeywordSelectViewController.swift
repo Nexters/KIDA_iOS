@@ -7,6 +7,7 @@
 
 import UIKit
 import RxDataSources
+import FlexiblePageControl
 
 final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 
@@ -21,7 +22,13 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     private weak var titleLabelTwo: UILabel!
     private weak var selectButton: UIButton!
     private weak var keywordTooltip: KeywordToolTipView!
+    private weak var pageControl: FlexiblePageControl!
+    
     private var collectionView: UICollectionView!
+    
+    // MARK: Property
+    
+    private var keywordCount: Int = 6
     
     private lazy var dataSource = KeywordSelectViewController.dataSourceFactory()
     
@@ -80,7 +87,14 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         }
         
         keywordTooltip = KeywordToolTipView().then {
-            view.addSubview($0)
+            headerView.addSubview($0)
+        }
+        
+        pageControl = FlexiblePageControl().then {
+            $0.numberOfPages = self.keywordCount
+            $0.pageIndicatorTintColor = .white
+            $0.currentPageIndicatorTintColor = .KIDA_orange()
+            headerView.addSubview($0)
         }
     }
 
@@ -113,6 +127,11 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.trailing.equalTo(headerView.snp.trailing)
             $0.width.equalTo(68)
             $0.height.equalTo(32)
+        }
+        
+        pageControl.snp.makeConstraints {
+            $0.leading.equalTo(headerView.snp.leading)
+            $0.bottom.equalTo(headerView.snp.bottom)
         }
         
         collectionView.snp.makeConstraints {
@@ -167,7 +186,7 @@ extension KeywordSelectViewController {
 
 extension KeywordSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return self.keywordCount
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -223,5 +242,3 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
     }
     
 }
-
-// didse
