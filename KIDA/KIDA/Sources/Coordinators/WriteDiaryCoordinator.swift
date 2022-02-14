@@ -27,11 +27,18 @@ final class WriteDiaryCoordinator: Coordinatable {
 
         navigationController.pushViewController(writeDiaryViewController, animated: true)
     }
+
+    func startWithPush() -> WriteDiaryViewController {
+        let writeDiaryReactor = WriteDiaryReactor()
+        writeDiaryReactor.delegate = self
+        let writeDiaryViewController = WriteDiaryViewController(reactor: writeDiaryReactor)
+
+        return writeDiaryViewController
+    }
 }
 
 extension WriteDiaryCoordinator: WriteDiaryReactorDelegate {
     func didWriteDiary() {
-        // navigationController.pop을 통해 이동
-        print("⚠️⚠️⚠️ [Ian] \(#function) \(#file) - \(#line): NavigationController.popVC")
+        self.navigationController.dismiss(animated: true, completion: nil)
     }
 }

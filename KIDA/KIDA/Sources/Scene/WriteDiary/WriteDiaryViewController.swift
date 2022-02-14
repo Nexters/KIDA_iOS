@@ -251,7 +251,11 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
             $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalToSuperview()
         }
+    }
 
+    override func setupNavigationBar() {
+        setupNavigationBarTitle(title: Date().toStringTypeTwo)
+        setupNavigationRightButton(buttonType: .close)
     }
 
     func bind(reactor: WriteDiaryReactor) {

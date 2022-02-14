@@ -26,5 +26,24 @@ final class DiaryListCoordinator: Coordinatable {
         diaryListViewController.reactor = diaryListReactor
         navigationController.viewControllers = [diaryListViewController]
     }
+
+    func startWithWrite() {
+        let diaryListReactor = DiaryListViewReactor()
+        let diaryListViewController = DiaryListViewController()
+        diaryListViewController.reactor = diaryListReactor
+
+        let writeDiaryCoordinator = WriteDiaryCoordinator(navigationController: navigationController)
+        self.childCoordinators.append(writeDiaryCoordinator)
+        writeDiaryCoordinator.parentCoordinator = self
+
+        let writeDiaryViewController = writeDiaryCoordinator.startWithPush()
+        navigationController.viewControllers = [diaryListViewController]
+
+        let diaryListNavigationController = UINavigationController(rootViewController: writeDiaryViewController)
+        diaryListNavigationController.modalPresentationStyle = .overFullScreen
+        diaryListViewController.present(diaryListNavigationController,
+                                        animated: true,
+                                        completion: nil)
+    }
 }
 

@@ -48,7 +48,7 @@ final class PopupCoordinator: Coordinatable {
             return
         }
 
-        topViewController.modalPresentationStyle = .overFullScreen
+        popupViewController.modalPresentationStyle = .overFullScreen
         topViewController.present(popupViewController,
                                   animated: true,
                                   completion: nil)
