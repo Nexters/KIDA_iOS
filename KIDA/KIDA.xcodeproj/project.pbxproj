@@ -50,6 +50,7 @@
 		86FE8F2D27B3509200786A12 /* PopupErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE8F2C27B3509200786A12 /* PopupErrorViewController.swift */; };
 		86FE8F2F27B3509800786A12 /* PopupErrorReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE8F2E27B3509800786A12 /* PopupErrorReactor.swift */; };
 		86FE8F3227B355D400786A12 /* PopupInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE8F3127B355D400786A12 /* PopupInfoHeaderView.swift */; };
+		8A7A59EAD40D336B3755B96B /* Pods_KIDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD3E4A24147A1309D2673BF /* Pods_KIDA.framework */; };
 		ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E00E27957407004951E1 /* DiaryListViewController.swift */; };
 		ED20E01127957416004951E1 /* DiaryListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E01027957416004951E1 /* DiaryListViewReactor.swift */; };
 		ED20E015279574A8004951E1 /* DiaryListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED20E014279574A8004951E1 /* DiaryListCoordinator.swift */; };
@@ -76,9 +77,12 @@
 		ED85CEF427B16B1200C26CA3 /* RightButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */; };
 		ED85CEF627B2707800C26CA3 /* DiaryListTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF527B2707800C26CA3 /* DiaryListTopView.swift */; };
 		ED85CEF827B2762300C26CA3 /* DiaryListBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF727B2762300C26CA3 /* DiaryListBottomView.swift */; };
+		ED85CEFA27B5424D00C26CA3 /* KeywordSelectButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEF927B5424D00C26CA3 /* KeywordSelectButtonType.swift */; };
+		ED85CEFD27B5445000C26CA3 /* KeywordToolTipViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85CEFC27B5445000C26CA3 /* KeywordToolTipViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		319A00984C795B6A4EE7E6FA /* Pods-KIDA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KIDA.release.xcconfig"; path = "Target Support Files/Pods-KIDA/Pods-KIDA.release.xcconfig"; sourceTree = "<group>"; };
 		86137908279564FF00AED9CF /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		8613790A2795663200AED9CF /* ObservableConvertibleType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+.swift"; sourceTree = "<group>"; };
 		863C6E3627B3FBBD00BB8978 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 		86FE8F2C27B3509200786A12 /* PopupErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupErrorViewController.swift; sourceTree = "<group>"; };
 		86FE8F2E27B3509800786A12 /* PopupErrorReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupErrorReactor.swift; sourceTree = "<group>"; };
 		86FE8F3127B355D400786A12 /* PopupInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupInfoHeaderView.swift; sourceTree = "<group>"; };
+		ABD3E4A24147A1309D2673BF /* Pods_KIDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KIDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA404FCC3FE2094B62C7E1E8 /* Pods-KIDA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KIDA.debug.xcconfig"; path = "Target Support Files/Pods-KIDA/Pods-KIDA.debug.xcconfig"; sourceTree = "<group>"; };
 		ED20E00E27957407004951E1 /* DiaryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListViewController.swift; sourceTree = "<group>"; };
 		ED20E01027957416004951E1 /* DiaryListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListViewReactor.swift; sourceTree = "<group>"; };
 		ED20E014279574A8004951E1 /* DiaryListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListCoordinator.swift; sourceTree = "<group>"; };
@@ -145,6 +151,8 @@
 		ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightButtonType.swift; sourceTree = "<group>"; };
 		ED85CEF527B2707800C26CA3 /* DiaryListTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListTopView.swift; sourceTree = "<group>"; };
 		ED85CEF727B2762300C26CA3 /* DiaryListBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListBottomView.swift; sourceTree = "<group>"; };
+		ED85CEF927B5424D00C26CA3 /* KeywordSelectButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSelectButtonType.swift; sourceTree = "<group>"; };
+		ED85CEFC27B5445000C26CA3 /* KeywordToolTipViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordToolTipViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +165,7 @@
 				ED26F2DA2792C8CD005EE53A /* Then in Frameworks */,
 				ED26F2E02792C94B005EE53A /* RxDataSources in Frameworks */,
 				ED26F2D72792C827005EE53A /* SnapKit in Frameworks */,
+				8A7A59EAD40D336B3755B96B /* Pods_KIDA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +270,8 @@
 			children = (
 				86FABDEA2792AEB2001D986C /* KIDA */,
 				86FABDE92792AEB2001D986C /* Products */,
+				B9F20379F7C4CFE28DE51802 /* Pods */,
+				A0F7A69973DDD9584D1C827F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -383,6 +394,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		A0F7A69973DDD9584D1C827F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABD3E4A24147A1309D2673BF /* Pods_KIDA.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9F20379F7C4CFE28DE51802 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA404FCC3FE2094B62C7E1E8 /* Pods-KIDA.debug.xcconfig */,
+				319A00984C795B6A4EE7E6FA /* Pods-KIDA.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		ED20E00D279573ED004951E1 /* DiaryList */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +438,7 @@
 				ED20E02127957B52004951E1 /* DiayListSection.swift */,
 				ED74BD78279EDDEF006AA255 /* KeywordSelectSection.swift */,
 				ED85CEF327B16B1200C26CA3 /* RightButtonType.swift */,
+				ED85CEF927B5424D00C26CA3 /* KeywordSelectButtonType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -425,6 +455,7 @@
 		ED74BD60279D566E006AA255 /* KeywordSelect */ = {
 			isa = PBXGroup;
 			children = (
+				ED85CEFB27B5444400C26CA3 /* Views */,
 				ED74BD71279EDC8E006AA255 /* Cells */,
 				ED74BD61279D5686006AA255 /* KeywordSelectViewController.swift */,
 				ED74BD63279D5690006AA255 /* KeywordSelectViewReactor.swift */,
@@ -451,6 +482,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		ED85CEFB27B5444400C26CA3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED85CEFC27B5445000C26CA3 /* KeywordToolTipViews.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -458,9 +497,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86FABDFF2792AEB3001D986C /* Build configuration list for PBXNativeTarget "KIDA" */;
 			buildPhases = (
+				3F5569D446111DF7140ED53A /* [CP] Check Pods Manifest.lock */,
 				86FABDE42792AEB2001D986C /* Sources */,
 				86FABDE52792AEB2001D986C /* Frameworks */,
 				86FABDE62792AEB2001D986C /* Resources */,
+				7D98D6ED183F8ED2F9FC1146 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -503,11 +544,11 @@
 			);
 			mainGroup = 86FABDDF2792AEB2001D986C;
 			packageReferences = (
-				ED26F2D12792C753005EE53A /* XCRemoteSwiftPackageReference "RxSwift" */,
-				ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit" */,
-				ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit" */,
-				ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then" */,
-				ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				ED26F2D12792C753005EE53A /* XCRemoteSwiftPackageReference "RxSwift.git" */,
+				ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit.git" */,
+				ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then.git" */,
+				ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources.git" */,
 			);
 			productRefGroup = 86FABDE92792AEB2001D986C /* Products */;
 			projectDirPath = "";
@@ -534,6 +575,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3F5569D446111DF7140ED53A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KIDA-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D98D6ED183F8ED2F9FC1146 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KIDA/Pods-KIDA-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KIDA/Pods-KIDA-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KIDA/Pods-KIDA-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		86FABDE42792AEB2001D986C /* Sources */ = {
@@ -565,9 +648,11 @@
 				8613790B2795663200AED9CF /* ObservableConvertibleType+.swift in Sources */,
 				863C6E4927B3FCA200BB8978 /* UIFont+.swift in Sources */,
 				ED20E01A279577E8004951E1 /* DiaryListCell.swift in Sources */,
+				ED85CEFD27B5445000C26CA3 /* KeywordToolTipViews.swift in Sources */,
 				ED74BD73279EDC9D006AA255 /* KeywordSelectCell.swift in Sources */,
 				ED20E00F27957407004951E1 /* DiaryListViewController.swift in Sources */,
 				86FABDF62792AEB2001D986C /* KIDA.xcdatamodeld in Sources */,
+				ED85CEFA27B5424D00C26CA3 /* KeywordSelectButtonType.swift in Sources */,
 				8673D8B12796ED4900085BF7 /* PersistentStorage.swift in Sources */,
 				86137909279564FF00AED9CF /* UIViewController+Rx.swift in Sources */,
 				ED85CEF827B2762300C26CA3 /* DiaryListBottomView.swift in Sources */,
@@ -732,6 +817,7 @@
 		};
 		86FABE002792AEB3001D986C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA404FCC3FE2094B62C7E1E8 /* Pods-KIDA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -760,6 +846,7 @@
 		};
 		86FABE012792AEB3001D986C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 319A00984C795B6A4EE7E6FA /* Pods-KIDA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -810,7 +897,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ED26F2D12792C753005EE53A /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		ED26F2D12792C753005EE53A /* XCRemoteSwiftPackageReference "RxSwift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -818,7 +905,7 @@
 				minimumVersion = 5.1.2;
 			};
 		};
-		ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
+		ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactorKit/ReactorKit.git";
 			requirement = {
@@ -826,7 +913,7 @@
 				minimumVersion = 2.1.1;
 			};
 		};
-		ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -834,7 +921,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then" */ = {
+		ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
 			requirement = {
@@ -842,7 +929,7 @@
 				minimumVersion = 2.7.0;
 			};
 		};
-		ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+		ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
 			requirement = {
@@ -855,27 +942,27 @@
 /* Begin XCSwiftPackageProductDependency section */
 		ED26F2D32792C7F1005EE53A /* ReactorKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit" */;
+			package = ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit.git" */;
 			productName = ReactorKit;
 		};
 		ED26F2D62792C827005EE53A /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit.git" */;
 			productName = SnapKit;
 		};
 		ED26F2D92792C8CD005EE53A /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then" */;
+			package = ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then.git" */;
 			productName = Then;
 		};
 		ED26F2DD2792C94B005EE53A /* Differentiator */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			package = ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources.git" */;
 			productName = Differentiator;
 		};
 		ED26F2DF2792C94B005EE53A /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			package = ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources.git" */;
 			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
