@@ -218,6 +218,8 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
         } else {
             index = Int(round(estimatedIndex))
         }
+        
+        self.pageControl.setCurrentPage(at: index)
 
         var xPoint = CGFloat(index) * cellWidthIncludingSpacing
         xPoint -= 40
