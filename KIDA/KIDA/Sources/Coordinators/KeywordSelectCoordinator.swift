@@ -25,9 +25,20 @@ final class KeywordSelectCoordinator: Coordinatable {
         }
 
         let keywordSelectReactor = KeywordSelectViewReactor()
+        keywordSelectReactor.delegate = self
         let keywordSelectViewController = KeywordSelectViewController()
         keywordSelectViewController.reactor = keywordSelectReactor
         keywordSelectViewController.navigationItem.title = .navBarDateTitle
         navigationController.viewControllers = [keywordSelectViewController]
+    }
+}
+
+extension KeywordSelectCoordinator: KeywordSelectReactorDelegate {
+    func didSelectCard(cardIndex: Int) {
+        let selectedKeywordCoordinator = SelectedKeywordCoordinator(navigationController: navigationController)
+        selectedKeywordCoordinator.parentCoordinator = self
+        self.childCoordinators.append(selectedKeywordCoordinator)
+
+        selectedKeywordCoordinator.startWithSelectedCard(cardIndex)
     }
 }

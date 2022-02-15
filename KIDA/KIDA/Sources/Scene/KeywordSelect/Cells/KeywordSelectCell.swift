@@ -17,15 +17,14 @@ class KeywordSelectCell: BaseCollectionViewCell<KeywordSelectCellReactor> {
     override var isSelected: Bool {
         willSet {
             if newValue != isSelected { // 값이 변경된 경우에만 호출
-                if isSelected {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.frame.origin.y += 10
-                    })
-                } else {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.frame.origin.y -= 10
-                    })
-                }
+                UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                    guard let self = self else { return }
+                    if self.isSelected {
+                        self.frame.origin.y += 15
+                    } else {
+                        self.frame.origin.y -= 15
+                    }
+                })
             }
         }
     }
