@@ -88,6 +88,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         
         keywordTooltip = KeywordToolTipView().then {
             headerView.addSubview($0)
+            $0.isHidden = true
         }
         
         pageControl = FlexiblePageControl().then {
@@ -169,15 +170,14 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 
 extension KeywordSelectViewController {
     func bindState(reactor: KeywordSelectViewReactor){
-//        guard let collectionView = collectionView else {
-//            return
-//        }
-
-//        reactor.state
-//            .map { $0.sections }
-//            .filter { !$0.isEmpty }
-//            .bind(to: collectionView.rx.items(dataSource: dataSource))
-//            .disposed(by: disposeBag)
+        guard let collectionView = collectionView else {
+            return
+        }
+        
+        collectionView.rx.itemSelected
+            .map { _ in Reactor.Action.selectKeyword }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
     }
 
     func bindAction(reactor: KeywordSelectViewReactor){
