@@ -35,7 +35,7 @@ final class PersistentStorage {
             diaries = []
         }
 
-        return diaries
+        return diaries.reversed()
     }
 
     /// 일기를 생성합니다.

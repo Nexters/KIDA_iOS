@@ -38,7 +38,7 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func setupNavigationBar() {
         self.setupNavigationBarTitle(title: KIDA_String.DiaryList.navigationTitle)
     }
@@ -60,6 +60,13 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
     func bind(reactor: DiaryListViewReactor) {
         bindState(reactor: reactor)
         bindAction(reactor: reactor)
+    }
+}
+
+extension DiaryListViewController {
+    func reloadDiaryList() {
+        reactor?.action
+            .onNext(.loadDiaryList)
     }
 }
 

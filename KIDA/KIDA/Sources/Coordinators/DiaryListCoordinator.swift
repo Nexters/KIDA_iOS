@@ -13,6 +13,7 @@ final class DiaryListCoordinator: Coordinatable {
     var childCoordinators: [Coordinatable] = []
     var parentCoordinator: Coordinatable?
     var navigationController: UINavigationController
+    private var diaryListViewController: DiaryListViewController?
 
     // MARK: - Initializer
     init(navigationController: UINavigationController) {
@@ -30,6 +31,7 @@ final class DiaryListCoordinator: Coordinatable {
     func startWithWrite() {
         let diaryListReactor = DiaryListViewReactor()
         let diaryListViewController = DiaryListViewController()
+        self.diaryListViewController = diaryListViewController
         diaryListViewController.reactor = diaryListReactor
 
         let writeDiaryCoordinator = WriteDiaryCoordinator(navigationController: navigationController)
@@ -44,6 +46,12 @@ final class DiaryListCoordinator: Coordinatable {
         diaryListViewController.present(diaryListNavigationController,
                                         animated: true,
                                         completion: nil)
+    }
+}
+
+extension DiaryListCoordinator {
+    func reloadDiaryList() {
+        diaryListViewController?.reloadDiaryList()
     }
 }
 
