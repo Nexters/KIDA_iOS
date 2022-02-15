@@ -113,11 +113,12 @@ final class PersistentStorage {
         return todayKeyword
     }
     
+    
     /// 오늘 일기를 썼는지 여부를 반환합니다.
     /// - Returns: 오늘 일기를 작성했으면 `true`를, 아니면 `false` 를 반환합니다.
     @discardableResult
-    func isTodayWritten() -> Bool {
-        var isWritten: Bool = false
+    func didWriteTodayDiary() -> Bool {
+        var didWrite: Bool = false
         
         var diaries: [Diary] = []
         do {
@@ -129,11 +130,11 @@ final class PersistentStorage {
         
         for diary in diaries {
             if diary.createdAt?.toStringTypeOne == Date().toStringTypeOne {
-                isWritten = true
+                didWrite = true
             }
         }
         
-        return isWritten
+        return didWrite
     }
     
 }
