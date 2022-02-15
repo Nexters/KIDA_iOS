@@ -408,7 +408,6 @@
 				BA404FCC3FE2094B62C7E1E8 /* Pods-KIDA.debug.xcconfig */,
 				319A00984C795B6A4EE7E6FA /* Pods-KIDA.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -544,11 +543,11 @@
 			);
 			mainGroup = 86FABDDF2792AEB2001D986C;
 			packageReferences = (
-				ED26F2D12792C753005EE53A /* XCRemoteSwiftPackageReference "RxSwift.git" */,
-				ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit.git" */,
-				ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit.git" */,
-				ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then.git" */,
-				ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources.git" */,
+				ED26F2D12792C753005EE53A /* XCRemoteSwiftPackageReference "RxSwift" */,
+				ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit" */,
+				ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then" */,
+				ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 86FABDE92792AEB2001D986C /* Products */;
 			projectDirPath = "";
@@ -897,7 +896,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ED26F2D12792C753005EE53A /* XCRemoteSwiftPackageReference "RxSwift.git" */ = {
+		ED26F2D12792C753005EE53A /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -905,7 +904,7 @@
 				minimumVersion = 5.1.2;
 			};
 		};
-		ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit.git" */ = {
+		ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactorKit/ReactorKit.git";
 			requirement = {
@@ -913,7 +912,7 @@
 				minimumVersion = 2.1.1;
 			};
 		};
-		ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -921,7 +920,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then.git" */ = {
+		ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
 			requirement = {
@@ -929,7 +928,7 @@
 				minimumVersion = 2.7.0;
 			};
 		};
-		ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources.git" */ = {
+		ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
 			requirement = {
@@ -942,27 +941,27 @@
 /* Begin XCSwiftPackageProductDependency section */
 		ED26F2D32792C7F1005EE53A /* ReactorKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit.git" */;
+			package = ED26F2D22792C7F1005EE53A /* XCRemoteSwiftPackageReference "ReactorKit" */;
 			productName = ReactorKit;
 		};
 		ED26F2D62792C827005EE53A /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = ED26F2D52792C827005EE53A /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 		ED26F2D92792C8CD005EE53A /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then.git" */;
+			package = ED26F2D82792C8CD005EE53A /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
 		};
 		ED26F2DD2792C94B005EE53A /* Differentiator */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources.git" */;
+			package = ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = Differentiator;
 		};
 		ED26F2DF2792C94B005EE53A /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources.git" */;
+			package = ED26F2DC2792C94B005EE53A /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */

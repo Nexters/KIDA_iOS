@@ -59,7 +59,7 @@ class BaseViewController: UIViewController {
     }
     
     /// 네비게이션바 오른쪽 버튼을 정의합니다.
-    func setupNavigationRightButton(buttonType: RightButtonType?){
+    func setupNavigationRightButton(buttonType: RightButtonType?) {
         let rightButon = UIButton().then {
             $0.setImage(buttonType!.image, for: .normal)
         }
@@ -79,7 +79,7 @@ class BaseViewController: UIViewController {
                     self.dismiss(animated: true, completion: nil)
                 case .info:
                     self.startPopup(presenter: navigationController,
-                                    popupType: .info)
+                                    popupType: PersistentStorage.shared.didWriteTodayDiary() ? .error : .info)
                 }
             })
             .disposed(by: disposeBag)
