@@ -61,28 +61,32 @@ class BaseViewController: UIViewController {
     /// 네비게이션바 오른쪽 버튼을 정의합니다.
     func setupNavigationRightButton(buttonType: RightButtonType?){
         let rightButon = UIButton().then {
-            $0.setImage(UIImage(named: "ic_info"), for: .normal)
+            $0.setImage(buttonType!.image, for: .normal)
         }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButon)
 
-        if buttonType == .info {
-            rightButon.rx.tap
-                .asDriver()
-                .drive(onNext: { [weak self] _ in
-                    guard let self = self,
-                          let navigationController = self.navigationController else {
-                              return
-                          }
-                    // TODO: 카드를 이미 뽑았는지의 여부에 따라 popupType 인자 변경
+        rightButon.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self,
+                      let navigationController = self.navigationController,
+                      let buttonType = buttonType else {
+                          return
+                      }
+
+                switch buttonType {
+                case .close:
+                    self.dismiss(animated: true, completion: nil)
+                case .info:
                     self.startPopup(presenter: navigationController,
                                     popupType: .info)
-                })
-                .disposed(by: disposeBag)
-        }
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     /// 네비게이션바 타이틀을 정의합니다.
-    func setupNavigationBarTitle(title: String){
+    func setupNavigationBarTitle(title: String) {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationItem.title = title
     }

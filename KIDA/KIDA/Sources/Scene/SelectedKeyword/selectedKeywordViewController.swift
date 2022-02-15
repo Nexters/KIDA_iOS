@@ -89,7 +89,7 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
 
         self.cardImageView = UIImageView().then {
             // TODO: 추후 Image Asset명 넣어주기
-            $0.image = UIImage(named: "card")
+            $0.image = UIImage(named: "splash")
             $0.contentMode = .scaleAspectFit
             view.addSubview($0)
         }
@@ -151,6 +151,11 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
             $0.bottom.equalTo(rePickButton.snp.top).offset(-15)
             $0.height.equalTo(50)
         }
+    }
+
+    override func setupNavigationBar() {
+        setupNavigationBarTitle(title: Date().toStringTypeTwo)
+        setupNavigationRightButton(buttonType: .info)
     }
 
     func bind(reactor: SelectedKeywordReactor) {

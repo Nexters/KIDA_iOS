@@ -30,14 +30,19 @@ final class SelectedKeywordCoordinator: Coordinatable {
 
 extension SelectedKeywordCoordinator: SelectedKeywordReactorDelegate {
     func didTapGotoWrite() {
-        let writeDiaryCoordinator = WriteDiaryCoordinator(navigationController: navigationController)
-        writeDiaryCoordinator.parentCoordinator = self
-        self.childCoordinators.append(writeDiaryCoordinator)
+        let diaryListCoordinator = DiaryListCoordinator(navigationController: navigationController)
+        diaryListCoordinator.parentCoordinator = self
+        self.childCoordinators.append(diaryListCoordinator)
 
-        writeDiaryCoordinator.start()
+        diaryListCoordinator.startWithWrite()
     }
 
     func didTapRePick() {
+        let keywordSelectCoordinator = KeywordSelectCoordinator(navigationController: navigationController)
+        keywordSelectCoordinator.parentCoordinator = self
+        self.childCoordinators.append(keywordSelectCoordinator)
+
+        keywordSelectCoordinator.start()
         print("⚠️⚠️⚠️ [Ian] \(#function) \(#file) - \(#line): ")
     }
 }

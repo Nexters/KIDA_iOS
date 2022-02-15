@@ -32,6 +32,8 @@ final class SplashCoordinator: Coordinatable {
 extension SplashCoordinator: SplashViewReactorDelegate {
     func showKeywordSelect() {
         navigationController.navigationBar.isHidden = false
+
+        // TODO: 일기 작성 여부 체크 이후 이미 작성했다면 DiaryListCooridnator.start 호출
         let keywordSelectCoordinator = KeywordSelectCoordinator(navigationController: navigationController)
         keywordSelectCoordinator.parentCoordinator = self
         self.childCoordinators.append(keywordSelectCoordinator)
