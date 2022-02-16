@@ -11,6 +11,7 @@ final class DiaryListViewReactor: Reactor {
     enum Action {
         case loadDiaryList
         case deleteDiary(Diary)
+        case reloadDiaryList
     }
     
     enum Mutation {
@@ -51,6 +52,8 @@ final class DiaryListViewReactor: Reactor {
             return .just(.loadDiaryList)
         case .deleteDiary(let diary):
             return .just(.deleteDiary(diary))
+        case .reloadDiaryList:
+            return .just(.loadDiaryList)
         }
     }
     
@@ -62,6 +65,8 @@ final class DiaryListViewReactor: Reactor {
         case .loadDiaryList:
             var diaryModelList: [DiaryModel] = []
             let diaryList: [Diary] = PersistentStorage.shared.getAllDiary()
+            
+            print("@@@ diaryList: \(diaryList)")
             
             for diary in diaryList {
                 diaryModelList.append(DiaryModel(content: diary.content ?? "", createdAt: diary.createdAt ?? Date(), keyword: diary.keyword ?? "", title: diary.title ?? ""))

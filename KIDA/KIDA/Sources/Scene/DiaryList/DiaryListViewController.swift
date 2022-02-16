@@ -131,7 +131,7 @@ private extension DiaryListViewController {
                 let deleteButton: Notifier.AlertButtonAction = ("삭제",
                                                                 action: {
                                                                     reactor.action.onNext(.deleteDiary(diaryEntity))
-                    
+                                                                    reactor.action.onNext(.reloadDiaryList)
                                                                 }, style: .destructive)
                 
                 Notifier.alert(on: self,
