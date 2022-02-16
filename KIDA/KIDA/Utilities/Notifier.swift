@@ -29,7 +29,7 @@ enum Notifier {
     ///   - Action: () -> Void
     static func alert(on viewController: UIViewController,
                       title: String,
-                      message: String,
+                      message: String?,
                       buttons: [AlertButtonAction]) {
         let alertController = UIAlertController(title: title,
                                                 message: message,

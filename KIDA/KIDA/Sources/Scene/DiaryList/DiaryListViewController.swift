@@ -84,6 +84,19 @@ private extension DiaryListViewController {
         reactor.state
             .map { $0.errorMsg }
             .filter { $0 != nil }
+            .subscribe(onNext: { [weak self] msg in
+                guard let self = self else { return }
+                
+                let okButton: Notifier.AlertButtonAction = ("확인",
+                                                              action: nil,
+                                                              style: .default)
+                Notifier.alert(on: self,
+                               title: "오류 발생",
+                               message: msg,
+                               buttons: [okButton])
+            })
+            .disposed(by: disposeBag)
+            
         
     }
 
@@ -99,16 +112,32 @@ private extension DiaryListViewController {
             .subscribe(onNext: { [weak self] model in
                 guard let self = self else { return }
                 
-                let diary: DiaryModel = model.initialState.diary
-                print("@@@ diary: \(diary)")
+                let diaryModel: DiaryModel = model.initialState.diary
+                var diaryEntity: Diary = Diary()
+            
+                let diaries: [Diary] = PersistentStorage.shared.getAllDiary()
+                for diary in diaries {
+                    if diaryModel.createdAt == diary.createdAt {
+                        diaryEntity = diary
+                    }
+                }
                 
-                let okButtonAction: Notifier.AlertButtonAction = ("OK",
-                                                                  action: { print("okbuttonaction") },
-                                                                  style: .default)
+                print("diaryEntity: \(diaryEntity)")
+                
+                let editButton: Notifier.AlertButtonAction = ("수정",
+                                                              action: { print("editButton") },
+                                                              style: .default)
+                
+                let deleteButton: Notifier.AlertButtonAction = ("삭제",
+                                                                action: {
+                                                                    reactor.action.onNext(.deleteDiary(diaryEntity))
+                    
+                                                                }, style: .destructive)
+                
                 Notifier.alert(on: self,
-                               title: "타이틀",
-                               message: "메세지",
-                               buttons: [okButtonAction])
+                               title: "수정 / 삭제하기",
+                               message: nil,
+                               buttons: [editButton, deleteButton])
                 
             })
             .disposed(by: disposeBag)
