@@ -108,7 +108,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         self.pickedKeywordLabel = UILabel().then {
             $0.text = diaryKeyword
             $0.textColor = .white
-            $0.font = .systemFont(ofSize: 24, weight: .bold)
+            $0.font = .pretendard(.Bold, size: 24)
             containerView.addSubview($0)
         }
 

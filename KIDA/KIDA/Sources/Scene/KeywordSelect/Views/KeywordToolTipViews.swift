@@ -33,7 +33,7 @@ final class KeywordToolTipView: UIView {
         
         tooltipLabel = UILabel().then {
             $0.text = KIDA_String.KeywordSelect.tooltipTitle
-            $0.font = .systemFont(ofSize: 12)
+            $0.font = .pretendard(size: 12)
             $0.textColor = .white
             addSubview($0)
         }

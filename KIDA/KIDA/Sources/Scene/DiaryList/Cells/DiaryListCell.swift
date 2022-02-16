@@ -13,6 +13,7 @@ final class DiaryListCell: BaseTableViewCell<DiaryListCellReactor> {
     
     private weak var topView: DiaryListTopView!
     private weak var bottomView: DiaryListBottomView!
+    private weak var rightPolygonImageView: UIImageView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -51,6 +52,11 @@ extension DiaryListCell {
             addSubview($0)
         }
         
+        rightPolygonImageView = UIImageView().then {
+            $0.image = UIImage(named: "ic_right_arrow")
+            addSubview($0)
+        }
+        
         bottomView = DiaryListBottomView().then {
             addSubview($0)
         }
@@ -62,6 +68,12 @@ extension DiaryListCell {
             $0.leading.equalTo(20)
             $0.trailing.equalTo(-20)
             $0.top.equalTo(12)
+        }
+        
+        rightPolygonImageView.snp.makeConstraints {
+            $0.centerY.equalTo(topView.snp.centerY)
+            $0.width.height.equalTo(22)
+            $0.trailing.equalTo(-8)
         }
         
         bottomView.snp.makeConstraints {

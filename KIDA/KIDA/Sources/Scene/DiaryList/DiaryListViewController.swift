@@ -47,6 +47,7 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
         tableView.register(Reuse.diaryListCell)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .KIDA_background()
+        tableView.allowsSelection = false
         
         view.addSubview(tableView)
     }

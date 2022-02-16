@@ -24,6 +24,10 @@ extension UIColor {
     static func KIDA_background3() -> UIColor {
         return .init(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
     }
+    
+    static func KIDA_background4() -> UIColor {
+        return .init(red: 0.48, green: 0.48, blue: 0.48, alpha: 1)
+    }
 
     static func KIDA_dimmed() -> UIColor {
         return .init(red: 0, green: 0, blue: 0, alpha: 0.8)
