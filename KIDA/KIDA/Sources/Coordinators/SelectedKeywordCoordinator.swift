@@ -24,7 +24,17 @@ final class SelectedKeywordCoordinator: Coordinatable {
         let selectedKeywordReactor = SelectedKeywordReactor()
         selectedKeywordReactor.delegate = self
         let selectedkeywordViewController = SelectedKeywordViewController(reactor: selectedKeywordReactor)
-        navigationController.pushViewController(selectedkeywordViewController, animated: true)
+        navigationController.pushViewController(selectedkeywordViewController,
+                                                animated: true)
+    }
+
+    func startWithSelectedCard(_ index: Int) {
+        let selectedKeywordReactor = SelectedKeywordReactor()
+        selectedKeywordReactor.delegate = self
+        let selectedKeywordViewController = SelectedKeywordViewController(reactor: selectedKeywordReactor,
+                                                                          selectedCardIndex: index)
+        navigationController.pushViewController(selectedKeywordViewController,
+                                                animated: true)
     }
 }
 

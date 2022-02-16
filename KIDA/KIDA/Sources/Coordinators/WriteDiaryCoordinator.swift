@@ -39,6 +39,12 @@ final class WriteDiaryCoordinator: Coordinatable {
 
 extension WriteDiaryCoordinator: WriteDiaryReactorDelegate {
     func didWriteDiary() {
-        self.navigationController.dismiss(animated: true, completion: nil)
+        self.navigationController.dismiss(animated: true, completion: { [weak self] in
+            guard let diaryListCoordinator = self?.parentCoordinator as? DiaryListCoordinator else {
+                return
+            }
+
+            diaryListCoordinator.reloadDiaryList()
+        })
     }
 }

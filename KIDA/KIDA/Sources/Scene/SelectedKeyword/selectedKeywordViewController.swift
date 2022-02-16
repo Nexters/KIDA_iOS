@@ -28,9 +28,11 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
 
     // MARK: - Property
     private var reactor: SelectedKeywordReactor
+    private let selectedCardIndex: Int
 
-    init(reactor: SelectedKeywordReactor) {
+    init(reactor: SelectedKeywordReactor, selectedCardIndex: Int) {
         self.reactor = reactor
+        self.selectedCardIndex = selectedCardIndex
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,7 +48,6 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
     }
 
     override func setupViews() {
-
         self.bottomPopupView = UIView().then {
             $0.backgroundColor = .KIDA_background2()
             $0.cornerRadius([.topLeft, .topRight], radius: 20)
@@ -89,7 +90,8 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
 
         self.cardImageView = UIImageView().then {
             // TODO: 추후 Image Asset명 넣어주기
-            $0.image = UIImage(named: "splash")
+//            $0.image = UIImage(named: "splash")
+            $0.image = UIImage(named: "card_0\(selectedCardIndex + 1)")
             $0.contentMode = .scaleAspectFit
             view.addSubview($0)
         }
@@ -111,6 +113,7 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
 
         cardImageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(60)
+            $0.height.equalTo(340)
             $0.centerX.equalToSuperview()
         }
 

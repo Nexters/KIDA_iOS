@@ -7,6 +7,7 @@
 
 import UIKit
 import RxDataSources
+import RxCocoa
 import FlexiblePageControl
 
 final class KeywordSelectViewController: BaseViewController, ServiceDependency {
@@ -23,8 +24,8 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     private weak var selectButton: UIButton!
     private weak var keywordTooltip: KeywordToolTipView!
     private weak var pageControl: FlexiblePageControl!
-    
     private var collectionView: UICollectionView!
+    private let selectedCardIndexRelay = BehaviorRelay<Int>(value: 0)
     
     // MARK: Property
     
@@ -88,7 +89,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         
         keywordTooltip = KeywordToolTipView().then {
             headerView.addSubview($0)
-            $0.isHidden = true
+            $0.alpha = 0
         }
         
         pageControl = FlexiblePageControl().then {
@@ -170,14 +171,16 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 
 extension KeywordSelectViewController {
     func bindState(reactor: KeywordSelectViewReactor){
-        guard let collectionView = collectionView else {
+        guard let _ = collectionView else {
             return
         }
-        
-        collectionView.rx.itemSelected
-            .map { _ in Reactor.Action.selectKeyword }
+
+        selectButton.rx.tap
+            .map { [weak self] _ in self?.selectedCardIndexRelay.value ?? 0 }
+            .map { Reactor.Action.didSelectCard(cardIndex: $0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
+
     }
 
     func bindAction(reactor: KeywordSelectViewReactor){
@@ -206,6 +209,7 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
             return
         }
 
+        didTouchCard(false)
         let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
 
         let estimatedIndex = scrollView.contentOffset.x / cellWidthIncludingSpacing
@@ -240,7 +244,22 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
             fatalError()
         }
 
+        didTouchCard(true)
+        selectedCardIndexRelay.accept(indexPath.item)
         selectCell.isSelected = !selectCell.isSelected
     }
     
+}
+
+private extension KeywordSelectViewController {
+    func didTouchCard(_ did: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                guard let self = self else { return }
+                self.keywordTooltip.alpha = did ? 1 : 0
+            })
+            let image = UIImage(named: did ? "ic_btn_hover" : "ic_btn_default")
+            self?.selectButton.setImage(image, for: .normal)
+        }
+    }
 }
