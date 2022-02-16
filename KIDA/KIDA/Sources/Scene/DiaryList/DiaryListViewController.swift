@@ -47,7 +47,7 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
         tableView.register(Reuse.diaryListCell)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .KIDA_background()
-        tableView.allowsSelection = false
+//        tableView.allowsSelection = false
         
         view.addSubview(tableView)
     }
@@ -81,8 +81,37 @@ private extension DiaryListViewController {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        reactor.state
+            .map { $0.errorMsg }
+            .filter { $0 != nil }
+        
     }
 
     func bindAction(reactor: DiaryListViewReactor){
+        
+        tableView.rx.modelSelected(DiaryListSectionItem.self)
+            .map { item -> DiaryListCellReactor in
+                switch item {
+                case .item(let reactor):
+                    return reactor
+                }
+            }
+            .subscribe(onNext: { [weak self] model in
+                guard let self = self else { return }
+                
+                let diary: DiaryModel = model.initialState.diary
+                print("@@@ diary: \(diary)")
+                
+                let okButtonAction: Notifier.AlertButtonAction = ("OK",
+                                                                  action: { print("okbuttonaction") },
+                                                                  style: .default)
+                Notifier.alert(on: self,
+                               title: "타이틀",
+                               message: "메세지",
+                               buttons: [okButtonAction])
+                
+            })
+            .disposed(by: disposeBag)
+        
     }
 }

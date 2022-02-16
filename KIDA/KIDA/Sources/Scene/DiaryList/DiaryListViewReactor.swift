@@ -10,14 +10,22 @@ import Foundation
 final class DiaryListViewReactor: Reactor {
     enum Action {
         case loadDiaryList
+        case deleteDiary(Diary)
     }
     
     enum Mutation {
         case loadDiaryList
+        case deleteDiary(Diary)
+        case errorMsg(String)
         
         var bindMutation: BindMutation {
             switch self {
-            case .loadDiaryList: return .loadDiaryList
+            case .loadDiaryList:
+                return .loadDiaryList
+            case .deleteDiary:
+                return .deleteDiary
+            case .errorMsg:
+                return .errorMsg
             }
         }
     }
@@ -25,18 +33,24 @@ final class DiaryListViewReactor: Reactor {
     enum BindMutation {
         case initialState
         case loadDiaryList
+        case deleteDiary
+        case errorMsg
     }
 
     struct State {
         var state: BindMutation = .initialState
         
         var sections: [DiaryListSection] = []
+        
+        var errorMsg: String?
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .loadDiaryList:
             return .just(.loadDiaryList)
+        case .deleteDiary(let diary):
+            return .just(.deleteDiary(diary))
         }
     }
     
@@ -54,6 +68,21 @@ final class DiaryListViewReactor: Reactor {
             }
             
             newState.sections = sections(list: diaryModelList)
+            
+        case .deleteDiary(let diary):
+            PersistentStorage.shared.deleteDiary(diary, onSuccess: { success in
+                if success {
+                    
+                } else {
+                    let msg = "다이어리를 삭제하는데 에러가 발생했습니다."
+                    
+                    newState.errorMsg = msg
+                    newState.state = .errorMsg
+                }
+            })
+        
+        case .errorMsg(let msg):
+            newState.errorMsg = msg
         }
         
         return newState
