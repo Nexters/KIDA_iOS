@@ -46,7 +46,18 @@ final class WriteDiaryCoordinator: Coordinatable {
         writeDiaryReactor.delegate = self
         let writeDiaryViewController = WriteDiaryViewController(reactor: writeDiaryReactor)
         
-        navigationController.pushViewController(writeDiaryViewController, animated: true)
+        let navi = UINavigationController(rootViewController: writeDiaryViewController)
+        navi.modalPresentationStyle = .overFullScreen
+        
+        navigationController.topViewController?.present(navi, animated: true, completion: nil)
+        
+        
+        
+//        writeDiaryViewController.modalPresentationStyle = .overFullScreen
+//
+//        navigationController.topViewController?.present(writeDiaryViewController,
+//                                                        animated: true,
+//                                                        completion: nil)
     }
 }
 

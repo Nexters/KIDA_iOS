@@ -40,6 +40,9 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         self.diaryKeyword = PersistentStorage.shared.todayKeyword
 
         super.init(nibName: nil, bundle: nil)
+    
+        self.navigationController?.navigationItem.leftBarButtonItem?.isEnabled = false
+        
     }
 
     required init?(coder: NSCoder) {
@@ -380,7 +383,9 @@ private extension WriteDiaryViewController {
         guard let content = content else {
             return
         }
-        writeButton.isEnabled = content.contains(diaryKeyword) && (!(titleTextField.text?.isEmpty ?? true))
+        
+        // TODO: 조건 빼기
+//        writeButton.isEnabled = content.contains(diaryKeyword) && (!(titleTextField.text?.isEmpty ?? true))
         writeButton.backgroundColor = writeButton.isEnabled ? .KIDA_orange() : .KIDA_background2()
         writeButton.setTitleColor(writeButton.isEnabled ? .white : subViewTitleColor, for: .normal)
         if content.count >= 150 {
