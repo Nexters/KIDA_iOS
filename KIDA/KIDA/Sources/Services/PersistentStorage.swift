@@ -89,10 +89,13 @@ final class PersistentStorage {
     ///   - beforeDiary: 기존 일기 모델.
     ///   - afterDiary: 수정 이후 일기 모델.
     ///   - onSuccess: 성공시 `true`를, 실패시 `false`를 반환합니다.
-    func updateDiary(before beforeDiary: inout DiaryModel,
-                     after afterDiary: DiaryModel,
+    func updateDiary(before beforeDiary: inout Diary,
+                     title: String,
+                     content: String,
                      onSuccess: ((Bool) -> Void)? = nil) {
-        beforeDiary = afterDiary
+        
+        beforeDiary.setValue(title, forKey: "title")
+        beforeDiary.setValue(content, forKey: "content")
 
         do {
             try context.save()
