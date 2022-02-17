@@ -70,4 +70,3 @@ extension DiaryListCoordinator: DiaryListReactorDelegate {
         writeDiaryCoordinator.startWithEdit(diary: diary)
     }
 }
-#26    0x000000010e4c1dc8 in static UIApplicationDelegate.main() ()
