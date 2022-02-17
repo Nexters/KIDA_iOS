@@ -23,6 +23,8 @@ final class DiaryListCoordinator: Coordinatable {
     // MARK: - Methods
     func start() {
         let diaryListReactor = DiaryListViewReactor()
+        diaryListReactor.delegate = self
+        
         let diaryListViewController = DiaryListViewController()
         diaryListViewController.reactor = diaryListReactor
         navigationController.viewControllers = [diaryListViewController]
@@ -30,6 +32,8 @@ final class DiaryListCoordinator: Coordinatable {
 
     func startWithWrite() {
         let diaryListReactor = DiaryListViewReactor()
+        diaryListReactor.delegate = self
+        
         let diaryListViewController = DiaryListViewController()
         self.diaryListViewController = diaryListViewController
         diaryListViewController.reactor = diaryListReactor
@@ -55,3 +59,16 @@ extension DiaryListCoordinator {
     }
 }
 
+extension DiaryListCoordinator: DiaryListReactorDelegate {
+    func didTapGoToUpdate(diary: Diary) {
+        
+        // test
+        print("@@@@@@@@@@@ diary coordinator @@@@@@@@ \(diary)")
+        
+        let writeDiaryCoordinator = WriteDiaryCoordinator(navigationController: navigationController)
+        writeDiaryCoordinator.parentCoordinator = self
+        self.childCoordinators.append(writeDiaryCoordinator)
+        
+        writeDiaryCoordinator.startWithEdit()
+    }
+}

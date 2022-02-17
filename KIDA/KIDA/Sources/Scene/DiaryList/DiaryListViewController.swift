@@ -125,7 +125,7 @@ private extension DiaryListViewController {
                 print("diaryEntity: \(diaryEntity)")
                 
                 let editButton: Notifier.AlertButtonAction = ("수정",
-                                                              action: { print("editButton") },
+                                                              action: { reactor.action.onNext(.didTapGoToUpdate(diaryEntity)) },
                                                               style: .default)
                 
                 let deleteButton: Notifier.AlertButtonAction = ("삭제",

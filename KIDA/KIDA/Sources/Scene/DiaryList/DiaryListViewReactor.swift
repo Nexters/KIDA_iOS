@@ -7,16 +7,22 @@
 
 import Foundation
 
+protocol DiaryListReactorDelegate: AnyObject {
+    func didTapGoToUpdate(diary: Diary)
+}
+
 final class DiaryListViewReactor: Reactor {
     enum Action {
         case loadDiaryList
         case deleteDiary(Diary)
         case reloadDiaryList
+        case didTapGoToUpdate(Diary)
     }
     
     enum Mutation {
         case loadDiaryList
         case deleteDiary(Diary)
+        case didTapGoToUpdate(Diary)
         case errorMsg(String)
         
         var bindMutation: BindMutation {
@@ -25,6 +31,8 @@ final class DiaryListViewReactor: Reactor {
                 return .loadDiaryList
             case .deleteDiary:
                 return .deleteDiary
+            case .didTapGoToUpdate:
+                return .didTapGoToUpdate
             case .errorMsg:
                 return .errorMsg
             }
@@ -35,6 +43,7 @@ final class DiaryListViewReactor: Reactor {
         case initialState
         case loadDiaryList
         case deleteDiary
+        case didTapGoToUpdate
         case errorMsg
     }
 
@@ -54,6 +63,9 @@ final class DiaryListViewReactor: Reactor {
             return .just(.deleteDiary(diary))
         case .reloadDiaryList:
             return .just(.loadDiaryList)
+        case .didTapGoToUpdate(let diary):
+            return .just(.didTapGoToUpdate(diary))
+        
         }
     }
     
@@ -85,6 +97,10 @@ final class DiaryListViewReactor: Reactor {
                     newState.state = .errorMsg
                 }
             })
+            
+        case .didTapGoToUpdate(let diary):
+            delegate?.didTapGoToUpdate(diary: diary)
+            
         
         case .errorMsg(let msg):
             newState.errorMsg = msg
@@ -95,6 +111,7 @@ final class DiaryListViewReactor: Reactor {
     
     
     var initialState: State = State()
+    weak var delegate: DiaryListReactorDelegate?
 
     init(){
         action.onNext(.loadDiaryList)

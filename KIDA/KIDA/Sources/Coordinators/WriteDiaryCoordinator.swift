@@ -35,6 +35,14 @@ final class WriteDiaryCoordinator: Coordinatable {
 
         return writeDiaryViewController
     }
+    
+    func startWithEdit() {
+        let writeDiaryReactor = WriteDiaryReactor()
+        writeDiaryReactor.delegate = self
+        let writeDiaryViewController = WriteDiaryViewController(reactor: writeDiaryReactor)
+        
+        navigationController.pushViewController(writeDiaryViewController, animated: true)
+    }
 }
 
 extension WriteDiaryCoordinator: WriteDiaryReactorDelegate {
