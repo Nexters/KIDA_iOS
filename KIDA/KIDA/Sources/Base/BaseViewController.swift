@@ -41,13 +41,10 @@ class BaseViewController: UIViewController {
             $0.setImage(UIImage(named: "ic_logo"), for: .normal)
         }
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-
-        let didWrite = PersistentStorage.shared.didWriteTodayDiary()
         
         leftButton.rx.tap
-//            .filter { didWrite == false }
             .asDriver()
-            .filter { didWrite == false }
+            .filter { !(PersistentStorage.shared.didWriteTodayDiary()) }
             .drive(onNext: { [weak self] _ in
                 guard let self = self,
                       let navigationController = self.navigationController else {
