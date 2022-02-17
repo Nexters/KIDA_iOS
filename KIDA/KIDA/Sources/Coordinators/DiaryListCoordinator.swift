@@ -26,6 +26,8 @@ final class DiaryListCoordinator: Coordinatable {
         diaryListReactor.delegate = self
         
         let diaryListViewController = DiaryListViewController()
+        self.diaryListViewController = diaryListViewController
+        
         diaryListViewController.reactor = diaryListReactor
         navigationController.viewControllers = [diaryListViewController]
     }
@@ -68,3 +70,4 @@ extension DiaryListCoordinator: DiaryListReactorDelegate {
         writeDiaryCoordinator.startWithEdit(diary: diary)
     }
 }
+#26    0x000000010e4c1dc8 in static UIApplicationDelegate.main() ()
