@@ -14,16 +14,24 @@ protocol WriteDiaryReactorDelegate: AnyObject {
 final class WriteDiaryReactor: Reactor {
 
     enum Action {
+        case setTitle(String)
+        case setContent(String)
         case didTapWriteButton(_ diary: DiaryModel, didSuccess: Bool)
         case setEditDiary(DiaryModel)
     }
     
     enum Mutation {
+        case setTitle(String)
+        case setContent(String)
         case didTapWriteButton(_ diary: DiaryModel, didSuccess: Bool)
         case setEditDiary(DiaryModel)
         
         var bindMutation: BindMutation {
             switch self {
+            case .setTitle:
+                return .setTitle
+            case .setContent:
+                return .setContent
             case .didTapWriteButton:
                 return .didTapWriteButton
             case .setEditDiary:
@@ -34,6 +42,8 @@ final class WriteDiaryReactor: Reactor {
     
     enum BindMutation {
         case initialState
+        case setTitle
+        case setContent
         case didTapWriteButton
         case setEditDiary
     }
@@ -42,11 +52,13 @@ final class WriteDiaryReactor: Reactor {
         var state: BindMutation = .initialState
         
         var didSuccessCreateDiary: Bool = false
+        var isEditing: Bool = false
         
         var diary: DiaryModel?
         var keyword: String?
         var title: String?
         var content: String?
+        var createdAt: Date?
     }
 
     // MARK: - Properties
@@ -57,8 +69,12 @@ final class WriteDiaryReactor: Reactor {
     init(isEditing: Bool? = false, diary: DiaryModel? = nil) {
         self.initialState = State()
         
+        guard let isEditing = isEditing else { return }
+        guard let diary = diary else { return }
+
+        initialState.isEditing = isEditing
+        
         if isEditing == true {
-            guard let diary = diary else { return }
             action.onNext(.setEditDiary(diary))
         }
     }
@@ -69,6 +85,10 @@ final class WriteDiaryReactor: Reactor {
         var didSuccessCreate: Bool = false
         
         switch action {
+        case .setTitle(let title):
+            return .just(.setTitle(title))
+        case .setContent(let content):
+            return .just(.setContent(content))
         case .didTapWriteButton(let diary, _):
             PersistentStorage.shared.createDiary(diary, onSuccess: { success in
                 didSuccessCreate = success
@@ -84,6 +104,12 @@ final class WriteDiaryReactor: Reactor {
         newState.state = mutation.bindMutation
         
         switch mutation {
+        case .setTitle(let title):
+            newState.title = title
+        case .setContent(let content):
+            newState.content = content
+            print("@@@@@@@ newstate content: \(newState.content)")
+            
         case .didTapWriteButton(_, let didSuccess):
             newState.didSuccessCreateDiary = didSuccess
             if didSuccess {
@@ -94,35 +120,9 @@ final class WriteDiaryReactor: Reactor {
             newState.keyword = diary.keyword
             newState.title = diary.title
             newState.content = diary.content
+            newState.createdAt = diary.createdAt
         }
         
         return newState
     }
-    
-
-//    func mutate(action: Action) -> Observable<Action> {
-//        var didSuccessCreate: Bool = false
-//
-//        switch action {
-//        case .didTapWriteButton(let diary, _):
-//            PersistentStorage.shared.createDiary(diary, onSuccess: { success in
-//                didSuccessCreate = success
-//            })
-//            return Observable.just(.didTapWriteButton(diary, didSuccess: didSuccessCreate))
-//        }
-//    }
-//
-//    func reduce(state: State, mutation: Action) -> State {
-//        var newState = state
-//        switch mutation {
-//        case .didTapWriteButton(_, let didSuccess):
-//            newState.didSuccessCreateDiary = didSuccess
-//            if didSuccess {
-//                // 리스트뷰로 화면 전환 예정
-//                self.delegate?.didWriteDiary()
-//            }
-//        }
-//
-//        return newState
-//    }
 }

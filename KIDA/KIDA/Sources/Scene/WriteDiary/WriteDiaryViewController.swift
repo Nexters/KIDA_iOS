@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum TextViewEditingStatus {
+    case didBegin
+    case didEnd
+}
+
 final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
     // MARK: - Properties
@@ -44,48 +49,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bind(reactor: reactor)
-
-        contentTextView.rx.didBeginEditing
-            .asDriver()
-            .do(onNext: { [weak self] _ in
-                self?.textVieweditingAnimation(.didBegin)
-            })
-            .compactMap { [weak self] _ in self?.contentTextView.text }
-            .filter(isPlaceHolderString(_:))
-            .drive(onNext: { [weak self] _ in
-                self?.contentTextView.text = nil
-                self?.contentTextView.textColor = .white
-            })
-            .disposed(by: disposeBag)
-
-        contentTextView.rx.didEndEditing
-            .asDriver()
-            .do(onNext: { [weak self] _ in
-                self?.textVieweditingAnimation(.didEnd)
-            })
-            .compactMap { [weak self] _ in self?.contentTextView.text }
-            .filter(isEmptyTextView(_:))
-            .drive(onNext: { [weak self] _ in
-                self?.contentTextView.text = KIDA_String.WriteDiary.contentTextViewPlaceholder
-                self?.contentTextView.textColor = .lightGray
-            })
-            .disposed(by: disposeBag)
-
-        tapGestureRecognizer.rx.event
-            .asDriver()
-            .map { $0.state == .recognized }
-            .drive(onNext: { [weak self] _ in
-                self?.view.endEditing(true)
-            })
-            .disposed(by: disposeBag)
-
-        contentTextView.rx.text
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.checkContentCondition($0)
-            })
-            .disposed(by: disposeBag)
+        bind(reactor: reactor) // TODO: 추후에 수정
     }
 
     override func setupViews() {
@@ -160,15 +124,12 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
         self.contentTextView = UITextView().then {
             $0.textAlignment = .left
-            $0.text = KIDA_String.WriteDiary.contentTextViewPlaceholder
             $0.font = .pretendard(size: 15)
-            $0.textColor = .lightGray
             $0.backgroundColor = .clear
             contentView.addSubview($0)
         }
 
         self.writeButton = UIButton().then {
-            $0.setTitle(KIDA_String.WriteDiary.writeButtonTitle, for: .normal)
             $0.backgroundColor = .init(red: 0.43, green: 0.43, blue: 0.43, alpha: 1)
             $0.setTitleColor(subViewTitleColor, for: .normal)
             $0.titleLabel?.font = .pretendard(size: 18)
@@ -265,16 +226,66 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 }
 
 private extension WriteDiaryViewController {
-    enum TextViewEditingStatus {
-        case didBegin
-        case didEnd
-    }
-
     func bindAction(reactor: WriteDiaryReactor) {
+        titleTextField.rx.controlEvent(.editingChanged)
+            .withLatestFrom(titleTextField.rx.text.orEmpty)
+            .map { Reactor.Action.setTitle($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+//        contentTextView.rx.didChange
+//            .map { [weak self] _ in self?.contentTextView.text }
+//            .map { Reactor.Action.setContent($0 ?? "") }
+//            .bind(to: reactor.action)
+//            .disposed(by: disposeBag)
+        
+        contentTextView.rx.didBeginEditing
+            .asDriver()
+            .do(onNext: { [weak self] _ in
+                self?.textVieweditingAnimation(.didBegin)
+            })
+            .compactMap { [weak self] _ in self?.contentTextView.text }
+            .filter { [weak self] text in
+                self?.isPlaceHolderString(text) == true
+            }
+            .drive(onNext: { [weak self] _ in
+                self?.contentTextView.text = nil
+                self?.contentTextView.textColor = .white
+            })
+            .disposed(by: disposeBag)
+            
+        contentTextView.rx.didEndEditing
+            .asDriver()
+            .do(onNext: { [weak self] _ in
+                self?.textVieweditingAnimation(.didEnd)
+            })
+            .compactMap { [weak self] _ in self?.contentTextView.text }
+            .filter(isEmptyTextView(_:))
+            .drive(onNext: { [weak self] _ in
+                self?.contentTextView.text = KIDA_String.WriteDiary.contentTextViewPlaceholder
+                self?.contentTextView.textColor = .lightGray
+            })
+            .disposed(by: disposeBag)
+        
         writeButton.rx.tap
             .map(makeDiary)
             .map { WriteDiaryReactor.Action.didTapWriteButton($0, didSuccess: false) }
             .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        tapGestureRecognizer.rx.event
+            .asDriver()
+            .map { $0.state == .recognized }
+            .drive(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+
+        contentTextView.rx.text
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.checkContentCondition($0)
+            })
             .disposed(by: disposeBag)
     }
 
@@ -297,11 +308,43 @@ private extension WriteDiaryViewController {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.content }
-            .filter { $0 != nil }
+            .map { $0.isEditing }
+            .filter { $0 == false }
+            .map { _ in KIDA_String.WriteDiary.contentTextViewPlaceholder }
             .bind(to: contentTextView.rx.text)
             .disposed(by: disposeBag)
         
+        reactor.state
+            .map { $0.isEditing }
+            .filter { $0 == false }
+            .subscribe(onNext: { [weak self] _ in
+                self?.contentTextView.text = KIDA_String.WriteDiary.contentTextViewPlaceholder
+                self?.contentTextView.textColor = .lightGray // TODO: 추후에 컬러 수정
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { ($0.isEditing, $0.content) }
+            .filter { $0.0 == true }
+            .subscribe(onNext: { [weak self] (_, content) in
+                self?.contentTextView.text = content
+                self?.contentTextView.textColor = .white
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isEditing }
+            .filter { $0 == true }
+            .map { _ in KIDA_String.WriteDiary.writeButtonEditTitle }
+            .bind(to: writeButton.rx.title())
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isEditing }
+            .filter { $0 == false }
+            .map { _ in KIDA_String.WriteDiary.writeButtonCompleteTitle }
+            .bind(to: writeButton.rx.title())
+            .disposed(by: disposeBag)
     }
 
     func isPlaceHolderString(_ string: String) -> Bool {
@@ -345,3 +388,4 @@ private extension WriteDiaryViewController {
         }
     }
 }
+
