@@ -61,14 +61,10 @@ extension DiaryListCoordinator {
 
 extension DiaryListCoordinator: DiaryListReactorDelegate {
     func didTapGoToUpdate(diary: Diary) {
-        
-        // test
-        print("@@@@@@@@@@@ diary coordinator @@@@@@@@ \(diary)")
-        
         let writeDiaryCoordinator = WriteDiaryCoordinator(navigationController: navigationController)
         writeDiaryCoordinator.parentCoordinator = self
         self.childCoordinators.append(writeDiaryCoordinator)
         
-        writeDiaryCoordinator.startWithEdit()
+        writeDiaryCoordinator.startWithEdit(diary: diary)
     }
 }

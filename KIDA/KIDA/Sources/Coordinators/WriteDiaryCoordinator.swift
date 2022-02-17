@@ -36,8 +36,13 @@ final class WriteDiaryCoordinator: Coordinatable {
         return writeDiaryViewController
     }
     
-    func startWithEdit() {
-        let writeDiaryReactor = WriteDiaryReactor()
+    func startWithEdit(diary: Diary) {
+        let diaryModel: DiaryModel = DiaryModel(content: diary.content ?? "",
+                                                createdAt: diary.createdAt ?? Date(),
+                                                keyword: diary.keyword ?? "",
+                                                title: diary.title ?? "")
+        
+        let writeDiaryReactor = WriteDiaryReactor(isEditing: true, diary: diaryModel)
         writeDiaryReactor.delegate = self
         let writeDiaryViewController = WriteDiaryViewController(reactor: writeDiaryReactor)
         

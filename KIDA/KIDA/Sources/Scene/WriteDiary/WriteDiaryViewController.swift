@@ -283,6 +283,25 @@ private extension WriteDiaryViewController {
             .map { $0.didSuccessCreateDiary }
             .subscribe()
             .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.keyword }
+            .filter { $0 != nil }
+            .bind(to: pickedKeywordLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.title }
+            .filter { $0 != nil }
+            .bind(to: titleTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.content }
+            .filter { $0 != nil }
+            .bind(to: contentTextView.rx.text)
+            .disposed(by: disposeBag)
+        
     }
 
     func isPlaceHolderString(_ string: String) -> Bool {
