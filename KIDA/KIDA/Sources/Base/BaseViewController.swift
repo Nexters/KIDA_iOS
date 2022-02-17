@@ -42,8 +42,12 @@ class BaseViewController: UIViewController {
         }
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
 
+        let didWrite = PersistentStorage.shared.didWriteTodayDiary()
+        
         leftButton.rx.tap
+//            .filter { didWrite == false }
             .asDriver()
+            .filter { didWrite == false }
             .drive(onNext: { [weak self] _ in
                 guard let self = self,
                       let navigationController = self.navigationController else {

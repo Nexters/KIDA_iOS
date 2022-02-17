@@ -35,7 +35,8 @@ enum KIDA_String {
         static let titlePlaceholder = "공백 포함 20자"
         static let contentLabel = "내용"
         static let contentTextViewPlaceholder = "공백 포함 150자"
-        static let writeButtonTitle = "작성 완료"
+        static let writeButtonCompleteTitle = "작성 완료"
+        static let writeButtonEditTitle = "수정 완료"
     }
 
     /// DiaryListViewController 에서 사용하는 문자열을 관리합니다.

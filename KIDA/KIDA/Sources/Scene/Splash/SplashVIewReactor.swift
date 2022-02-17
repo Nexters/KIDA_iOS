@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol SplashViewReactorDelegate: AnyObject {
-    func showKeywordSelect()
+    func showNext()
 }
 
 final class SplashViewReactor: Reactor {
@@ -33,7 +33,7 @@ final class SplashViewReactor: Reactor {
         case .showKeywordSelect:
             return Observable<Action>.just(.showKeywordSelect)
                 .do(onNext: { [weak self] _ in
-                    self?.delegate?.showKeywordSelect()
+                    self?.delegate?.showNext()
                 })
         }
     }

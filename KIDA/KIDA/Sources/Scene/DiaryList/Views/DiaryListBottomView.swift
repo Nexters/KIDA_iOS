@@ -38,7 +38,7 @@ final class DiaryListBottomView: UIView {
 extension DiaryListBottomView {
     private func setupViews(){
         wholeView = UIView().then {
-            $0.backgroundColor = UIColor.init(red: 0.23, green: 0.23, blue: 0.23, alpha: 1)
+            $0.backgroundColor = .KIDA_background4() // TODO: 색상 변경하기
             $0.layer.cornerRadius = 10
             $0.layer.cornerRadius = 10
             $0.clipsToBounds = true
@@ -48,7 +48,7 @@ extension DiaryListBottomView {
         
         contentLabel = UILabel().then {
             $0.textColor = .white
-            $0.font = .systemFont(ofSize: 14)
+            $0.font = .pretendard(size: 14)
             $0.numberOfLines = 0
             addSubview($0)
         }

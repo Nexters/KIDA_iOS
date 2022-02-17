@@ -52,7 +52,7 @@ final class DiaryListTopView: UIView {
 extension DiaryListTopView {
     private func setupViews(){
         wholeView = UIView().then {
-            $0.backgroundColor = UIColor.init(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+            $0.backgroundColor = .KIDA_background2()
             $0.layer.cornerRadius = 10
             $0.clipsToBounds = true
             $0.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -61,19 +61,19 @@ extension DiaryListTopView {
         
         keywordLabel = UILabel().then {
             $0.textColor = .KIDA_orange()
-            $0.font = .systemFont(ofSize: 12)
+            $0.font = .pretendard(size: 12)
             addSubview($0)
         }
         
         dateLabel = UILabel().then {
             $0.textColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
-            $0.font = .systemFont(ofSize: 12)
+            $0.font = .pretendard(size: 12)
             addSubview($0)
         }
         
         titleLabel = UILabel().then {
             $0.textColor = .white
-            $0.font = .systemFont(ofSize: 16)
+            $0.font = .pretendard(size: 16)
             addSubview($0)
         }
     }

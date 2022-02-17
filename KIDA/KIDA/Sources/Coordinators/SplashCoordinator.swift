@@ -30,14 +30,33 @@ final class SplashCoordinator: Coordinatable {
 }
 
 extension SplashCoordinator: SplashViewReactorDelegate {
-    func showKeywordSelect() {
+    func showNext() {
         navigationController.navigationBar.isHidden = false
-
-        // TODO: 일기 작성 여부 체크 이후 이미 작성했다면 DiaryListCooridnator.start 호출
+        
+        let didWrite = PersistentStorage.shared.didWriteTodayDiary()
+        
+        if didWrite {
+            showDiaryList()
+        } else {
+            showKeywordSelect()
+        }
+    }
+    
+    func showKeywordSelect(){
         let keywordSelectCoordinator = KeywordSelectCoordinator(navigationController: navigationController)
         keywordSelectCoordinator.parentCoordinator = self
         self.childCoordinators.append(keywordSelectCoordinator)
 
         keywordSelectCoordinator.start()
+    }
+    
+    func showDiaryList(){
+        
+        let diaryListCoordinator = DiaryListCoordinator(navigationController: navigationController)
+        diaryListCoordinator.parentCoordinator = self
+        self.childCoordinators.append(diaryListCoordinator)
+        
+        diaryListCoordinator.start()
+        
     }
 }
