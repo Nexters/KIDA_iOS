@@ -30,7 +30,7 @@ final class SplashCoordinator: Coordinatable {
 }
 
 extension SplashCoordinator: SplashViewReactorDelegate {
-    func showNext() {
+    func showNextScene() {
         navigationController.navigationBar.isHidden = false
         
         let didWrite = PersistentStorage.shared.didWriteTodayDiary()
