@@ -36,19 +36,13 @@ final class WriteDiaryCoordinator: Coordinatable {
         return writeDiaryViewController
     }
     
-    func startWithEdit(diary: Diary) {
-        let diaryModel: DiaryModel = DiaryModel(content: diary.content ?? "",
-                                                createdAt: diary.createdAt ?? Date(),
-                                                keyword: diary.keyword ?? "",
-                                                title: diary.title ?? "")
-        
-        let writeDiaryReactor = WriteDiaryReactor(isEditing: true, diary: diaryModel)
+    func startWithEdit(diary: Diary) {        
+        let writeDiaryReactor = WriteDiaryReactor(isEditing: true, diary: diary)
         writeDiaryReactor.delegate = self
         let writeDiaryViewController = WriteDiaryViewController(reactor: writeDiaryReactor)
 
         let writeDiaryNavigationController = UINavigationController(rootViewController: writeDiaryViewController)
         writeDiaryNavigationController.modalPresentationStyle = .overFullScreen
-        
         navigationController.topViewController?.present(writeDiaryNavigationController, animated: true, completion: nil)
     }
 }

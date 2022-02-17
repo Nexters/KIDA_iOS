@@ -8,8 +8,8 @@
 import Foundation
 
 struct DiaryModel {
-    let content: String
+    var content: String
     let createdAt: Date
     let keyword: String
-    let title: String
+    var title: String
 }

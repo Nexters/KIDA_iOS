@@ -230,18 +230,6 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
 
 private extension WriteDiaryViewController {
     func bindAction(reactor: WriteDiaryReactor) {
-        titleTextField.rx.controlEvent(.editingChanged)
-            .withLatestFrom(titleTextField.rx.text.orEmpty)
-            .map { Reactor.Action.setTitle($0) }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-//        contentTextView.rx.didChange
-//            .map { [weak self] _ in self?.contentTextView.text }
-//            .map { Reactor.Action.setContent($0 ?? "") }
-//            .bind(to: reactor.action)
-//            .disposed(by: disposeBag)
-        
         contentTextView.rx.didBeginEditing
             .asDriver()
             .do(onNext: { [weak self] _ in
@@ -271,8 +259,15 @@ private extension WriteDiaryViewController {
             .disposed(by: disposeBag)
         
         writeButton.rx.tap
+            .filter { reactor.currentState.isEditing == false }
             .map(makeDiary)
             .map { WriteDiaryReactor.Action.didTapWriteButton($0, didSuccess: false) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        writeButton.rx.tap
+            .filter { reactor.currentState.isEditing == true }
+            .map { Reactor.Action.updateDiary(title: self.titleTextField.text ?? "", content: self.contentTextView.text ?? "") }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         

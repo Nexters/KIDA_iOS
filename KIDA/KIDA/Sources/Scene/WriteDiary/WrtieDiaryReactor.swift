@@ -14,38 +14,33 @@ protocol WriteDiaryReactorDelegate: AnyObject {
 final class WriteDiaryReactor: Reactor {
 
     enum Action {
-        case setTitle(String)
-        case setContent(String)
         case didTapWriteButton(_ diary: DiaryModel, didSuccess: Bool)
-        case setEditDiary(DiaryModel)
+        case setEditDiaryData(Diary)
+        case updateDiary(title: String, content: String)
     }
     
     enum Mutation {
-        case setTitle(String)
-        case setContent(String)
         case didTapWriteButton(_ diary: DiaryModel, didSuccess: Bool)
-        case setEditDiary(DiaryModel)
+        case setEditDiaryData(Diary)
+        case updateDiary(title: String, content: String)
         
         var bindMutation: BindMutation {
             switch self {
-            case .setTitle:
-                return .setTitle
-            case .setContent:
-                return .setContent
             case .didTapWriteButton:
                 return .didTapWriteButton
-            case .setEditDiary:
-                return .setEditDiary
+            case .setEditDiaryData:
+                return .setEditDiaryData
+            case .updateDiary:
+                return .updateDiary
             }
         }
     }
     
     enum BindMutation {
         case initialState
-        case setTitle
-        case setContent
         case didTapWriteButton
-        case setEditDiary
+        case setEditDiaryData
+        case updateDiary
     }
 
     struct State {
@@ -54,7 +49,7 @@ final class WriteDiaryReactor: Reactor {
         var didSuccessCreateDiary: Bool = false
         var isEditing: Bool = false
         
-        var diary: DiaryModel?
+        var diary: Diary?
         var keyword: String?
         var title: String?
         var content: String?
@@ -66,16 +61,17 @@ final class WriteDiaryReactor: Reactor {
     weak var delegate: WriteDiaryReactorDelegate?
 
     // MARK: - Initializer
-    init(isEditing: Bool? = false, diary: DiaryModel? = nil) {
+    init(isEditing: Bool? = false, diary: Diary? = nil) {
         self.initialState = State()
         
         guard let isEditing = isEditing else { return }
         guard let diary = diary else { return }
 
         initialState.isEditing = isEditing
+        initialState.diary = diary
         
         if isEditing == true {
-            action.onNext(.setEditDiary(diary))
+            action.onNext(.setEditDiaryData(diary))
         }
     }
 
@@ -85,17 +81,15 @@ final class WriteDiaryReactor: Reactor {
         var didSuccessCreate: Bool = false
         
         switch action {
-        case .setTitle(let title):
-            return .just(.setTitle(title))
-        case .setContent(let content):
-            return .just(.setContent(content))
         case .didTapWriteButton(let diary, _):
             PersistentStorage.shared.createDiary(diary, onSuccess: { success in
                 didSuccessCreate = success
             })
             return .just(.didTapWriteButton(diary, didSuccess: didSuccessCreate))
-        case .setEditDiary(let diary):
-            return .just(.setEditDiary(diary))
+        case .setEditDiaryData(let diary):
+            return .just(.setEditDiaryData(diary))
+        case .updateDiary(let title, let content):
+            return .just(.updateDiary(title: title, content: content))
         }
     }
     
@@ -104,23 +98,28 @@ final class WriteDiaryReactor: Reactor {
         newState.state = mutation.bindMutation
         
         switch mutation {
-        case .setTitle(let title):
-            newState.title = title
-        case .setContent(let content):
-            newState.content = content
-            print("@@@@@@@ newstate content: \(newState.content)")
-            
         case .didTapWriteButton(_, let didSuccess):
             newState.didSuccessCreateDiary = didSuccess
             if didSuccess {
                 // 리스트뷰로 화면 전환 예정
                 self.delegate?.didWriteDiary()
             }
-        case .setEditDiary(let diary):
+        case .setEditDiaryData(let diary):
             newState.keyword = diary.keyword
             newState.title = diary.title
             newState.content = diary.content
             newState.createdAt = diary.createdAt
+        case .updateDiary(let title, let content):
+            newState.title = title
+            newState.content = content
+            
+            var beforeDiary: Diary = newState.diary ?? Diary()
+
+            PersistentStorage.shared.updateDiary(before: &beforeDiary, title: title, content: content, onSuccess: { onSuccess in
+                print("onSuccess: \(onSuccess)")
+            })
+            
+            delegate?.didWriteDiary()
         }
         
         return newState
