@@ -92,10 +92,19 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.alpha = 0
         }
         
+        let config = FlexiblePageControl.Config(
+            displayCount: 7,
+            dotSize: 6,
+            dotSpace: 6,
+            smallDotSizeRatio: 0.5,
+            mediumDotSizeRatio: 0.7
+        )
+        
         pageControl = FlexiblePageControl().then {
             $0.numberOfPages = self.keywordCount
             $0.pageIndicatorTintColor = .white
             $0.currentPageIndicatorTintColor = .KIDA_orange()
+            $0.setConfig(config)
             headerView.addSubview($0)
         }
     }
@@ -134,6 +143,8 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         pageControl.snp.makeConstraints {
             $0.leading.equalTo(headerView.snp.leading)
             $0.bottom.equalTo(headerView.snp.bottom)
+            $0.width.equalTo(78)
+            $0.height.equalTo(6)
         }
         
         collectionView.snp.makeConstraints {
