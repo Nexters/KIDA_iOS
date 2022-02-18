@@ -50,7 +50,12 @@ class BaseViewController: UIViewController {
                       let navigationController = self.navigationController else {
                           return
                       }
-                self.startKeywordSelect(presenter: navigationController)
+
+                if navigationController.topViewController is SelectedKeywordViewController {
+                    navigationController.popViewController(animated: true)
+                } else {
+                    self.startKeywordSelect(presenter: navigationController)
+                }
             })
             .disposed(by: disposeBag)
     }
