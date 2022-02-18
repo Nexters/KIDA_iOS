@@ -81,7 +81,10 @@ final class DiaryListViewReactor: Reactor {
             print("@@@ diaryList: \(diaryList)")
             
             for diary in diaryList {
-                diaryModelList.append(DiaryModel(content: diary.content ?? "", createdAt: diary.createdAt ?? Date(), keyword: diary.keyword ?? "", title: diary.title ?? ""))
+                diaryModelList.append(DiaryModel(content: diary.content ?? "",
+                                                 createdAt: diary.createdAt ?? Date(),
+                                                 keyword: diary.keyword ?? "",
+                                                 title: diary.title ?? ""))
             }
             
             newState.sections = sections(list: diaryModelList)

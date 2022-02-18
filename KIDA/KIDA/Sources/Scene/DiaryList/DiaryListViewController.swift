@@ -48,7 +48,7 @@ final class DiaryListViewController: BaseViewController, ServiceDependency {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .KIDA_background()
 //        tableView.allowsSelection = false
-        
+
         view.addSubview(tableView)
     }
 
@@ -77,7 +77,6 @@ private extension DiaryListViewController {
         
         reactor.state
             .map { $0.sections }
-            .filter { !$0.isEmpty }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
@@ -88,20 +87,19 @@ private extension DiaryListViewController {
                 guard let self = self else { return }
                 
                 let okButton: Notifier.AlertButtonAction = ("확인",
-                                                              action: nil,
-                                                              style: .default)
+                                                            action: nil,
+                                                            style: .default)
                 Notifier.alert(on: self,
                                title: "오류 발생",
                                message: msg,
                                buttons: [okButton])
             })
             .disposed(by: disposeBag)
-            
-        
+
+
     }
 
     func bindAction(reactor: DiaryListViewReactor){
-        
         tableView.rx.modelSelected(DiaryListSectionItem.self)
             .map { item -> DiaryListCellReactor in
                 switch item {
@@ -114,7 +112,7 @@ private extension DiaryListViewController {
                 
                 let diaryModel: DiaryModel = model.initialState.diary
                 var diaryEntity: Diary = Diary()
-            
+
                 let diaries: [Diary] = PersistentStorage.shared.getAllDiary()
                 for diary in diaries {
                     if diaryModel.createdAt == diary.createdAt {
@@ -129,18 +127,25 @@ private extension DiaryListViewController {
                                                               style: .default)
                 
                 let deleteButton: Notifier.AlertButtonAction = ("삭제",
-                                                                action: {
-                                                                    reactor.action.onNext(.deleteDiary(diaryEntity))
-                                                                    reactor.action.onNext(.reloadDiaryList)
-                                                                }, style: .destructive)
+                                                                action: { reactor.action.onNext(.deleteDiary(diaryEntity))
+                                                                reactor.action.onNext(.reloadDiaryList) },
+                                                                style: .destructive)
+
+                let cancelButton: Notifier.AlertButtonAction = ("취소",
+                                                                action: nil,
+                                                                style: .default)
                 
                 Notifier.alert(on: self,
                                title: "수정 / 삭제하기",
                                message: nil,
-                               buttons: [editButton, deleteButton])
-                
+                               buttons: [editButton, deleteButton, cancelButton])
             })
             .disposed(by: disposeBag)
-        
+
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
