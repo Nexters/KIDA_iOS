@@ -92,10 +92,19 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.alpha = 0
         }
         
+        let config = FlexiblePageControl.Config(
+            displayCount: 7,
+            dotSize: 6,
+            dotSpace: 6,
+            smallDotSizeRatio: 0.5,
+            mediumDotSizeRatio: 0.7
+        )
+        
         pageControl = FlexiblePageControl().then {
             $0.numberOfPages = self.keywordCount
             $0.pageIndicatorTintColor = .white
             $0.currentPageIndicatorTintColor = .KIDA_orange()
+            $0.setConfig(config)
             headerView.addSubview($0)
         }
     }
@@ -134,6 +143,8 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         pageControl.snp.makeConstraints {
             $0.leading.equalTo(headerView.snp.leading)
             $0.bottom.equalTo(headerView.snp.bottom)
+            $0.width.equalTo(78)
+            $0.height.equalTo(6)
         }
         
         collectionView.snp.makeConstraints {
@@ -223,32 +234,33 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
             index = Int(round(estimatedIndex))
         }
         
+        // MARK: page control event
+        
         self.pageControl.setCurrentPage(at: index)
+        
+        // MARK: cell drag event
+        
+        let indexPath: IndexPath = IndexPath(item: index, section: 0)
+        let cells = collectionView.visibleCells
+        for cell in cells {
+            cell.isSelected = false
+        }
+        
+        guard let selectCell = collectionView.cellForItem(at: indexPath) as? KeywordSelectCell else { return }
+        
+        selectedCardIndexRelay.accept(indexPath.item)
+        selectCell.isSelected = !selectCell.isSelected
+        didTouchCard(true)
+        
+        // MARK: 셀 위치 조정
 
         var xPoint = CGFloat(index) * cellWidthIncludingSpacing
         xPoint -= 40
         
         targetContentOffset.pointee = CGPoint(x: xPoint,
                                               y: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let cells = collectionView.visibleCells
-
-        for cell in cells {
-            cell.isSelected = false
-        }
-
-        guard let selectCell = collectionView.cellForItem(at: indexPath) as? KeywordSelectCell else {
-            fatalError()
-        }
-
-        didTouchCard(true)
-        selectedCardIndexRelay.accept(indexPath.item)
-        selectCell.isSelected = !selectCell.isSelected
     }
-    
 }
 
 private extension KeywordSelectViewController {

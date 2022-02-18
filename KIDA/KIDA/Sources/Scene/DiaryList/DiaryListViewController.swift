@@ -120,8 +120,6 @@ private extension DiaryListViewController {
                     }
                 }
                 
-                print("diaryEntity: \(diaryEntity)")
-                
                 let editButton: Notifier.AlertButtonAction = ("수정",
                                                               action: { reactor.action.onNext(.didTapGoToUpdate(diaryEntity)) },
                                                               style: .default)
