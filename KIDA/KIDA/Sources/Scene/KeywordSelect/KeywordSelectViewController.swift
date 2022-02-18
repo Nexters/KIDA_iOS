@@ -223,32 +223,33 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
             index = Int(round(estimatedIndex))
         }
         
+        // MARK: page control event
+        
         self.pageControl.setCurrentPage(at: index)
+        
+        // MARK: cell drag event
+        
+        let indexPath: IndexPath = IndexPath(item: index, section: 0)
+        let cells = collectionView.visibleCells
+        for cell in cells {
+            cell.isSelected = false
+        }
+        
+        guard let selectCell = collectionView.cellForItem(at: indexPath) as? KeywordSelectCell else { return }
+        
+        selectedCardIndexRelay.accept(indexPath.item)
+        selectCell.isSelected = !selectCell.isSelected
+        didTouchCard(true)
+        
+        // MARK: 셀 위치 조정
 
         var xPoint = CGFloat(index) * cellWidthIncludingSpacing
         xPoint -= 40
         
         targetContentOffset.pointee = CGPoint(x: xPoint,
                                               y: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let cells = collectionView.visibleCells
-
-        for cell in cells {
-            cell.isSelected = false
-        }
-
-        guard let selectCell = collectionView.cellForItem(at: indexPath) as? KeywordSelectCell else {
-            fatalError()
-        }
-
-        didTouchCard(true)
-        selectedCardIndexRelay.accept(indexPath.item)
-        selectCell.isSelected = !selectCell.isSelected
     }
-    
 }
 
 private extension KeywordSelectViewController {
