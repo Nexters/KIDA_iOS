@@ -4,9 +4,9 @@ NEXTERS 20th 일기 서비스 - iOS
 
 [AppStore Link](https://apps.apple.com/app/kida/id1610539797) <br/>
 
-<img src="https://user-images.githubusercontent.com/33051018/154844642-57a6ce6d-bd87-4269-a340-1e80a4a3bea8.jpg"  width="60%" height="40%"/><br/><br/> 
+<img src="https://user-images.githubusercontent.com/33051018/154844642-57a6ce6d-bd87-4269-a340-1e80a4a3bea8.jpg"  width="62%" height="40%"/><br/>
 
-<img src="https://user-images.githubusercontent.com/33051018/154844297-8422e37c-1c0f-4388-895b-b330b2901dee.jpg"  width="200" height="20%"/>,
+<img src="https://user-images.githubusercontent.com/33051018/154844297-8422e37c-1c0f-4388-895b-b330b2901dee.jpg"  width="20%" height="20%"/>,
 <img src="https://user-images.githubusercontent.com/33051018/154844460-71848bbb-10b2-4ca8-8e8a-48441fbc4ee8.jpg"  width="20%" height="20%"/>,
 <img src="https://user-images.githubusercontent.com/33051018/154844477-55b53182-8c75-44be-998a-9d1618e58bac.jpg"  width="20%" height="20%"/><br/>
 <img src="https://user-images.githubusercontent.com/33051018/154844556-a17c1c05-70b9-4d5a-8de3-d2b4ec0c0538.jpg"  width="20%" height="20%"/>,
