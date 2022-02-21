@@ -233,7 +233,7 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
         } else {
             index = Int(round(estimatedIndex))
         }
-        
+
         // MARK: page control event
         
         self.pageControl.setCurrentPage(at: index)
@@ -259,7 +259,6 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
         
         targetContentOffset.pointee = CGPoint(x: xPoint,
                                               y: 0)
-        
     }
 }
 
