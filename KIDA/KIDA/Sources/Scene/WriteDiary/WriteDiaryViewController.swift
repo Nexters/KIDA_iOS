@@ -107,7 +107,7 @@ final class WriteDiaryViewController: BaseViewController, ServiceDependency {
         self.titleTextField = UITextField().then {
             $0.attributedPlaceholder = NSAttributedString(string: KIDA_String.WriteDiary.titlePlaceholder,
                                                           attributes: [.foregroundColor: UIColor.lightGray])
-            $0.font = .pretendard(size: 17)
+            $0.font = .pretendard(size: 15)
             $0.textColor = .white
             titleView.addSubview($0)
         }
@@ -285,6 +285,15 @@ private extension WriteDiaryViewController {
                 self?.checkContentCondition($0)
             })
             .disposed(by: disposeBag)
+
+        titleTextField.rx.text
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                if ($0?.count ?? 0) > 20 {
+                    self?.titleTextField.text = String($0?.prefix(20) ?? "")
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     func bindState(reactor: WriteDiaryReactor) {
@@ -307,7 +316,7 @@ private extension WriteDiaryViewController {
         
         reactor.state
             .map { $0.isEditing }
-            .filter { $0 == false }
+            .filter { !($0) }
             .map { _ in KIDA_String.WriteDiary.contentTextViewPlaceholder }
             .bind(to: contentTextView.rx.text)
             .disposed(by: disposeBag)
@@ -378,9 +387,7 @@ private extension WriteDiaryViewController {
         guard let content = content else {
             return
         }
-        
-        // TODO: 조건 빼기
-//        writeButton.isEnabled = content.contains(diaryKeyword) && (!(titleTextField.text?.isEmpty ?? true))
+
         writeButton.backgroundColor = writeButton.isEnabled ? .KIDA_orange() : .KIDA_background2()
         writeButton.setTitleColor(writeButton.isEnabled ? .white : subViewTitleColor, for: .normal)
         if content.count >= 150 {
