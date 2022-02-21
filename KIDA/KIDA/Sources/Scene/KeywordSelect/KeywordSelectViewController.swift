@@ -8,7 +8,7 @@
 import UIKit
 import RxDataSources
 import RxCocoa
-import FlexiblePageControl
+import AdvancedPageControl
 
 final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 
@@ -23,7 +23,8 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     private weak var titleLabelTwo: UILabel!
     private weak var selectButton: UIButton!
     private weak var keywordTooltip: KeywordToolTipView!
-    private weak var pageControl: FlexiblePageControl!
+    private weak var pageControl: AdvancedPageControlView!
+    
     private var collectionView: UICollectionView!
     private let selectedCardIndexRelay = BehaviorRelay<Int>(value: 0)
     
@@ -92,19 +93,20 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
             $0.alpha = 0
         }
         
-        let config = FlexiblePageControl.Config(
-            displayCount: 7,
-            dotSize: 6,
-            dotSpace: 6,
-            smallDotSizeRatio: 0.5,
-            mediumDotSizeRatio: 0.7
-        )
+        let drawer: ExtendedDotDrawer = ExtendedDotDrawer(numberOfPages: self.keywordCount,
+                                        height: 6,
+                                        width: 6,
+                                        space: 6,
+                                        indicatorColor: .KIDA_orange(),
+                                        dotsColor: .gray,
+                                        isBordered: false,
+                                        borderColor: .white,
+                                        borderWidth: 0,
+                                        indicatorBorderColor: .KIDA_orange(),
+                                        indicatorBorderWidth: 6)
         
-        pageControl = FlexiblePageControl().then {
-            $0.numberOfPages = self.keywordCount
-            $0.pageIndicatorTintColor = .white
-            $0.currentPageIndicatorTintColor = .KIDA_orange()
-            $0.setConfig(config)
+        pageControl = AdvancedPageControlView().then {
+            $0.drawer = drawer
             headerView.addSubview($0)
         }
     }
@@ -236,7 +238,7 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
         
         // MARK: page control event
         
-        self.pageControl.setCurrentPage(at: index)
+        self.pageControl.setPage(index)
         
         // MARK: cell drag event
         

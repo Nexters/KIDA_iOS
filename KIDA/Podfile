@@ -6,6 +6,6 @@ target 'KIDA' do
   use_frameworks!
 
   # Pods for KIDA
-  pod "FlexiblePageControl"
+  pod 'AdvancedPageControl'
 
 end
