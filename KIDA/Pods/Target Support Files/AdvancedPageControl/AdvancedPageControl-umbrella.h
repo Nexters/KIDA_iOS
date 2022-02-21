@@ -10,8 +10,7 @@
 #endif
 #endif
 
-#import "FlexiblePageControl.h"
 
-FOUNDATION_EXPORT double FlexiblePageControlVersionNumber;
-FOUNDATION_EXPORT const unsigned char FlexiblePageControlVersionString[];
+FOUNDATION_EXPORT double AdvancedPageControlVersionNumber;
+FOUNDATION_EXPORT const unsigned char AdvancedPageControlVersionString[];
 

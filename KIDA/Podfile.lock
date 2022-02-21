@@ -1,16 +1,16 @@
 PODS:
-  - FlexiblePageControl (1.0.8)
+  - AdvancedPageControl (0.9.0)
 
 DEPENDENCIES:
-  - FlexiblePageControl
+  - AdvancedPageControl
 
 SPEC REPOS:
   trunk:
-    - FlexiblePageControl
+    - AdvancedPageControl
 
 SPEC CHECKSUMS:
-  FlexiblePageControl: 07f7765054f16b3f0bc3f14dfd95ab5f45817ea4
+  AdvancedPageControl: 39e3b32b00b2d324c534f8e17cc6c5be9abe84b7
 
-PODFILE CHECKSUM: 5dba4756795bb1dea7c72bd0739b3822cde8cbf8
+PODFILE CHECKSUM: 820a74703f0633b9377a9c94d7ed0917b7edfc96
 
 COCOAPODS: 1.11.2

@@ -1,6 +1,0 @@
-framework module FlexiblePageControl {
-  umbrella header "FlexiblePageControl-umbrella.h"
-
-  export *
-  module * { export * }
-}
