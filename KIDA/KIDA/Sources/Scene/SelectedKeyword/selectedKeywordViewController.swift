@@ -10,12 +10,7 @@ import UIKit
 final class SelectedKeywordViewController: BaseViewController, ServiceDependency {
 
     // MARK: - UI
-//    private weak var todayKeywordLabel: UILabel!
-//    private weak var selectedKeywordLabel: UILabel!
-//    private weak var characterImageView: UIImageView!
-//    private weak var confirmButton: UIButton!
-//    private weak var rePickButton: UIButton!
-
+    
     private weak var bottomPopupView: UIView!
     private weak var selectedKeywordGuideLabel: UILabel!
     private weak var selectedkeywordLabelButton: UIButton!
@@ -89,8 +84,6 @@ final class SelectedKeywordViewController: BaseViewController, ServiceDependency
         }
 
         self.cardImageView = UIImageView().then {
-            // TODO: 추후 Image Asset명 넣어주기
-//            $0.image = UIImage(named: "splash")
             $0.image = UIImage(named: "card_0\(selectedCardIndex + 1)")
             $0.contentMode = .scaleAspectFit
             view.addSubview($0)
