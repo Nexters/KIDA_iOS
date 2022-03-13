@@ -294,6 +294,28 @@ private extension WriteDiaryViewController {
                 }
             })
             .disposed(by: disposeBag)
+
+        Observable.combineLatest(contentTextView.rx.text,
+                                 titleTextField.rx.text)
+            .asDriverSkipError()
+            .map { [weak self] content, title -> Bool in
+                guard let self = self else { return false }
+                if (content?.isEmpty ?? true || self.isPlaceHolderString(content ?? "")) ||
+                    title?.isEmpty ?? true {
+                    return false
+                } else {
+                    return true
+                }
+            }
+            .drive(onNext: { [weak self] writeButtonEnabled in
+                guard let self = self else { return }
+                self.writeButton.isEnabled = writeButtonEnabled
+                self.writeButton.backgroundColor = writeButtonEnabled ? .KIDA_orange() : .KIDA_background2()
+                self.writeButton.setTitleColor(writeButtonEnabled ? .white : self.subViewTitleColor,
+                                               for: .normal)
+            })
+            .disposed(by: disposeBag)
+
     }
 
     func bindState(reactor: WriteDiaryReactor) {

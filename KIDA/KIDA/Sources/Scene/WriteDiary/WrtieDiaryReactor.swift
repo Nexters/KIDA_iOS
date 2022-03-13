@@ -101,7 +101,6 @@ final class WriteDiaryReactor: Reactor {
         case .didTapWriteButton(_, let didSuccess):
             newState.didSuccessCreateDiary = didSuccess
             if didSuccess {
-                // 리스트뷰로 화면 전환 예정
                 self.delegate?.didWriteDiary()
             }
         case .setEditDiaryData(let diary):
