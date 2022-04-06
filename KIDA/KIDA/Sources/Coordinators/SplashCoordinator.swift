@@ -51,12 +51,10 @@ extension SplashCoordinator: SplashViewReactorDelegate {
     }
     
     func showDiaryList(){
-        
         let diaryListCoordinator = DiaryListCoordinator(navigationController: navigationController)
         diaryListCoordinator.parentCoordinator = self
         self.childCoordinators.append(diaryListCoordinator)
         
         diaryListCoordinator.start()
-        
     }
 }

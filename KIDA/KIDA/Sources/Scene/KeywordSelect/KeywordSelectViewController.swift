@@ -18,14 +18,45 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     
     // MARK: UI
     
-    private weak var headerView: UIView!
-    private weak var titleLabelOne: UILabel!
-    private weak var titleLabelTwo: UILabel!
-    private weak var selectButton: UIButton!
-    private weak var keywordTooltip: KeywordToolTipView!
-    private weak var pageControl: AdvancedPageControlView!
+    private let headerView = UIView()
+    
+    private let titleLabelOne = UILabel().then {
+        $0.text = KIDA_String.KeywordSelect.titleOne
+        $0.font = .pretendard(.SemiBold, size: 28)
+        $0.textColor = .white
+    }
+    
+    private let titleLabelTwo = UILabel().then {
+        $0.text = KIDA_String.KeywordSelect.titleTwo
+        $0.font = .pretendard(.SemiBold, size: 28)
+        $0.textColor = .white
+    }
+    
+    private let selectButton = UIButton().then {
+        $0.setImage(UIImage(named: "ic_btn_default"), for: .normal)
+    }
+    
+    private let keywordTooltip = KeywordToolTipView().then {
+        $0.alpha = 0
+    }
+    
+    private let pageControl =  AdvancedPageControlView().then {
+        $0.drawer = ExtendedDotDrawer(numberOfPages: 6, // TODO: 수정
+                                      height: 6,
+                                      width: 6,
+                                      space: 6,
+                                      indicatorColor: .KIDA_orange(),
+                                      dotsColor: .gray,
+                                      isBordered: false,
+                                      borderColor: .white,
+                                      borderWidth: 0,
+                                      indicatorBorderColor: .KIDA_orange(),
+                                      indicatorBorderWidth: 6)
+    }
     
     private var collectionView: UICollectionView!
+    
+    
     private let selectedCardIndexRelay = BehaviorRelay<Int>(value: 0)
     
     // MARK: Property
@@ -52,8 +83,6 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bind(reactor: reactor!) // TODO: 추후에 수정
     }
     
     override func setupNavigationBar() {
@@ -63,52 +92,15 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     
     override func setupViews() {
         initCollectionView()
+        
+        view.addSubview(headerView)
         view.addSubview(collectionView)
         
-        headerView = UIView().then {
-            view.addSubview($0)
-        }
-        
-        titleLabelOne = UILabel().then {
-            $0.text = KIDA_String.KeywordSelect.titleOne
-            $0.font = .pretendard(.SemiBold, size: 28)
-            $0.textColor = .white
-            headerView.addSubview($0)
-        }
-        
-        titleLabelTwo = UILabel().then {
-            $0.text = KIDA_String.KeywordSelect.titleTwo
-            $0.font = .pretendard(.SemiBold, size: 28)
-            $0.textColor = .white
-            headerView.addSubview($0)
-        }
-        
-        selectButton = UIButton().then {
-            $0.setImage(UIImage(named: "ic_btn_default"), for: .normal)
-            headerView.addSubview($0)
-        }
-        
-        keywordTooltip = KeywordToolTipView().then {
-            headerView.addSubview($0)
-            $0.alpha = 0
-        }
-        
-        let drawer: ExtendedDotDrawer = ExtendedDotDrawer(numberOfPages: self.keywordCount,
-                                        height: 6,
-                                        width: 6,
-                                        space: 6,
-                                        indicatorColor: .KIDA_orange(),
-                                        dotsColor: .gray,
-                                        isBordered: false,
-                                        borderColor: .white,
-                                        borderWidth: 0,
-                                        indicatorBorderColor: .KIDA_orange(),
-                                        indicatorBorderWidth: 6)
-        
-        pageControl = AdvancedPageControlView().then {
-            $0.drawer = drawer
-            headerView.addSubview($0)
-        }
+        headerView.addSubview(titleLabelOne)
+        headerView.addSubview(titleLabelTwo)
+        headerView.addSubview(selectButton)
+        headerView.addSubview(pageControl)
+        headerView.addSubview(keywordTooltip)
     }
 
     override func setupLayoutConstraints() {
@@ -145,7 +137,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         pageControl.snp.makeConstraints {
             $0.leading.equalTo(headerView.snp.leading)
             $0.bottom.equalTo(headerView.snp.bottom)
-            $0.width.equalTo(88)
+            $0.width.equalTo(78) // TODO: 고치기 
             $0.height.equalTo(6)
         }
         
@@ -165,15 +157,18 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
                                      height: UIScreen.main.bounds.height - 300)
 
         collectionView = UICollectionView(frame: .zero,
-                                          collectionViewLayout: flowLayout)
-        collectionView.register(Reuse.keywordCell)
-        collectionView.decelerationRate = .fast
-        collectionView.contentInset = .init(top: 0, left: 40, bottom: 0, right: 40)
-        collectionView.isPagingEnabled = false
-        collectionView.dataSource = self
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = .clear
-        collectionView.delegate = self
+                                          collectionViewLayout: flowLayout).then {
+            $0.register(Reuse.keywordCell)
+            $0.decelerationRate = .fast
+            $0.contentInset = .init(top: 0, left: 40, bottom: 0, right: 40)
+            $0.isPagingEnabled = false
+            $0.dataSource = self
+            $0.showsVerticalScrollIndicator = false
+            $0.showsHorizontalScrollIndicator = false
+            $0.backgroundColor = .clear
+            $0.delegate = self
+        }
+        
     }
 
     func bind(reactor: KeywordSelectViewReactor) {
@@ -184,19 +179,15 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
 
 extension KeywordSelectViewController {
     func bindState(reactor: KeywordSelectViewReactor){
-        guard let _ = collectionView else {
-            return
-        }
+        
+    }
 
+    func bindAction(reactor: KeywordSelectViewReactor){
         selectButton.rx.tap
             .map { [weak self] _ in self?.selectedCardIndexRelay.value ?? 0 }
             .map { Reactor.Action.didSelectCard(cardIndex: $0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
-
-    }
-
-    func bindAction(reactor: KeywordSelectViewReactor){
     }
 }
 
