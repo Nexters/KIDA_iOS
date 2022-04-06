@@ -145,7 +145,7 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         pageControl.snp.makeConstraints {
             $0.leading.equalTo(headerView.snp.leading)
             $0.bottom.equalTo(headerView.snp.bottom)
-            $0.width.equalTo(78)
+            $0.width.equalTo(88)
             $0.height.equalTo(6)
         }
         
