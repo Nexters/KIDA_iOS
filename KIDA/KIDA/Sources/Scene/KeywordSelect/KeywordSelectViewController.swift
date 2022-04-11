@@ -220,9 +220,9 @@ extension KeywordSelectViewController: UICollectionViewDelegate {
 
         let index: Int
         if velocity.x > 0 {
-            index = Int(ceil(estimatedIndex))
+            index = min(Int(ceil(estimatedIndex)), keywordCount-1)
         } else if velocity.x < 0 {
-            index = Int(floor(estimatedIndex))
+            index = max(Int(floor(estimatedIndex)), 0)
         } else {
             index = Int(round(estimatedIndex))
         }
