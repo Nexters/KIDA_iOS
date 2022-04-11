@@ -40,8 +40,8 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
         $0.alpha = 0
     }
     
-    private let pageControl =  AdvancedPageControlView().then {
-        $0.drawer = ExtendedDotDrawer(numberOfPages: 6, // TODO: 수정
+    private lazy var pageControl = AdvancedPageControlView().then {
+        $0.drawer = ExtendedDotDrawer(numberOfPages: keywordCount,
                                       height: 6,
                                       width: 6,
                                       space: 6,
@@ -56,10 +56,9 @@ final class KeywordSelectViewController: BaseViewController, ServiceDependency {
     
     private var collectionView: UICollectionView!
     
+    // MARK: Property
     
     private let selectedCardIndexRelay = BehaviorRelay<Int>(value: 0)
-    
-    // MARK: Property
     
     private var keywordCount: Int = 6
     
