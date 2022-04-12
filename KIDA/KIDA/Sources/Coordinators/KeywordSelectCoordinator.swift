@@ -13,7 +13,6 @@ final class KeywordSelectCoordinator: Coordinatable {
     var parentCoordinator: Coordinatable?
     var navigationController: UINavigationController
     private var keywordSelectViewController: KeywordSelectViewController?
-//    private var diaryListViewController: DiaryListViewController?
 
     // MARK: - Initializer
     init(navigationController: UINavigationController) {
