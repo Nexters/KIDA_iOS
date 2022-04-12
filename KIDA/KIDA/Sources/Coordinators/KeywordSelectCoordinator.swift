@@ -12,6 +12,7 @@ final class KeywordSelectCoordinator: Coordinatable {
     var childCoordinators: [Coordinatable] = []
     var parentCoordinator: Coordinatable?
     var navigationController: UINavigationController
+    private var keywordSelectViewController: KeywordSelectViewController?
 
     // MARK: - Initializer
     init(navigationController: UINavigationController) {
@@ -26,6 +27,7 @@ final class KeywordSelectCoordinator: Coordinatable {
 
         let keywordSelectReactor = KeywordSelectViewReactor()
         keywordSelectReactor.delegate = self
+        
         let keywordSelectViewController = KeywordSelectViewController()
         keywordSelectViewController.reactor = keywordSelectReactor
         keywordSelectViewController.navigationItem.title = .navBarDateTitle
